@@ -14,7 +14,7 @@
       >
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-app-bar-title>vue sample</v-app-bar-title>
+        <v-app-bar-title>Eunwk</v-app-bar-title>
 
       </v-app-bar>
       <v-main>
