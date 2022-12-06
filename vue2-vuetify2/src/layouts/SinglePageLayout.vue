@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-app-bar app class="text-center" color="transparent">
+    <v-app-bar app class="text-center" color="#ffffff" flat>
       <v-app-bar-title>
         <router-link to="/" class="app-logo">
           <v-icon color="primary">mdi-cloud-braces</v-icon>
-          Eun's Template
+          Eunwk
         </router-link>
       </v-app-bar-title>
       <v-spacer></v-spacer>
@@ -35,10 +35,6 @@ export default {
 </script>
 
 <style scoped>
-.v-toolbar {
-  box-shadow: none !important;
-  background: #fff;
-}
 
 .v-app-bar-title .app-logo {
   text-decoration: none;
