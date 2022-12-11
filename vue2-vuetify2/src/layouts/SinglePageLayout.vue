@@ -10,8 +10,8 @@
       <v-spacer></v-spacer>
       <v-row justify="end">
         <v-btn text color="primary" to="/login">Login</v-btn>
-        <v-btn text color="primary" to="/sub1">sub1</v-btn>
-        <v-btn text color="primary" to="/sub2">sub2</v-btn>
+        <v-btn text color="primary" to="/html/sub1">html</v-btn>
+        <v-btn text color="primary" to="/css/sub1">css</v-btn>
       </v-row>
     </v-app-bar>
     <v-main>

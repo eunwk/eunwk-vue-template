@@ -1,11 +1,26 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app  disable-resize-watcher>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      fixed
+    >
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+            {{ selectedTabTitle }}
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            subtext
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-divider></v-divider>
       <v-list>
           <v-list-item
-              v-for="item in items"
+              v-for="item in selectedMenuData"
               :key="item.value"
-              :href="item.src"
+              :to="item.src"
           >{{item.title}}</v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -41,62 +56,24 @@
       </v-row>
       <template v-slot:extension>
         <v-tabs
-          v-model="tab"
+          v-model="selectedTabIndex"
           dark
           slider-color="yellow"
           show-arrows
-          @change="onChangeTabs"
         >
           <v-tab
             v-for="item in tabItems"
-            :key="item.value"
+            :key="item.id"
+            :to="item.src"
+            @click="onClickTab(item)"
           >
-            {{ item.title }}
+            {{ item.category }}
           </v-tab>
-          <!-- <v-menu
-            v-if="more.length"
-            bottom
-            left
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                text
-                class="align-self-center mr-4"
-                v-bind="attrs"
-                v-on="on"
-              >
-                more
-                <v-icon right>
-                  mdi-menu-down
-                </v-icon>
-              </v-btn>
-            </template>
-
-            <v-list class="grey lighten-3">
-              <v-list-item
-                v-for="item in more"
-                :key="item"
-                @click="addItem(item)"
-              >
-                {{ item }}
-              </v-list-item>
-            </v-list>
-          </v-menu> -->
         </v-tabs>
       </template>
     </v-app-bar>
     <v-main>
       <v-container>
-        <v-tabs-items v-model="tab">
-        <v-tab-item
-          v-for="item in tabItems"
-          :key="item.value"
-        >
-          <v-card flat>
-            <v-card-text v-text="text"></v-card-text>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
           <router-view></router-view>
       </v-container>
     </v-main>
@@ -104,63 +81,71 @@
 </template>
 
 <script>
+// import { channel } from 'diagnostics_channel';
+// import { set } from 'vue/types/umd';
 export default {
     name: 'SubPageLayout',
     data: () => ({
       drawer: false,
       searchValue: '',
-      items: [
+      menuItems: [
         {
-          title: '서브페이지1',
-          value: 'sub1',
-          src: '/sub1',
+          category: 'Html',
+          menus: [
+            { title: 'html 서브 메뉴1', src: '/html/sub1' },
+            { title: 'html 서브 메뉴2', src: '/html/sub2' },
+            { title: 'html 서브 메뉴3', src: '/html/sub3' },
+          ],
         },
         {
-          title: '서브페이지2',
-          value: 'sub2',
-          src: '/sub2',
+          category: 'Css',
+          menus: [
+            { title: 'css 서브 메뉴1', src: '/css/sub1' },
+            { title: 'css 서브 메뉴2', src: '/css/sub2' },
+            { title: 'css 서브 메뉴3', src: '/css/sub3' },
+          ],
+        },
+        {
+          category: 'JavaScript',
+          menus: [
+            { title: 'javascript 서브 메뉴1', src: '/javascript/sub1' },
+            { title: 'javascript 서브 메뉴2', src: '/javascript/sub2' },
+            { title: 'javascript 서브 메뉴3', src: '/javascript/sub3' },
+          ],
+        },
+        {
+          category: 'React',
+          menus: [
+            { title: 'react 서브 메뉴1', src: '/react/sub1' },
+            { title: 'react 서브 메뉴2', src: '/react/sub2' },
+            { title: 'react 서브 메뉴3', src: '/react/sub3' },
+          ],
+        },
+        {
+          category: 'Vue',
+          menus: [
+            { title: 'vue 서브 메뉴1', src: '/vue/sub1' },
+            { title: 'vue 서브 메뉴2', src: '/vue/sub2' },
+            { title: 'vue 서브 메뉴3', src: '/vue/sub3' },
+          ],
         },
       ],
-      tab: null,
+      selectedMenuData: [],
+      selectedTabIndex: null,
+      selectedTabTitle: '11111',
       tabItems: [
-          {
-            title: '카테고리 A',
-            value: 'menu-A',
-          },
-          {
-            title: '카테고리 B',
-            value: 'menu-B',
-          },
-          {
-            title: '카테고리 C',
-            value: 'menu-C',
-          },
-          {
-            title: '카테고리 D',
-            value: 'menu-D',
-          },
-          {
-            title: '카테고리 E',
-            value: 'menu-E',
-          },
-          {
-            title: '카테고리 F',
-            value: 'menu-F',
-          },
-          {
-            title: '카테고리 G',
-            value: 'menu-G',
-          },
-          {
-            title: '카테고리 H',
-            value: 'menu-H',
-          },
-          {
-            title: '카테고리 I',
-            value: 'menu-I',
-          },
-      ],
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do',
+          { id: 1, category: 'Html', src: '/html/sub1' },
+          { id: 2, category: 'Css', src: '/css/sub1' },
+          { id: 3, category: 'JavaScript', src: '/javascript' },
+          { id: 4, category: 'React', src: '/react' },
+          { id: 5, category: 'Vue', src: '/vue' },
+        ],
+        // computed() {
+        //   changeMenuItem() {
+        //     return this.result.reduce((a,c) => a + c, 0) / this.result.length || 0
+        //   }
+        // }
+      // selectedTabTitle: this.tabItems[this.selectedTabIndex].title,
     }),
     methods: {
       onSearch() {
@@ -170,12 +155,35 @@ export default {
           alert('검색어를 입력해 주세요.');
         }
       },
-      onChangeTabs(e) {
-        console.log('탭', e);
+      onClickTab(clickedItem) {
+        this.selectedTabTitle = clickedItem.category;
+        console.log('this.selectedTabIndex', this.selectedTabIndex);
+        this.setSubMenu();
       },
-      onClickTabs() {
-        console.log('탭버튼');
+      setSubMenu() {
+        const data = this.menuItems.filter(
+          ({ category }) => category === this.selectedTabTitle,
+        );
+        // 하위메뉴 없을 경우 예외처리
+        if (!data.length) {
+          this.selectedMenuData = [];
+        } else {
+          this.selectedMenuData = data[0].menus;
+        }
       },
+      setSubMenuTitle() {
+        const data = this.tabItems.filter(
+          ({ src }) => src === this.$route.path,
+        );
+        this.selectedTabTitle = data[0].category;
+      },
+    },
+    computed: {
+    },
+    mounted() {
+      // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
+      this.setSubMenuTitle();
+      this.setSubMenu();
     },
 };
 </script>

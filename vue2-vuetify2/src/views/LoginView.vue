@@ -29,13 +29,15 @@
                   @click="validate"
                   block
                   class="mb-5"
+                  large
               >
               Login
               </v-btn>
               <v-btn
-                  color="gray"
+                  color="blue-grey lighten-5"
                   block
                   href="/"
+                  large
               >Sign Up</v-btn>
             </div>
         </v-form>

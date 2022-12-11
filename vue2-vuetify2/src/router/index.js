@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue';
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: '/',
     // route level code-splitting
@@ -28,14 +28,33 @@ const routes = [
     component: () => import(/* webpackChunkName: "index" */ '../layouts/SubPageLayout.vue'),
     children: [
       {
-        path: '/sub1',
-        name: 'SubPage1',
-        component: () => import(/* webpackChunkName: "index" */ '../views/SubPage1.vue'),
+        path: '/html/sub1',
+        name: 'HtmlSub1',
+        component: () => import(/* webpackChunkName: "index" */ '../views/HtmlSub1.vue'),
       },
       {
-        path: '/sub2',
-        name: 'SubPage2',
-        component: () => import(/* webpackChunkName: "index" */ '../views/SubPage2.vue'),
+        path: '/html/sub2',
+        name: 'HtmlSub2',
+        component: () => import(/* webpackChunkName: "index" */ '../views/HtmlSub2.vue'),
+      },
+      {
+        path: '/css/sub1',
+        name: 'CssSub1',
+        component: () => import(/* webpackChunkName: "index" */ '../views/CssSub1.vue'),
+      },
+      {
+        path: '/css/sub2',
+        name: 'CssSub2',
+        component: () => import(/* webpackChunkName: "index" */ '../views/CssSub2.vue'),
+      },
+      {
+        path: '/javascript',
+        name: 'SubPage3',
+      },
+      {
+        path: '*', // 404
+        name: 'NotPound', // name은 파일명에 맞추거나, 화면 ID로 지정한다. 중복될수 없다.
+        component: () => import('../views/404.vue'),
       },
     ],
   },
