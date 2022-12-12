@@ -1,0 +1,17 @@
+/* 본문영역 페이지 container */
+.v-application {
+    .single-layout-body-container {
+        padding: 50px 15px;
+  
+    }
+    .sub-layout-body-container {
+        padding: 20px 15px;
+  
+    }
+
+     /* 로그인, 메시지 박스 등 내부  Card 형 박스 */
+     & .card-box {
+        margin: 0 auto;
+        max-width: 460px;
+    }
+}

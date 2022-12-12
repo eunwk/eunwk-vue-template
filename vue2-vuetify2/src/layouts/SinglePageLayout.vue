@@ -10,12 +10,14 @@
       <v-spacer></v-spacer>
       <v-row justify="end">
         <v-btn text color="primary" to="/login">Login</v-btn>
-        <v-btn text color="primary" to="/html/sub1">html</v-btn>
+        <v-btn text color="primary" to="/vuetify/theme">Vuetify</v-btn>
         <v-btn text color="primary" to="/css/sub1">css</v-btn>
       </v-row>
     </v-app-bar>
     <v-main>
-      <router-view></router-view>
+      <v-container class="sub-layout-body-container">
+        <router-view></router-view>
+      </v-container>
     </v-main>
     <v-footer color="blue-grey lighten-4">
       <v-col

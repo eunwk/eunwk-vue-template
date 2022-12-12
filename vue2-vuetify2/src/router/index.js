@@ -10,7 +10,7 @@ export const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "index" */ '../layouts/SinglePageLayout.vue'),
+    component: () => import(/* webpackChunkName: 'index' */ '../layouts/SinglePageLayout.vue'),
     children: [
       {
         path: '/',
@@ -19,33 +19,44 @@ export const routes = [
       },
       {
         path: '/login',
-        component: () => import(/* webpackChunkName: "index" */ '../views/LoginView.vue'),
+        name: 'Login',
+        component: () => import(/* webpackChunkName: 'index' */ '../views/LoginView.vue'),
       },
     ],
   },
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "index" */ '../layouts/SubPageLayout.vue'),
+    component: () => import(/* webpackChunkName: 'index' */ '../layouts/SubPageLayout.vue'),
     children: [
+      {
+        path: '/vuetify/components',
+        name: 'VuetifyComponents',
+        component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyComponents.vue'),
+      },
+      {
+        path: '/vuetify/theme',
+        name: 'VuetifyTheme',
+        component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyTheme.vue'),
+      },
       {
         path: '/html/sub1',
         name: 'HtmlSub1',
-        component: () => import(/* webpackChunkName: "index" */ '../views/HtmlSub1.vue'),
+        component: () => import(/* webpackChunkName: 'index' */ '../views/HtmlSub1.vue'),
       },
       {
         path: '/html/sub2',
         name: 'HtmlSub2',
-        component: () => import(/* webpackChunkName: "index" */ '../views/HtmlSub2.vue'),
+        component: () => import(/* webpackChunkName: 'index' */ '../views/HtmlSub2.vue'),
       },
       {
         path: '/css/sub1',
         name: 'CssSub1',
-        component: () => import(/* webpackChunkName: "index" */ '../views/CssSub1.vue'),
+        component: () => import(/* webpackChunkName: 'index' */ '../views/CssSub1.vue'),
       },
       {
         path: '/css/sub2',
         name: 'CssSub2',
-        component: () => import(/* webpackChunkName: "index" */ '../views/CssSub2.vue'),
+        component: () => import(/* webpackChunkName: 'index' */ '../views/CssSub2.vue'),
       },
       {
         path: '/javascript',
@@ -64,7 +75,7 @@ export const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    component: () => import(/* webpackChunkName: 'about' */ '../views/AboutView.vue'),
   },
 ];
 
