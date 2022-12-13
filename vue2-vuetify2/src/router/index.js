@@ -39,9 +39,9 @@ export const routes = [
         component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyTheme.vue'),
       },
       {
-        path: '/html/sub1',
-        name: 'HtmlSub1',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/HtmlSub1.vue'),
+        path: '/custom-component/section-title',
+        name: 'CustomSectionTitle',
+        component: () => import(/* webpackChunkName: 'index' */ '../views/CustomSectionTitle.vue'),
       },
       {
         path: '/html/sub2',

@@ -78,11 +78,9 @@ export default {
         ],
       },
       {
-        category: 'Html',
+        category: 'CustomComponent',
         menus: [
-          { title: 'html 서브 메뉴1', src: '/html/sub1' },
-          { title: 'html 서브 메뉴2', src: '/html/sub2' },
-          { title: 'html 서브 메뉴3', src: '/html/sub3' },
+          { title: 'SectionTitle', src: '/custom-component/section-title' },
         ],
       },
       {
@@ -123,7 +121,7 @@ export default {
     selectedTabTitle: '11111',
     tabItems: [
       { id: 1, category: 'Vuetify', src: '/vuetify/theme' },
-      { id: 2, category: 'Html', src: '/html/sub1' },
+      { id: 2, category: 'CustomComponent', src: '/custom-component/section-title' },
       { id: 3, category: 'Css', src: '/css/sub1' },
       { id: 4, category: 'JavaScript', src: '/javascript' },
       { id: 5, category: 'React', src: '/react' },
