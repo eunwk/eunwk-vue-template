@@ -52,8 +52,8 @@
       </v-row>
     </v-app-bar>
     <v-main>
-      <v-container class="sub-layout-body-container" fluid>
-        <router-view></router-view>
+      <v-container class="sub-layout-body-container">
+        <router-view class="sub-content-inner"></router-view>
       </v-container>
     </v-main>
     <v-footer app>
@@ -74,7 +74,7 @@ export default {
         category: 'Vuetify',
         menus: [
           { title: 'Theme Customizing', src: '/vuetify/theme' },
-          { title: 'Component', src: '/vuetify/components' },
+          { title: 'Responsive', src: '/vuetify/responsive' },
         ],
       },
       {
@@ -84,35 +84,9 @@ export default {
         ],
       },
       {
-        category: 'Css',
+        category: 'Etc',
         menus: [
-          { title: 'css 서브 메뉴1', src: '/css/sub1' },
-          { title: 'css 서브 메뉴2', src: '/css/sub2' },
-          { title: 'css 서브 메뉴3', src: '/css/sub3' },
-        ],
-      },
-      {
-        category: 'JavaScript',
-        menus: [
-          { title: 'javascript 서브 메뉴1', src: '/javascript/sub1' },
-          { title: 'javascript 서브 메뉴2', src: '/javascript/sub2' },
-          { title: 'javascript 서브 메뉴3', src: '/javascript/sub3' },
-        ],
-      },
-      {
-        category: 'React',
-        menus: [
-          { title: 'react 서브 메뉴1', src: '/react/sub1' },
-          { title: 'react 서브 메뉴2', src: '/react/sub2' },
-          { title: 'react 서브 메뉴3', src: '/react/sub3' },
-        ],
-      },
-      {
-        category: 'Vue',
-        menus: [
-          { title: 'vue 서브 메뉴1', src: '/vue/sub1' },
-          { title: 'vue 서브 메뉴2', src: '/vue/sub2' },
-          { title: 'vue 서브 메뉴3', src: '/vue/sub3' },
+          { title: '404 에러페이지', src: '/css/sub1' },
         ],
       },
     ],
@@ -122,10 +96,7 @@ export default {
     tabItems: [
       { id: 1, category: 'Vuetify', src: '/vuetify/theme' },
       { id: 2, category: 'CustomComponent', src: '/custom-component/section-title' },
-      { id: 3, category: 'Css', src: '/css/sub1' },
-      { id: 4, category: 'JavaScript', src: '/javascript' },
-      { id: 5, category: 'React', src: '/react' },
-      { id: 6, category: 'Vue', src: '/vue' },
+      { id: 3, category: 'Etc', src: '/css/sub1' },
     ],
     // computed() {
     //   changeMenuItem() {
@@ -190,4 +161,5 @@ export default {
   margin-right: 7px;
   font-size: 30px;
 }
+
 </style>

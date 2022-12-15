@@ -29,9 +29,9 @@ export const routes = [
     component: () => import(/* webpackChunkName: 'index' */ '../layouts/SubPageLayout.vue'),
     children: [
       {
-        path: '/vuetify/components',
-        name: 'VuetifyComponents',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyComponents.vue'),
+        path: '/vuetify/responsive',
+        name: 'Responsive',
+        component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyResponsive.vue'),
       },
       {
         path: '/vuetify/theme',
@@ -42,25 +42,6 @@ export const routes = [
         path: '/custom-component/section-title',
         name: 'CustomSectionTitle',
         component: () => import(/* webpackChunkName: 'index' */ '../views/CustomSectionTitle.vue'),
-      },
-      {
-        path: '/html/sub2',
-        name: 'HtmlSub2',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/HtmlSub2.vue'),
-      },
-      {
-        path: '/css/sub1',
-        name: 'CssSub1',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/CssSub1.vue'),
-      },
-      {
-        path: '/css/sub2',
-        name: 'CssSub2',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/CssSub2.vue'),
-      },
-      {
-        path: '/javascript',
-        name: 'SubPage3',
       },
       {
         path: '*', // 404

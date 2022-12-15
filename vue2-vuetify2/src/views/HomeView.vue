@@ -21,41 +21,11 @@
           Used Dependencies
         </h2>
         <v-row justify="center mb-10">
-          <v-chip
-            class="ma-2"
-          >
-            Default
-          </v-chip>
-
-          <v-chip
-            class="ma-2"
-            color="primary"
-          >
-            Primary
-          </v-chip>
-
-          <v-chip
-            class="ma-2"
-            color="secondary"
-          >
-            Secondary
-          </v-chip>
-
-          <v-chip
-            class="ma-2"
-            color="red"
-            text-color="white"
-          >
-            Red Chip
-          </v-chip>
-
-          <v-chip
-            class="ma-2"
-            color="green"
-            text-color="white"
-          >
-            Green Chip
-          </v-chip>
+          <v-chip class="ma-2" color="secondary">Vuex</v-chip>
+          <v-chip class="ma-2" color="red">SCSS</v-chip>
+          <v-chip class="ma-2">faker.js</v-chip>
+          <v-chip class="ma-2" color="primary">shortid</v-chip>
+          <v-chip class="ma-2" color="green">Green</v-chip>
         </v-row>
 
         <div>

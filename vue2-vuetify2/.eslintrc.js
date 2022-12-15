@@ -16,5 +16,7 @@ module.exports = {
     indent: 'off',
     'vuejs-accessibility/label-has-for': 'off',
     'max-len': 'off',
+    // 'import/no-extraneous-dependencies': ["error", {"devDependencies": true}],
+    'import/no-extraneous-dependencies': 'off',
   },
 };

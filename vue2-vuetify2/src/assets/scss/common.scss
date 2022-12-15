@@ -15,3 +15,10 @@
         max-width: 460px;
     }
 }
+
+/* 본문영역 페이지 container */
+@media (min-width: 960px) {
+    .container {
+        max-width: inherit;
+    }
+}
