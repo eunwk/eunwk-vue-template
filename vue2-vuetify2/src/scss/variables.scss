@@ -1,0 +1,47 @@
+// Globals
+// $body-font-family: 'Work Sans', serif;
+// $border-radius-root: 6px;
+// $font-size-root: 14px;
+
+// Variables must come before the import
+// $btn-letter-spacing: -1px;
+// $btn-font-weight: 400;
+// $list-item-title-font-size: 0.929rem;
+// $list-item-dense-title-font-size: 0.929rem;
+// $list-item-dense-title-font-weight: initial;
+// $fab-icon-sizes: (
+//   'small': 20
+// );
+
+// btn
+$btn-sizes: (
+  'x-small': 18,
+  'small': 24,
+  'default': 28,
+  'large': 32,
+  'x-arge': 38,
+);
+
+$btn-text-transform: initial !default;
+$btn-letter-spacing: 0 !default;
+// $headings: (
+//   'h1': (
+//     'size': 3.3125rem,
+//     'line-height': 1.15em
+//   ),
+//   'h2': (
+//     'size': 2.25rem,
+//     'line-height': 1.5em
+//   )
+// );
+// :root {
+//  --v-primary-base: 'yellow';
+// }
+
+// $color-main: green;
+// $primary: #ff0000;
+
+// $theme: (
+//   'primary': "#ff0000",
+//   'secondary': "#424242",
+//   )

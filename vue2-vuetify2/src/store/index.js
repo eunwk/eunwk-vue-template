@@ -16,6 +16,7 @@ export const generateCardList = (number) => Array(number).fill().map(() => ({
 export default new Vuex.Store({
   state: {
     cardList: generateCardList(7),
+    isThemeDark: false,
   },
   getters: {
   },

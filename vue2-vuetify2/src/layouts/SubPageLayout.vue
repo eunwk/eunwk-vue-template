@@ -49,6 +49,7 @@
           height="24px"
           @click:append="onSearch"></v-text-field>
         <v-btn text color="#ffffff" to="/login">Login</v-btn>
+        <btn-theme-change></btn-theme-change>
       </v-row>
     </v-app-bar>
     <v-main>
@@ -63,9 +64,13 @@
 </template>
 
 <script>
+import BtnThemeChange from '@/components/BtnThemeChange.vue';
 
 export default {
   name: 'SubPageLayout',
+  components: {
+    BtnThemeChange,
+  },
   data: () => ({
     drawer: true,
     searchValue: '',

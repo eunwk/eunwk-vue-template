@@ -7,11 +7,14 @@
           Eunwk
         </router-link>
       </v-app-bar-title>
+
       <v-spacer></v-spacer>
+
       <v-row justify="end">
         <v-btn text color="primary" to="/login">Login</v-btn>
-        <v-btn text color="primary" to="/vuetify/theme">Vuetify</v-btn>
-        <v-btn text color="primary" to="/css/sub1">css</v-btn>
+        <v-btn text color="primary" to="/vuetify/theme">Layout Template</v-btn>
+        <v-btn text color="primary" to="/css/sub1">Custom Component</v-btn>
+        <btn-theme-change></btn-theme-change>
       </v-row>
     </v-app-bar>
     <v-main>
@@ -31,8 +34,13 @@
 </template>
 
 <script>
+import BtnThemeChange from '@/components/BtnThemeChange.vue';
+
 export default {
   name: 'SinglePageLayout',
+  components: {
+    BtnThemeChange,
+  },
 };
 </script>
 
