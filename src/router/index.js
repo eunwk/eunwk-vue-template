@@ -29,14 +29,14 @@ export const routes = [
     component: () => import(/* webpackChunkName: 'index' */ '../layouts/SubPageLayout.vue'),
     children: [
       {
-        path: '/vuetify/responsive',
+        path: '/template/card-layout',
         name: 'Responsive',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyResponsive.vue'),
+        component: () => import(/* webpackChunkName: 'index' */ '../views/CardLayout.vue'),
       },
       {
-        path: '/vuetify/theme',
-        name: 'VuetifyTheme',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/VuetifyTheme.vue'),
+        path: '/template/search-grid',
+        name: 'SearchGrid',
+        component: () => import(/* webpackChunkName: 'index' */ '../views/SearchGrid.vue'),
       },
       {
         path: '/custom-component/section-title',

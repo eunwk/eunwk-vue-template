@@ -17,8 +17,19 @@
 }
 
 /* 본문영역 페이지 container */
-@media (min-width: 960px) {
-    .container {
-        max-width: inherit;
-    }
+// @media (min-width: 960px) {
+//     
+// }
+
+/* 조회영역 */
+.search-area {
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 15px;
+
+    // & .v-btn[type="submit"] {
+    //    position: absolute;
+    //    right: 10px;
+    // }
 }

@@ -3,7 +3,7 @@
     <section>
       <section-title title='Card Layout & breakpoint' depth="1">breakpoint: {{this.$vuetify.breakpoint.name}}</section-title>
         <v-row>
-          <v-col cols="12" sm="6" md="4" v-for="item in cardList" :key="item.id" align-self="stretch">
+          <v-col cols="12" sm="6" md="4" lg="3" v-for="item in cardList" :key="item.id" align-self="stretch">
           <v-card>
             <v-img
               height="150"
@@ -35,7 +35,7 @@
 import SectionTitle from '@/components/SectionTitle.vue';
 
 export default {
-  name: 'VuetifyResponsive',
+  name: 'CardLayout',
   components: {
     'section-title': SectionTitle,
   },

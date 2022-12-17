@@ -53,7 +53,7 @@
       </v-row>
     </v-app-bar>
     <v-main>
-      <v-container class="sub-layout-body-container">
+      <v-container class="sub-layout-body-container" fluid>
         <router-view class="sub-content-inner"></router-view>
       </v-container>
     </v-main>
@@ -76,10 +76,10 @@ export default {
     searchValue: '',
     menuItems: [
       {
-        category: 'Vuetify',
+        category: 'Template',
         menus: [
-          { title: 'Theme Customizing', src: '/vuetify/theme' },
-          { title: 'Responsive', src: '/vuetify/responsive' },
+          { title: 'Search + Grid', src: '/template/search-grid' },
+          { title: 'Card Layout', src: '/template/card-layout' },
         ],
       },
       {
@@ -99,7 +99,7 @@ export default {
     selectedTabIndex: null,
     selectedTabTitle: '11111',
     tabItems: [
-      { id: 1, category: 'Vuetify', src: '/vuetify/theme' },
+      { id: 1, category: 'Template', src: '/template/search-grid' },
       { id: 2, category: 'CustomComponent', src: '/custom-component/section-title' },
       { id: 3, category: 'Etc', src: '/css/sub1' },
     ],
