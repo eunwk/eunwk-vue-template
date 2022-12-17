@@ -6,5 +6,6 @@
 2. Sass를 이용한 Vuetify Customizing 설정 및 Style 작업 
 3. Vuex를 이용해 state관리 
 4. faker.js, shortid 등 Dependency 사용 
+5. gh-pages로 배포 
 
-# Vue3 + Nuxt를 사용한 퍼블리싱 템플릿(작업예정) 
+https://eunwk.github.io/eunwk-vue-template/ 
