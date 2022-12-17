@@ -7,4 +7,4 @@
 3. Vuex를 이용해 state관리 
 4. faker.js, shortid 등 Dependency 사용 
 
-# Vue3 + Nuxt를 사용한 퍼블리싱 템플릿(작업예정) 
+https://eunwk.github.io/eunwk-vue-template/
