@@ -4,4 +4,6 @@ module.exports = defineConfig({
   transpileDependencies: [
     'vuetify',
   ],
+  outputDir: '.dist',
+  publicPath: '/eunwk-vue-template',
 });
