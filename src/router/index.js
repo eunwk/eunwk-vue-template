@@ -26,22 +26,32 @@ export const routes = [
   },
   {
     path: '/',
-    component: () => import(/* webpackChunkName: 'index' */ '../layouts/SubPageLayout.vue'),
+    component: () => import(/* webpackChunkName: 'sub' */ '../layouts/SubPageLayout.vue'),
     children: [
       {
         path: '/template/card-layout',
         name: 'Responsive',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/CardLayout.vue'),
+        component: () => import(/* webpackChunkName: 'template' */ '../views/CardLayout.vue'),
       },
       {
         path: '/template/search-grid',
         name: 'SearchGrid',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/SearchGrid.vue'),
+        component: () => import(/* webpackChunkName: 'template' */ '../views/SearchGrid.vue'),
       },
       {
         path: '/custom-component/section-title',
         name: 'CustomSectionTitle',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/CustomSectionTitle.vue'),
+        component: () => import(/* webpackChunkName: 'component' */ '../views/CustomSectionTitle.vue'),
+      },
+      {
+        path: '/custom-component/search-area',
+        name: 'CustomSearchArea',
+        component: () => import(/* webpackChunkName: 'component' */ '../views/CustomSearchArea.vue'),
+      },
+      {
+        path: '/custom-component/message-box',
+        name: 'CustomMessageBox',
+        component: () => import(/* webpackChunkName: 'component' */ '../views/CustomMessageBox.vue'),
       },
       {
         path: '*', // 404

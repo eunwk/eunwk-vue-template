@@ -85,7 +85,9 @@ export default {
       {
         category: 'CustomComponent',
         menus: [
-          { title: 'SectionTitle', src: '/custom-component/section-title' },
+          { title: 'Section Title', src: '/custom-component/section-title' },
+          { title: 'Search Area', src: '/custom-component/search-area' },
+          { title: 'Message Box', src: '/custom-component/message-box' },
         ],
       },
       {
