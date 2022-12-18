@@ -13,7 +13,8 @@
 //   'small': 20
 // );
 
-// btn
+/** btn ********/
+/***************/
 $btn-sizes: (
   'x-small': 18,
   'small': 24,
@@ -21,6 +22,9 @@ $btn-sizes: (
   'large': 32,
   'x-arge': 38,
 );
+
+// $input-max-height: 28px;
+
 
 $btn-text-transform: initial !default;
 $btn-letter-spacing: 0 !default;
@@ -45,3 +49,21 @@ $btn-letter-spacing: 0 !default;
 //   'primary': "#ff0000",
 //   'secondary': "#424242",
 //   )
+
+
+/** table ******/
+/***************/
+.v-data-table__wrapper {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.v-data-table-header th {
+  background: #f1f1f1;
+}
+
+/** table ******/
+/***************/
+
+.btn-area-row .v-btn:not(:last-child) {
+  margin-right: 5px;
+}

@@ -19,6 +19,18 @@ export default new Vuex.Store({
     isThemeDark: false,
   },
   getters: {
+    calcResponsiveCols() { // 조회영역 col 기준 공통
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+         return 12;
+        case 'sm':
+         return 6;
+        case 'md':
+         return 4;
+      default:
+        return 3;
+      }
+    },
   },
   mutations: {
   },
