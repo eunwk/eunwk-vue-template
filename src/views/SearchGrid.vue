@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="['search-area', 'responsive-'+ breakpoint]">
+    <div class="search-area">
       <v-form v-model="valid">
         <v-text-field
           v-model="firstname"
@@ -158,11 +158,6 @@ export default {
         ],
       },
     };
-  },
-  computed: {
-    breakpoint() {
-      return this.$vuetify.breakpoint.name;
-    },
   },
   methods: {
     // onClickToggle() {

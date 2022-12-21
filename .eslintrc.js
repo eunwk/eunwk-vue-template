@@ -18,5 +18,6 @@ module.exports = {
     'max-len': 'off',
     // 'import/no-extraneous-dependencies': ["error", {"devDependencies": true}],
     'import/no-extraneous-dependencies': 'off',
+    defaultDate: 'off',
   },
 };

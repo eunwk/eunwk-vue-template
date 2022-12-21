@@ -16,19 +16,28 @@
     }
 }
 
+/* 컴포넌트 커스터마이징 */
+// .v-label {
+//   font-size: 14px;
+// }
+
 /* 본문영역 페이지 container */
 // @media (min-width: 960px) {
 //     
 // }
 
+
 .search-area {
     background: #f1f1f1;
     border: 1px solid #ddd;
-    border-radius: 2px;
-    padding: 10px;
+    border-radius: 4px;
+    padding: 10px 0;
     margin-bottom: 20px;
     padding-right: 120px;
     position: relative;
+    input {
+      font-size: 14px;
+    }   
 }
 
 .search-area form {
@@ -36,37 +45,45 @@
   flex-wrap: wrap;
 }
 
+.search-area .item {
+  padding: 3px 10px;
+  width: 25%;
+}
+
+.search-area .item.date-double {
+  width: 50%;
+}
+
+/* vutify customizing */
 .search-area .v-text-field__details {
   display: none;
 }
+
 .search-area .v-text-field {
   padding-top: 0;
   margin-top: 0;
 }
+
 .search-area .v-input__slot {
   margin-bottom: 0;
 }
+
 .search-area .v-text-field > .v-input__control > .v-input__slot:before {
   content: none;
 }
+
 .search-area .v-text-field__slot .v-label {
   position: relative !important;
   transform: none !important;
   max-width: auto;
   overflow: visible;
   margin-right: 10px;
+  font-size: 14px;
 }
 .search-area .v-text-field__slot .v-label + input {
   border: 1px solid #ddd;
   background: #fff;
   border-radius: 2px;
-}
-
-.search-area > .v-input {
-  padding: 3px 5px;
-  flex: 0 0 auto;
-  // width: 25%;
-  width: auto;
 }
 
 .search-area .v-input input {
@@ -85,30 +102,39 @@
 }
 
 /* 반응형 처리, mobile first */
-.search-area.responsive-xs > .v-input,
-.search-area.responsive-xs .single-date {
-  width: 100%;
+.app-xs {
+  .search-area {
+    padding-right: 0;
+  }
+  .search-area .item {
+    width: 100%;
+  }
+  .search-area .v-btn[type="submit"] {
+    position: static;
+    flex-grow: 1;
+    margin: 3px 10px 0px;
+  }
 }
 
-.search-area.responsive-sm > .v-input {
-  width: 50%;
-}
-.search-area.responsive-sm .priod-date {
-  width: 100%;
+.app-sm {
+  .search-area {
+    padding-right: 0;
+  }
+  .search-area .item {
+    width: 50%;
+  }
+  .search-area .v-btn[type="submit"] {
+    position: static;
+    flex-grow: 1;
+    margin: 3px 10px 0px;
+  }
 }
 
-
-.search-area.responsive-md > .v-input {
-  width: 33.3333%;
-}
-
-.search-area.responsive-xs,
-.search-area.responsive-sm {
-  padding-right: 10px;
-}
-.search-area.responsive-xs .v-btn[type="submit"],
-.search-area.responsive-sm .v-btn[type="submit"] {
-  position: static;
-  width: calc(100% - 10px);
-  margin: 3px 5px 0px;
+.app-md {
+  .search-area .item {
+    width: 33.3333%;
+  }
+  .search-area .item.date-double {
+    width: 66.6667%;
+  }
 }
