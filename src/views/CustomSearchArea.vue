@@ -1,10 +1,10 @@
 <template>
-    <div :class="{'priod-date d-flex': double, 'single-date': !double}">
+    <div>
         <section-title title='조회영역 1Row 4컬럼'></section-title>
         <div :class="['search-area', 'responsive-'+ breakpoint]">
           <v-form v-model="valid">
             <div class="item">
-              <datePicker default-date="2000-12-12" />
+              <date-picker default-date="2000-12-12"></date-picker>
             </div>
             <div class="item">
               <v-text-field
@@ -14,11 +14,10 @@
               ></v-text-field>
             </div>
             <div class="item">
-              <v-text-field
-                v-model="firstname"
-                label="조회조건"
-                required
-              ></v-text-field>
+              <v-select
+                :items="items"
+                label="SelectBox"
+              ></v-select>
             </div>
             <div class="item">
               <v-text-field
@@ -34,14 +33,13 @@
         <div :class="['search-area', 'responsive-'+ breakpoint]">
           <v-form v-model="valid">
             <div class="item date-double">
-              <datePicker label="조회기간" double from="2000-12-12" to="2024-12-12"/>
+              <date-picker label="조회기간" double from="2000-12-12" to="2024-12-12"></date-picker>
             </div>
             <div class="item">
-              <v-text-field
-                v-model="firstname"
-                label="조회조건"
-                required
-              ></v-text-field>
+              <v-select
+                :items="items"
+                label="SelectBox"
+              ></v-select>
             </div>
             <div class="item">
               <v-text-field
@@ -269,6 +267,9 @@ export default {
   },
   data() {
       return {
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+        firstname: '',
+        valid: false,
       };
   },
   computed: {
