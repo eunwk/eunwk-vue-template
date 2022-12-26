@@ -53,8 +53,16 @@
   width: 25%;
 }
 
-.search-area .item.date-double {
+.search-area .item.col2 {
   width: 50%;
+}
+
+.search-area .item.col3 {
+  width: 75%;
+}
+
+.search-area .item.col4 {
+  width: 100%;
 }
 
 /* vutify customizing */
@@ -104,6 +112,46 @@
   top: 13px;
 }
 
+/* 조회영역. SelectBox */
+.search-area .v-select label {
+  position: static !important;
+  margin-right: 10px;
+  transform: none;
+}
+.search-area .v-select .v-select__selections {
+  background:   #fff;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  height: 28px;
+}
+.search-area .v-select .v-select__selection {
+  margin: 0 5px;
+}
+.search-area .v-select .v-input__append-inner {
+  position: absolute;
+  right: 2px;
+  margin-top: 0;
+}
+.search-area .v-select .v-input__icon {
+  height: 26px;
+}
+
+/* 조회영역. CheckBox */
+.search-area .v-input--checkbox {
+  margin: 0 10px 0 0;
+  display: inline-block;
+  padding-top: 0;
+  vertical-align: middle;
+}
+.search-area .item > label {
+  font-size: 14px;
+  margin-right: 10px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.search-area .v-messages {
+  display: none;
+}
+
 /* 반응형 처리, mobile first */
 .app-xs {
   .search-area {
@@ -113,7 +161,7 @@
     width: 100%;
   }
   .search-area .v-btn[type="submit"] {
-    position: static;
+    position: static !important;
     flex-grow: 1;
     margin: 3px 10px 0px;
   }
@@ -126,8 +174,12 @@
   .search-area .item {
     width: 50%;
   }
+  .search-area .item.col2,
+  .search-area .item.col3 {
+    width: 100%;
+  }
   .search-area .v-btn[type="submit"] {
-    position: static;
+    position: static !important;
     flex-grow: 1;
     margin: 3px 10px 0px;
   }
@@ -137,7 +189,10 @@
   .search-area .item {
     width: 33.3333%;
   }
-  .search-area .item.date-double {
+  .search-area .item.col2 {
     width: 66.6667%;
+  } 
+  .search-area .item.col3 {
+    width: 100%;
   }
 }

@@ -2,62 +2,64 @@
   <div>
     <div class="search-area">
       <v-form v-model="valid">
-        <v-text-field
-          v-model="firstname"
-          :rules="nameRules"
-          label="조회조건"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="firstname"
-          :rules="nameRules"
-          label="조회조건"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="firstname"
-          :rules="nameRules"
-          label="조회조건"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="firstname"
-          :rules="nameRules"
-          label="조회조건"
-          required
-        ></v-text-field>
+        <div class="item">
+          <date-picker default-date="2000-12-12"></date-picker>
+        </div>
+        <div class="item">
+          <v-text-field
+            v-model="firstname"
+            label="조회조건"
+            required
+          ></v-text-field>
+        </div>
+        <div class="item">
+          <v-select
+            :items="items"
+            label="SelectBox"
+          ></v-select>
+        </div>
+        <div class="item">
+          <v-text-field
+            v-model="firstname"
+            label="조회조건"
+            required
+          ></v-text-field>
+        </div>
         <v-btn type="submit" color="secondary"><v-icon>mdi-magnify</v-icon>Search</v-btn>
       </v-form>
     </div>
-      <section-title title='검색결과'>
-        <v-btn color="secondary" depressed>추가</v-btn>
-        <v-btn color="secondary" depressed>삭제</v-btn>
-        <v-btn color="secondary" depressed>저장</v-btn>
-      </section-title>
-      <v-data-table
-        v-model="tableData.selected"
-        :headers="tableData.headers"
-        :items="tableData.desserts"
-        :single-select="singleSelect"
-        hide-default-footer
-        item-key="name"
-        show-select
-      ></v-data-table>
+    <section-title title='검색결과'>
+      <v-btn color="secondary" depressed>추가</v-btn>
+      <v-btn color="secondary" depressed>삭제</v-btn>
+      <v-btn color="secondary" depressed>저장</v-btn>
+    </section-title>
+    <v-data-table
+      v-model="tableData.selected"
+      :headers="tableData.headers"
+      :items="tableData.desserts"
+      :single-select="singleSelect"
+      hide-default-footer
+      item-key="name"
+      show-select
+    ></v-data-table>
   </div>
 </template>
 
 <script>
 import SectionTitle from '@/components/SectionTitle.vue';
+import DatePicker from '@/components/DatePicker.vue';
 
 export default {
   name: 'SearchGrid',
   components: {
-    'section-title': SectionTitle,
+    SectionTitle,
+    DatePicker,
   },
   data() {
     return {
       isDisabled: false,
       toggle_exclusive: 2,
+      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
       tableData: {
         selected: [],
         singleSelect: true,
