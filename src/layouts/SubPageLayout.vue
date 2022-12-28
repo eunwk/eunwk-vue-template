@@ -80,6 +80,8 @@ export default {
         menus: [
           { title: 'Search + Grid', src: '/template/search-grid' },
           { title: 'Card Layout', src: '/template/card-layout' },
+          { title: 'Register(Form)', src: '/template/register' },
+          { title: 'Register(Table)', src: '/template/register-detail' },
         ],
       },
       {
@@ -105,12 +107,6 @@ export default {
       { id: 2, category: 'CustomComponent', src: '/custom-component/section-title' },
       { id: 3, category: 'Etc', src: '/css/sub1' },
     ],
-    // computed() {
-    //   changeMenuItem() {
-    //     return this.result.reduce((a,c) => a + c, 0) / this.result.length || 0
-    //   }
-    // }
-    // selectedTabTitle: this.tabItems[this.selectedTabIndex].title,
   }),
   methods: {
     onSearch() {

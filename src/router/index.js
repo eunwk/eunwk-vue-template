@@ -39,6 +39,16 @@ export const routes = [
         component: () => import(/* webpackChunkName: 'template' */ '../views/SearchGrid.vue'),
       },
       {
+        path: '/template/register',
+        name: 'RegisterView',
+        component: () => import(/* webpackChunkName: 'template' */ '../views/RegisterView.vue'),
+      },
+      {
+        path: '/template/register-detail',
+        name: 'RegisterDetail',
+        component: () => import(/* webpackChunkName: 'template' */ '../views/RegisterDetail.vue'),
+      },
+      {
         path: '/custom-component/section-title',
         name: 'CustomSectionTitle',
         component: () => import(/* webpackChunkName: 'component' */ '../views/CustomSectionTitle.vue'),

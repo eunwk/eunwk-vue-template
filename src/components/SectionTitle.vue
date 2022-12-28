@@ -1,5 +1,5 @@
 <template>
-  <div class="section-title-area">
+  <div :class="{'section-title-area':true, box:box}">
     <div :class="computeDepth"><v-icon v-if="icon" class="mr-2">{{ icon }}</v-icon>{{ title }}</div>
     <div class="section-extra-area">
       <slot></slot>
@@ -23,6 +23,10 @@ export default {
       type: String,
       default: null,
     },
+    box: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
   }),
@@ -36,40 +40,37 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .section-title-area {
   margin-bottom: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 28px;
+  &.box {
+    padding: 5px 8px 5px 10px;
+    background: #e5e5e5;
+    border-radius: 4px;
+  }
+  .section-title {
+    margin-right: 10px;
+    font-weight: 500;
+    &.depth-1 {
+      font-size: 18px;
+    }
+    &.depth-2 {
+      font-size: 16px;
+    }
+    &.depth-3 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+    &.depth-4 {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
 }
-.section-title {
-  margin-right: 10px;
-  font-weight: 500;
-}
-
-.section-title.depth-1 {
-  font-size: 18px;
-}
-
-.section-title.depth-2{
-  font-size: 16px;
-}
-
-.section-title.depth-3{
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.section-title.depth-4{
-  font-size: 14px;
-  font-weight: 400;
-}
-
-/* .section-title .v-icon {
-  margin-left: -8px;
-} */
 
 .section-extra-area {
   display: flex;

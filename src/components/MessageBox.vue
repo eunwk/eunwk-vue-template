@@ -12,10 +12,11 @@
 </template>
 
 <script>
-import img404 from '@/assets/images/img_404.png';
+import imgError from '@/assets/images/img_error.png';
 import imgEmpty from '@/assets/images/img_empty.png';
 import imgNotice from '@/assets/images/img_notice.png';
 import imgForbiden from '@/assets/images/img_auth.png';
+import imgWarning from '@/assets/images/img_warning.png';
 
 export default {
   props: {
@@ -45,7 +46,11 @@ export default {
     imageForType(type) {
       switch (type) {
         case 'error':
-          return img404;
+          return imgError;
+        case 'warning':
+          return imgWarning;
+        case 'success':
+          return imgNotice;
         case 'empty':
           return imgEmpty;
         case 'forbidden':
