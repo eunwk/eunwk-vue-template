@@ -1,5 +1,12 @@
+
+
+body {
+  font-size: 0.875rem;
+}
+
 /* 본문영역 페이지 container */
 .v-application {
+    font-size: 0.938rem;
     .single-layout-body-container {
         padding: 50px 15px;
   
@@ -20,9 +27,7 @@
 }
 
 /* 컴포넌트 커스터마이징 */
-// .v-label {
-//   font-size: 14px;
-// }
+
 
 /* 본문영역 페이지 container */
 // @media (min-width: 960px) {
@@ -38,9 +43,9 @@
     margin-bottom: 20px;
     padding-right: 120px;
     position: relative;
-    input {
-      font-size: 14px;
-    }   
+    .v-label {
+      align-self: center;
+    } 
 }
 
 .search-area form {
@@ -84,12 +89,11 @@
 }
 
 .search-area .v-text-field__slot .v-label {
-  position: relative !important;
+  position: static !important;
   transform: none !important;
   max-width: auto;
   overflow: visible;
   margin-right: 10px;
-  font-size: 14px;
 }
 .search-area .v-text-field__slot .v-label + input {
   border: 1px solid #ddd;

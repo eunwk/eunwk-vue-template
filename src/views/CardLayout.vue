@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped lang="scss">
 .list-container {
   border: 1px solid red;
   display: grid;
@@ -62,11 +62,15 @@ export default {
   margin-bottom: 30px;
 }
 
-.card-title {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.v-card {
+  .card-title {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.5rem !important;
+    letter-spacing: 0 !important;
+  }
 }
 
 .card-content {

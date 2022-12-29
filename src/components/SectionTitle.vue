@@ -49,8 +49,9 @@ export default {
   min-height: 28px;
   &.box {
     padding: 5px 8px 5px 10px;
-    background: #e5e5e5;
-    border-radius: 4px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
   }
   .section-title {
     margin-right: 10px;
