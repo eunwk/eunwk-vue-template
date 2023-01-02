@@ -19,5 +19,7 @@ module.exports = {
     // 'import/no-extraneous-dependencies': ["error", {"devDependencies": true}],
     'import/no-extraneous-dependencies': 'off',
     defaultDate: 'off',
+    'vuejs-accessibility/form-control-has-label': 'off',
+    'implicit-arrow-linebreak': 'off',
   },
 };

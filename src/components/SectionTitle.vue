@@ -1,6 +1,9 @@
 <template>
-  <div :class="{'section-title-area':true, box:box}">
-    <div :class="computeDepth"><v-icon v-if="icon" class="mr-2">{{ icon }}</v-icon>{{ title }}</div>
+  <div :class="{ 'section-title-area': true, box: box }">
+    <div :class="computeDepth">
+      <v-icon v-if="icon" class="mr-2">{{ icon }}</v-icon
+      >{{ title }}
+    </div>
     <div class="section-extra-area">
       <slot></slot>
     </div>
@@ -28,15 +31,13 @@ export default {
       default: false,
     },
   },
-  data: () => ({
-  }),
+  data: () => ({}),
   computed: {
     computeDepth() {
       return `section-title depth-${this.depth}`;
     },
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
@@ -52,6 +53,9 @@ export default {
     background: #f1f1f1;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+    & + .section-title-area {
+      margin-top: 15px;
+    }
   }
   .section-title {
     margin-right: 10px;
@@ -78,10 +82,10 @@ export default {
   align-items: center;
 }
 
-.section-extra-area>*:not(:last-child) {
+.section-extra-area > *:not(:last-child) {
   margin-right: 5px;
 }
-.section-extra-area>button {
+.section-extra-area > button {
   height: 28px !important;
 }
 
@@ -98,5 +102,4 @@ export default {
 .section-extra-area .v-text-field--outlined.v-input--dense .v-label {
   top: auto;
 }
-
 </style>

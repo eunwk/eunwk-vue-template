@@ -3,23 +3,23 @@
         <section-title title='조회영역 1Row 4컬럼'></section-title>
         <div class="search-area">
           <v-form v-model="valid">
-            <div class="item">
+            <div class="src-item">
               <date-picker default-date="2000-12-12"></date-picker>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-select
                 :items="items"
                 label="SelectBox"
               ></v-select>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
@@ -32,37 +32,37 @@
         <section-title title='조회영역 2 Row'></section-title>
         <div class="search-area">
           <v-form v-model="valid">
-            <div class="item col2">
+            <div class="src-item col2">
               <date-picker label="조회기간" double from="2000-12-12" to="2024-12-12"></date-picker>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-select
                 :items="items"
                 label="SelectBox"
               ></v-select>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
@@ -75,10 +75,10 @@
         <section-title title='조회영역 3 Row'></section-title>
         <div class="search-area">
           <v-form v-model="valid">
-            <div class="item">
+            <div class="src-item">
               <date-picker default-date="2000-12-12"></date-picker>
             </div>
-            <div class="item col3">
+            <div class="src-item col3">
               <label for="selectAll">CheckBox</label>
               <v-checkbox
                 v-model="checkboxAll"
@@ -112,56 +112,56 @@
                 @change="onClickCheckItem"
               ></v-checkbox>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
@@ -174,94 +174,94 @@
         <section-title title='조회영역 4 Row'></section-title>
         <div class="search-area">
           <v-form v-model="valid">
-            <div class="item">
+            <div class="src-item">
               <date-picker default-date="2000-12-12"></date-picker>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"
                 required
               ></v-text-field>
             </div>
-            <div class="item">
+            <div class="src-item">
               <v-text-field
                 v-model="firstname"
                 label="조회조건"

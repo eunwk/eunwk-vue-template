@@ -2,23 +2,23 @@
   <div>
     <div class="search-area">
       <v-form v-model="valid">
-        <div class="item">
+        <div class="src-item">
           <date-picker default-date="2000-12-12"></date-picker>
         </div>
-        <div class="item">
+        <div class="src-item">
           <v-text-field
             v-model="firstname"
             label="조회조건"
             required
           ></v-text-field>
         </div>
-        <div class="item">
+        <div class="src-item">
           <v-select
             :items="items"
             label="SelectBox"
           ></v-select>
         </div>
-        <div class="item">
+        <div class="src-item">
           <v-text-field
             v-model="firstname"
             label="조회조건"
@@ -29,9 +29,22 @@
       </v-form>
     </div>
     <section-title title='검색결과'>
-      <v-btn color="secondary" depressed>추가</v-btn>
-      <v-btn color="secondary" depressed>삭제</v-btn>
-      <v-btn color="secondary" depressed>저장</v-btn>
+      <v-dialog v-model="addPopup" width="500">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="secondary" depressed v-bind="attrs" v-on="on">추가</v-btn>
+      </template>
+      <add-grid-popup :bind-close="onCloseAddPopup" />
+    </v-dialog>
+    <v-dialog
+      v-model="confirm"
+      persistent
+      max-width="290"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="secondary" depressed v-bind="attrs" v-on="on">삭제</v-btn>
+      </template>
+      <common-confirm :bind-close="cancleConfirm" :bind-ok="okConfirm" msg="삭제하시겠습니까?" type="delete" />
+    </v-dialog>
     </section-title>
     <v-data-table
       v-model="tableData.selected"
@@ -48,15 +61,21 @@
 <script>
 import SectionTitle from '@/components/SectionTitle.vue';
 import DatePicker from '@/components/DatePicker.vue';
+import CommonConfirm from '@/components/CommonConfirm.vue';
+import AddGridPopup from '@/popup/AddGridPopup.vue';
 
 export default {
   name: 'SearchGrid',
   components: {
     SectionTitle,
     DatePicker,
+    AddGridPopup,
+    CommonConfirm,
   },
   data() {
     return {
+      addPopup: false,
+      confirm: false,
       isDisabled: false,
       toggle_exclusive: 2,
       items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
@@ -162,9 +181,20 @@ export default {
     };
   },
   methods: {
-    // onClickToggle() {
-    //   this.isDisabled = !this.isDisabled;
-    // },
+    onCloseAddPopup() {
+      this.addPopup = false;
+    },
+    onSaveAddPopup() {
+      alert('저장되었습니다.');
+      this.addPopup = false;
+    },
+    cancleConfirm() {
+      this.confirm = false;
+    },
+    okConfirm() {
+      alert('삭제하였습니다.');
+      this.confirm = false;
+    },
   },
 };
 </script>

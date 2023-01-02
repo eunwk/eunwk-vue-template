@@ -7,21 +7,26 @@
           <v-list-item-title class="text-h6">
             {{ selectedTabTitle }}
           </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
+          <v-list-item-subtitle> subtext </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>
       <v-list>
-        <v-list-item v-for="item in selectedMenuData" :key="item.value" :to="item.src">
+        <v-list-item
+          v-for="item in selectedMenuData"
+          :key="item.value"
+          :to="item.src"
+        >
           {{ item.title }}
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <!-- <v-app-bar app flat clipped-left color="primary" dense> -->
     <v-app-bar app flat color="primary" dense>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" color="#ffffff"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        color="#ffffff"
+      ></v-app-bar-nav-icon>
       <v-app-bar-title>
         <router-link to="/" class="app-logo">
           <v-icon color="#ffffff">mdi-cloud-braces</v-icon>
@@ -29,8 +34,19 @@
         </router-link>
       </v-app-bar-title>
       <template v-slot:extension>
-        <v-tabs v-model="selectedTabIndex" dark slider-color="yellow" show-arrows class="pl-3">
-          <v-tab v-for="item in tabItems" :key="item.id" :to="item.src" @click="onClickTab(item)">
+        <v-tabs
+          v-model="selectedTabIndex"
+          dark
+          slider-color="yellow"
+          show-arrows
+          class="pl-3"
+        >
+          <v-tab
+            v-for="item in tabItems"
+            :key="item.id"
+            :to="item.src"
+            @click="onClickTab(item)"
+          >
             {{ item.category }}
           </v-tab>
         </v-tabs>
@@ -45,9 +61,11 @@
           style="max-width: 200px"
           append-icon="mdi-magnify"
           clear-icon="mdi-close-circle"
-          dense rounded
+          dense
+          rounded
           height="24px"
-          @click:append="onSearch"></v-text-field>
+          @click:append="onSearch"
+        ></v-text-field>
         <v-btn text color="#ffffff" to="/login">Login</v-btn>
         <btn-theme-change></btn-theme-change>
       </v-row>
@@ -57,9 +75,7 @@
         <router-view class="sub-content-inner"></router-view>
       </v-container>
     </v-main>
-    <v-footer app>
-    푸터
-    </v-footer>
+    <v-footer app> 푸터 </v-footer>
   </div>
 </template>
 
@@ -80,8 +96,8 @@ export default {
         menus: [
           { title: 'Search + Grid', src: '/template/search-grid' },
           { title: 'Card Layout', src: '/template/card-layout' },
-          { title: 'Register(Form)', src: '/template/register' },
-          { title: 'Register(Table)', src: '/template/register-detail' },
+          { title: 'Post Form', src: '/template/post' },
+          { title: 'Responsive Table', src: '/template/responsive-table' },
         ],
       },
       {
@@ -94,9 +110,7 @@ export default {
       },
       {
         category: 'Etc',
-        menus: [
-          { title: '404 에러페이지', src: '/css/sub1' },
-        ],
+        menus: [{ title: '404 에러페이지', src: '/css/sub1' }],
       },
     ],
     selectedMenuData: [],
@@ -104,7 +118,11 @@ export default {
     selectedTabTitle: '11111',
     tabItems: [
       { id: 1, category: 'Template', src: '/template/search-grid' },
-      { id: 2, category: 'CustomComponent', src: '/custom-component/section-title' },
+      {
+        id: 2,
+        category: 'CustomComponent',
+        src: '/custom-component/section-title',
+      },
       { id: 3, category: 'Etc', src: '/css/sub1' },
     ],
   }),
@@ -133,14 +151,11 @@ export default {
       }
     },
     setSubMenuTitle() {
-      const data = this.tabItems.filter(
-        ({ src }) => src === this.$route.path,
-      );
+      const data = this.tabItems.filter(({ src }) => src === this.$route.path);
       this.selectedTabTitle = data[0].category;
     },
   },
-  computed: {
-  },
+  computed: {},
   mounted() {
     // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
     this.setSubMenuTitle();
@@ -164,5 +179,4 @@ export default {
   margin-right: 7px;
   font-size: 30px;
 }
-
 </style>

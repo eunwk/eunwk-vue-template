@@ -10,7 +10,8 @@ export const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: 'index' */ '../layouts/SinglePageLayout.vue'),
+    component: () =>
+      import(/* webpackChunkName: 'index' */ '../layouts/SinglePageLayout.vue'),
     children: [
       {
         path: '/',
@@ -20,48 +21,67 @@ export const routes = [
       {
         path: '/login',
         name: 'Login',
-        component: () => import(/* webpackChunkName: 'index' */ '../views/LoginView.vue'),
+        component: () =>
+          import(/* webpackChunkName: 'index' */ '../views/LoginView.vue'),
       },
     ],
   },
   {
     path: '/',
-    component: () => import(/* webpackChunkName: 'sub' */ '../layouts/SubPageLayout.vue'),
+    component: () =>
+      import(/* webpackChunkName: 'sub' */ '../layouts/SubPageLayout.vue'),
     children: [
       {
         path: '/template/card-layout',
         name: 'Responsive',
-        component: () => import(/* webpackChunkName: 'template' */ '../views/CardLayout.vue'),
+        component: () =>
+          import(/* webpackChunkName: 'template' */ '../views/CardLayout.vue'),
       },
       {
         path: '/template/search-grid',
         name: 'SearchGrid',
-        component: () => import(/* webpackChunkName: 'template' */ '../views/SearchGrid.vue'),
+        component: () =>
+          import(/* webpackChunkName: 'template' */ '../views/SearchGrid.vue'),
       },
       {
-        path: '/template/register',
+        path: '/template/post',
         name: 'RegisterView',
-        component: () => import(/* webpackChunkName: 'template' */ '../views/RegisterView.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: 'template' */ '../views/RegisterView.vue'
+          ),
       },
       {
-        path: '/template/register-detail',
+        path: '/template/responsive-table',
         name: 'RegisterDetail',
-        component: () => import(/* webpackChunkName: 'template' */ '../views/RegisterDetail.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: 'template' */ '../views/RegisterDetail.vue'
+          ),
       },
       {
         path: '/custom-component/section-title',
         name: 'CustomSectionTitle',
-        component: () => import(/* webpackChunkName: 'component' */ '../views/CustomSectionTitle.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: 'component' */ '../views/CustomSectionTitle.vue'
+          ),
       },
       {
         path: '/custom-component/search-area',
         name: 'CustomSearchArea',
-        component: () => import(/* webpackChunkName: 'component' */ '../views/CustomSearchArea.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: 'component' */ '../views/CustomSearchArea.vue'
+          ),
       },
       {
         path: '/custom-component/message-box',
         name: 'CustomMessageBox',
-        component: () => import(/* webpackChunkName: 'component' */ '../views/CustomMessageBox.vue'),
+        component: () =>
+          import(
+            /* webpackChunkName: 'component' */ '../views/CustomMessageBox.vue'
+          ),
       },
       {
         path: '*', // 404
@@ -76,7 +96,8 @@ export const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: 'about' */ '../views/AboutView.vue'),
+    component: () =>
+      import(/* webpackChunkName: 'about' */ '../views/AboutView.vue'),
   },
 ];
 
