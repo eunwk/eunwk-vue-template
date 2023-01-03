@@ -17,6 +17,7 @@ export default new Vuex.Store({
   state: {
     cardList: generateCardList(7),
     isThemeDark: false,
+    showSubPageLnbDrawer: true,
   },
   getters: {
     // calcResponsiveCols() { // 조회영역 col 기준 공통
@@ -35,6 +36,13 @@ export default new Vuex.Store({
   mutations: {
     toggleTheme(state) {
       state.isThemeDark = !state.isThemeDark;
+    },
+    toggleLnb(state) {
+      state.showSubPageLnbDrawer = !state.showSubPageLnbDrawer;
+    },
+    setLnbForCreated(state, payload) {
+      console.log('setLnbForCreated', state, payload);
+      state.showSubPageLnbDrawer = payload;
     },
   },
   actions: {

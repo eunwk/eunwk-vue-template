@@ -1,32 +1,7 @@
 <template>
   <div>
-    <!-- <v-navigation-drawer v-model="drawer" app clipped > -->
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            {{ selectedTabTitle }}
-          </v-list-item-title>
-          <v-list-item-subtitle> subtext </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <v-divider></v-divider>
-      <v-list>
-        <v-list-item
-          v-for="item in selectedMenuData"
-          :key="item.value"
-          :to="item.src"
-        >
-          {{ item.title }}
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <!-- <v-app-bar app flat clipped-left color="primary" dense> -->
     <v-app-bar app flat color="primary" dense>
-      <v-app-bar-nav-icon
-        @click.stop="drawer = !drawer"
-        color="#ffffff"
-      ></v-app-bar-nav-icon>
       <v-app-bar-title>
         <router-link to="/" class="app-logo">
           <v-icon color="#ffffff">mdi-cloud-braces</v-icon>
@@ -34,6 +9,10 @@
         </router-link>
       </v-app-bar-title>
       <template v-slot:extension>
+        <v-app-bar-nav-icon
+          @click.stop="toggleLnb"
+          color="#ffffff"
+        ></v-app-bar-nav-icon>
         <v-tabs
           v-model="selectedTabIndex"
           dark
@@ -67,28 +46,30 @@
           @click:append="onSearch"
         ></v-text-field>
         <v-btn text color="#ffffff" to="/login">Login</v-btn>
-        <btn-theme-change></btn-theme-change>
+        <btn-theme-change />
       </v-row>
     </v-app-bar>
-    <v-main>
-      <v-container class="sub-layout-body-container" fluid>
+    <v-main :class="{'sub-layout-body-container': true, 'lnb-showing': showSubPageLnbDrawer}">
+      <sub-page-layout-lnb />
+      <v-container class="sub-layout-content" fluid>
         <router-view class="sub-content-inner"></router-view>
       </v-container>
     </v-main>
-    <v-footer app> 푸터 </v-footer>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import BtnThemeChange from '@/components/BtnThemeChange.vue';
+import SubPageLayoutLnb from './SubPageLayoutLnb.vue';
 
 export default {
   name: 'SubPageLayout',
   components: {
     BtnThemeChange,
+    SubPageLayoutLnb,
   },
   data: () => ({
-    drawer: true,
     searchValue: '',
     menuItems: [
       {
@@ -125,8 +106,23 @@ export default {
       },
       { id: 3, category: 'Etc', src: '/css/sub1' },
     ],
+    windowSize: {
+      x: 0,
+      y: 0,
+    },
   }),
+  computed: {
+    showSubPageLnbDrawer() {
+      return this.$store.state.showSubPageLnbDrawer;
+    },
+    mobileBreakPoint() {
+      return this.$vuetify.breakpoint.mobileBreakpoint;
+    },
+  },
   methods: {
+    ...mapMutations([
+      'toggleLnb',
+    ]),
     onSearch() {
       if (this.searchValue) {
         alert(`${this.searchValue}를 검색합니다.`);
@@ -155,11 +151,23 @@ export default {
       this.selectedTabTitle = data[0].category;
     },
   },
-  computed: {},
   mounted() {
     // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
     this.setSubMenuTitle();
     this.setSubMenu();
+  },
+  beforeMount() {
+    // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
+    this.windowSize = { x: window.innerWidth, y: window.innerHeight };
+    console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
+    if (this.windowSize.x < this.mobileBreakPoint) {
+      // breakpoint md 이하
+      this.$store.commit('setLnbForCreated', false);
+    }
+    if (this.windowSize.x >= this.mobileBreakPoint) {
+      // breakpoint lg 이상
+      this.$store.commit('setLnbForCreated', true);
+    }
   },
 };
 </script>
@@ -179,4 +187,28 @@ export default {
   margin-right: 7px;
   font-size: 30px;
 }
+
+/* Lnb Show/hide */
+.lnb {
+  background: #fff;
+  border-right: 1px solid #ddd;
+  width: 240px;
+  margin-left: -240px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.lnb-showing .lnb {
+  margin-left: 0;
+}
+
+.app-md .lnb,
+.app-sm .lnb,
+.app-xs .lnb   {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+};
+
 </style>

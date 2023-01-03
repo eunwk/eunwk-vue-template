@@ -19,8 +19,15 @@ body {
   
     }
     .sub-layout-body-container {
+      height: 100vh;
+      .v-main__wrap {
+        display: flex;
+        border: 1px solid red;
+      }
+      .sub-layout-content {
         padding: 20px 15px;
-  
+        overflow: auto;
+      }
     }
 
      /* 로그인, 메시지 박스 등 내부  Card 형 박스 */
