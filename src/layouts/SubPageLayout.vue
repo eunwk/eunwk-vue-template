@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <v-app-bar app flat clipped-left color="primary" dense> -->
     <v-app-bar app flat color="primary" dense>
       <v-app-bar-title>
         <router-link to="/" class="app-logo">
@@ -59,7 +58,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import BtnThemeChange from '@/components/BtnThemeChange.vue';
 import SubPageLayoutLnb from './SubPageLayoutLnb.vue';
 
@@ -71,50 +70,17 @@ export default {
   },
   data: () => ({
     searchValue: '',
-    menuItems: [
-      {
-        category: 'Template',
-        menus: [
-          { title: 'Search + Grid', src: '/template/search-grid' },
-          { title: 'Card Layout', src: '/template/card-layout' },
-          { title: 'Post Form', src: '/template/post' },
-          { title: 'Responsive Table', src: '/template/responsive-table' },
-        ],
-      },
-      {
-        category: 'CustomComponent',
-        menus: [
-          { title: 'Section Title', src: '/custom-component/section-title' },
-          { title: 'Search Area', src: '/custom-component/search-area' },
-          { title: 'Message Box', src: '/custom-component/message-box' },
-        ],
-      },
-      {
-        category: 'Etc',
-        menus: [{ title: '404 에러페이지', src: '/css/sub1' }],
-      },
-    ],
-    selectedMenuData: [],
-    selectedTabIndex: null,
-    selectedTabTitle: '11111',
-    tabItems: [
-      { id: 1, category: 'Template', src: '/template/search-grid' },
-      {
-        id: 2,
-        category: 'CustomComponent',
-        src: '/custom-component/section-title',
-      },
-      { id: 3, category: 'Etc', src: '/css/sub1' },
-    ],
     windowSize: {
       x: 0,
       y: 0,
     },
   }),
   computed: {
-    showSubPageLnbDrawer() {
-      return this.$store.state.showSubPageLnbDrawer;
-    },
+    ...mapState([
+      'tabItems',
+      'showSubPageLnbDrawer',
+      'selectedCategory',
+    ]),
     mobileBreakPoint() {
       return this.$vuetify.breakpoint.mobileBreakpoint;
     },
@@ -122,6 +88,9 @@ export default {
   methods: {
     ...mapMutations([
       'toggleLnb',
+      'setCategoryFromPath',
+      'setCategoryFromTabClick',
+      'setSubMenu',
     ]),
     onSearch() {
       if (this.searchValue) {
@@ -130,36 +99,18 @@ export default {
         alert('검색어를 입력해 주세요.');
       }
     },
-    onClickTab(clickedItem) {
-      this.selectedTabTitle = clickedItem.category;
-      console.log('this.selectedTabIndex', this.selectedTabIndex);
-      this.setSubMenu();
-    },
-    setSubMenu() {
-      const data = this.menuItems.filter(
-        ({ category }) => category === this.selectedTabTitle,
-      );
-      // 하위메뉴 없을 경우 예외처리
-      if (!data.length) {
-        this.selectedMenuData = [];
-      } else {
-        this.selectedMenuData = data[0].menus;
-      }
-    },
-    setSubMenuTitle() {
-      const data = this.tabItems.filter(({ src }) => src === this.$route.path);
-      this.selectedTabTitle = data[0].category;
+    onClickTab(item) {
+     this.$store.commit('setCategoryFromTabClick', item.category);
     },
   },
   mounted() {
     // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
-    this.setSubMenuTitle();
-    this.setSubMenu();
+    this.$store.commit('setCategoryFromPath', this.$route.path);
   },
   beforeMount() {
     // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
     this.windowSize = { x: window.innerWidth, y: window.innerHeight };
-    console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
+    // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
     if (this.windowSize.x < this.mobileBreakPoint) {
       // breakpoint md 이하
       this.$store.commit('setLnbForCreated', false);

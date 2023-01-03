@@ -32,35 +32,35 @@ export const routes = [
       import(/* webpackChunkName: 'sub' */ '../layouts/SubPageLayout.vue'),
     children: [
       {
-        path: '/template/card-layout',
+        path: '/Template/card-layout',
         name: 'Responsive',
         component: () =>
-          import(/* webpackChunkName: 'template' */ '../views/CardLayout.vue'),
+          import(/* webpackChunkName: 'Template' */ '../views/CardLayout.vue'),
       },
       {
-        path: '/template/search-grid',
+        path: '/Template/search-grid',
         name: 'SearchGrid',
         component: () =>
-          import(/* webpackChunkName: 'template' */ '../views/SearchGrid.vue'),
+          import(/* webpackChunkName: 'Template' */ '../views/SearchGrid.vue'),
       },
       {
-        path: '/template/post',
+        path: '/Template/post',
         name: 'RegisterView',
         component: () =>
           import(
-            /* webpackChunkName: 'template' */ '../views/RegisterView.vue'
+            /* webpackChunkName: 'Template' */ '../views/RegisterView.vue'
           ),
       },
       {
-        path: '/template/responsive-table',
+        path: '/Template/responsive-table',
         name: 'RegisterDetail',
         component: () =>
           import(
-            /* webpackChunkName: 'template' */ '../views/RegisterDetail.vue'
+            /* webpackChunkName: 'Template' */ '../views/RegisterDetail.vue'
           ),
       },
       {
-        path: '/custom-component/section-title',
+        path: '/CustomComponent/section-title',
         name: 'CustomSectionTitle',
         component: () =>
           import(
@@ -68,7 +68,7 @@ export const routes = [
           ),
       },
       {
-        path: '/custom-component/search-area',
+        path: '/CustomComponent/search-area',
         name: 'CustomSearchArea',
         component: () =>
           import(
@@ -76,7 +76,7 @@ export const routes = [
           ),
       },
       {
-        path: '/custom-component/message-box',
+        path: '/CustomComponent/message-box',
         name: 'CustomMessageBox',
         component: () =>
           import(
