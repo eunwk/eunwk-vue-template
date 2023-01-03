@@ -59,10 +59,10 @@
 </template>
 
 <script>
-import SectionTitle from '@/components/SectionTitle.vue';
-import DatePicker from '@/components/DatePicker.vue';
-import CommonConfirm from '@/components/CommonConfirm.vue';
-import AddGridPopup from '@/popup/AddGridPopup.vue';
+import SectionTitle from '@/components/SectionTitle';
+import DatePicker from '@/components/DatePicker';
+import CommonConfirm from '@/components/CommonConfirm';
+import AddGridPopup from '@/popup/AddGridPopup';
 
 export default {
   name: 'SearchGrid',

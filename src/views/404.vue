@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MessageBox from '@/components/MessageBox.vue';
+import MessageBox from '@/components/MessageBox';
 
 export default {
     name: 'NotPound',

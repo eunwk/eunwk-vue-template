@@ -275,8 +275,8 @@
 </template>
 
 <script>
-import SectionTitle from '@/components/SectionTitle.vue';
-import DatePicker from '@/components/DatePicker.vue';
+import SectionTitle from '@/components/SectionTitle';
+import DatePicker from '@/components/DatePicker';
 
 export default {
   name: 'CustomSearchArea',

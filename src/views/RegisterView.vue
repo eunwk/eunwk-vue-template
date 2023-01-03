@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import QuillEditor from '@/components/QuillEditor.vue';
-import SectionTitle from '@/components/SectionTitle.vue';
-import CategoryBanner from '@/components/CategoryBanner.vue';
+import QuillEditor from '@/components/QuillEditor';
+import SectionTitle from '@/components/SectionTitle';
+import CategoryBanner from '@/components/CategoryBanner';
 
  export default {
     components: {

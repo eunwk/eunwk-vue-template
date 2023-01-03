@@ -59,8 +59,8 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
-import BtnThemeChange from '@/components/BtnThemeChange.vue';
-import SubPageLayoutLnb from './SubPageLayoutLnb.vue';
+import BtnThemeChange from '@/components/BtnThemeChange';
+import SubPageLayoutLnb from './SubPageLayoutLnb';
 
 export default {
   name: 'SubPageLayout',

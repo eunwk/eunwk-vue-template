@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import BtnThemeChange from '@/components/BtnThemeChange.vue';
+import BtnThemeChange from '@/components/BtnThemeChange';
 
 export default {
   name: 'SinglePageLayout',

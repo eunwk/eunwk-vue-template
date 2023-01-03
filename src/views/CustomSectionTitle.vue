@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import SectionTitle from '@/components/SectionTitle.vue';
+import SectionTitle from '@/components/SectionTitle';
 
 export default {
     name: 'CustomSectionTitle',

@@ -135,8 +135,8 @@
 </template>
 
 <script>
-import SectionTitle from '@/components/SectionTitle.vue';
-import CategoryBanner from '@/components/CategoryBanner.vue';
+import SectionTitle from '@/components/SectionTitle';
+import CategoryBanner from '@/components/CategoryBanner';
 
 export default {
   components: {

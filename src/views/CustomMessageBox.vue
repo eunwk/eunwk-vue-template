@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import SectionTitle from '@/components/SectionTitle.vue';
-import MessageBox from '@/components/MessageBox.vue';
+import SectionTitle from '@/components/SectionTitle';
+import MessageBox from '@/components/MessageBox';
 
 export default {
     name: 'CustomMessageBox',
