@@ -103,10 +103,6 @@ export default {
      this.$store.commit('app/setCategoryFromTabClick', item.category);
     },
   },
-  mounted() {
-    // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
-    this.$store.commit('app/setCategoryFromPath', this.$route.path);
-  },
   beforeMount() {
     // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
     this.windowSize = { x: window.innerWidth, y: window.innerHeight };
@@ -120,10 +116,13 @@ export default {
       this.$store.commit('app/setLnbForCreated', true);
     }
   },
+  beforeCreate() {
+    this.$store.commit('app/setCategoryFromPath', this.$route.path);
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .v-app-bar-title .app-logo {
   text-decoration: none;
   display: flex;

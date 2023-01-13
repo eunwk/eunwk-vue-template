@@ -70,7 +70,7 @@
   };
 </script>
 
-<style>
+<style scoped lang="scss">
 
 .login-box {
   margin: 0 auto;

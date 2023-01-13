@@ -112,6 +112,6 @@ import CategoryBanner from '@/components/CategoryBanner';
   };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 </style>

@@ -22,5 +22,6 @@ module.exports = {
     'vuejs-accessibility/form-control-has-label': 'off',
     'implicit-arrow-linebreak': 'off',
     'import/extensions': 'off',
+    'no-unneeded-ternary': 'off',
   },
 };

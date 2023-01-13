@@ -64,7 +64,7 @@ export default {
 
 </script>
 
-<style >
+<style scoped lang="scss">
 .msg-box {
   border: 1px solid #ddd;
   border-radius: 4px;

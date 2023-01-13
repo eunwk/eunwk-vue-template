@@ -12,8 +12,8 @@
 
       <v-row justify="end">
         <v-btn text color="primary" to="/login">Login</v-btn>
-        <v-btn text color="primary" to="/template/search-grid">Layout Template</v-btn>
-        <v-btn text color="primary" to="/custom-component/section-title">Custom Component</v-btn>
+        <v-btn text color="primary" to="/Template/search-grid">Layout Template</v-btn>
+        <v-btn text color="primary" to="/Custom-component/section-title">Custom Component</v-btn>
         <btn-theme-change></btn-theme-change>
       </v-row>
     </v-app-bar>
@@ -41,10 +41,16 @@ export default {
   components: {
     BtnThemeChange,
   },
+  methods: {
+    // onClickMenu() {
+    //   console.log('cick');
+    //   this.$store.commit('app/setCategoryFromTabClick', 'template');
+    // },
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .v-app-bar-title .app-logo {
   text-decoration: none;

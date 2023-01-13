@@ -10,7 +10,7 @@ import './scss/common.scss';
 export default {
   name: 'App',
   data: () => ({
-    //
+
   }),
   computed: {
     breakpoint() {

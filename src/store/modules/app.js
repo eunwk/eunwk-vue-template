@@ -9,6 +9,75 @@ const generateCardList = (number) => Array(number).fill().map(() => ({
   content: faker.lorem.paragraph(),
 }));
 
+export const getters = {
+  // calcResponsiveCols() { // 조회영역 col 기준 공통
+    //   switch (this.$vuetify.breakpoint.name) {
+    //     case 'xs':
+    //      return 12;
+    //     case 'sm':
+    //      return 6;
+    //     case 'md':
+    //      return 4;
+    //   default:
+    //     return 3;
+    //   }
+    // },
+    darkMode() {
+      return this.$vuetify.theme.dark;
+    },
+};
+
+const mutations = {
+  toggleTheme(state) {
+    state.isThemeDark = !state.isThemeDark;
+  },
+  toggleLnb(state) {
+    state.showSubPageLnbDrawer = !state.showSubPageLnbDrawer;
+  },
+  setLnbForCreated(state, payload) {
+   // console.log('setLnbForCreated', state, payload);
+    state.showSubPageLnbDrawer = payload;
+  },
+  setCategoryFromPath(state, path) {
+    // 처음 서브화면 진입 시, 새로고침 시 카테고리 및 LNB select 셋팅
+    const splitPath = path.split('/');
+    const data = state.tabItems.filter(({ category }) => category === splitPath[1]);
+    if (data) {
+     // console.log('화면 새로고침 path', splitPath[1], data);
+     // console.log(data[0].category);
+      state.selectedCategory = data[0].category;
+      this.commit('app/setSubMenu');
+    }
+  },
+  setCategoryFromTabClick(state, category) {
+    state.selectedCategory = category;
+    this.commit('app/setSubMenu');
+  },
+  setSubMenu(state) {
+    const data = state.menuItems.filter(
+      ({ category }) => category === state.selectedCategory,
+    );
+    // 하위메뉴 없을 경우 예외처리
+    if (!data.length) {
+      state.selectedMenuData = [];
+    } else {
+      state.selectedMenuData = data[0].menus;
+    }
+    // console.log('setSubMenu 실행', state.selectedMenuData);
+  },
+  setDarkMode(mode) {
+    this.$vuetify.theme.dark = mode;
+      localStorage.setItem('darkMode', mode ? 'dark' : 'light');
+    },
+  getDarkMode() {
+    const mode = localStorage.getItem('darkMode') === 'dark' ? true : false;
+    this.$vuetify.theme.dark = mode;
+  },
+};
+
+const actions = {
+};
+
 const state = {
   cardList: generateCardList(7),
   isThemeDark: false,
@@ -47,63 +116,6 @@ const state = {
     },
   ],
   selectedMenuData: [],
-};
-
-export const getters = {
-  // calcResponsiveCols() { // 조회영역 col 기준 공통
-    //   switch (this.$vuetify.breakpoint.name) {
-    //     case 'xs':
-    //      return 12;
-    //     case 'sm':
-    //      return 6;
-    //     case 'md':
-    //      return 4;
-    //   default:
-    //     return 3;
-    //   }
-    // },
-};
-
-const mutations = {
-  toggleTheme(state) {
-    state.isThemeDark = !state.isThemeDark;
-  },
-  toggleLnb(state) {
-    state.showSubPageLnbDrawer = !state.showSubPageLnbDrawer;
-  },
-  setLnbForCreated(state, payload) {
-   // console.log('setLnbForCreated', state, payload);
-    state.showSubPageLnbDrawer = payload;
-  },
-  setCategoryFromPath(state, path) {
-    // 처음 서브화면 진입 시, 새로고침 시 카테고리 및 LNB select 셋팅
-    const splitPath = path.split('/');
-    const data = state.tabItems.filter(({ category }) => category === splitPath[1]);
-    // console.log('화면 새로고침 path', splitPath[1]);
-    if (data) {
-      state.selectedCategory = data[0].category;
-      this.commit('app/setSubMenu');
-    }
-  },
-  setCategoryFromTabClick(state, category) {
-    state.selectedCategory = category;
-    this.commit('app/setSubMenu');
-  },
-  setSubMenu(state) {
-    const data = state.menuItems.filter(
-      ({ category }) => category === state.selectedCategory,
-    );
-    // 하위메뉴 없을 경우 예외처리
-    if (!data.length) {
-      state.selectedMenuData = [];
-    } else {
-      state.selectedMenuData = data[0].menus;
-    }
-    // console.log('setSubMenu 실행', state.selectedMenuData);
-  },
-};
-
-const actions = {
 };
 
 export default {

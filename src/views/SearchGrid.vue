@@ -43,7 +43,7 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="secondary" depressed v-bind="attrs" v-on="on">삭제</v-btn>
       </template>
-      <common-confirm :bind-close="cancleConfirm" :bind-ok="okConfirm" msg="삭제하시겠습니까?" type="delete" />
+      <common-message :bind-close="cancleConfirm" :bind-ok="okConfirm" msg="삭제하시겠습니까?" type="delete" confirm />
     </v-dialog>
     </section-title>
     <v-data-table
@@ -61,7 +61,7 @@
 <script>
 import SectionTitle from '@/components/SectionTitle';
 import DatePicker from '@/components/DatePicker';
-import CommonConfirm from '@/components/CommonConfirm';
+import CommonMessage from '@/components/CommonMessage';
 import AddGridPopup from '@/popup/AddGridPopup';
 
 export default {
@@ -70,7 +70,7 @@ export default {
     SectionTitle,
     DatePicker,
     AddGridPopup,
-    CommonConfirm,
+    CommonMessage,
   },
   data() {
     return {
@@ -81,6 +81,7 @@ export default {
       toggle_exclusive: 2,
       items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
       firstname: '',
+      returnValue: null,
       tableData: {
         selected: [],
         singleSelect: true,
@@ -201,5 +202,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 </style>

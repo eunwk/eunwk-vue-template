@@ -20,7 +20,7 @@
         <h2 class="headline font-weight-bold mb-3">
           Used Dependencies
         </h2>
-        <v-row justify="center mb-10">
+        <v-row justify="center" class="mb-10">
           <v-chip class="ma-2" color="secondary">Vuex</v-chip>
           <v-chip class="ma-2" color="red">SCSS</v-chip>
           <v-chip class="ma-2">faker.js</v-chip>
@@ -52,6 +52,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 
 </style>
