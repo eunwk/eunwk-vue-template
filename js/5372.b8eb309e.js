@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue2_vuetify2"]=self["webpackChunkvue2_vuetify2"]||[]).push([[5372],{4259:function(e,t,n){n.r(t),n.d(t,{default:function(){return d}});var u=n(6190),o=function(){var e=this,t=e._self._c;return t("message-box",{attrs:{title:"404 Not Founded",desc:"파일을 찾을 수 없습니다.",type:"empty"}},[t(u.Z,{attrs:{to:"/",block:"",color:"secondary"}},[e._v("Home")])],1)},s=[],r=n(2557),a={name:"NotPound",components:{MessageBox:r.Z},data(){return{}}},c=a,l=n(1001),f=(0,l.Z)(c,o,s,!1,null,"e8ca3444",null),d=f.exports}}]);
-//# sourceMappingURL=5372.b8eb309e.js.map
