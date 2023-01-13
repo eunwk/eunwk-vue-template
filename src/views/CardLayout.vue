@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     cardList() {
-      return this.$store.state.cardList;
+      return this.$store.state.app.cardList;
     },
   },
   methods: {

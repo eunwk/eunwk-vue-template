@@ -20,7 +20,7 @@
             <section-title title='extra 컴포넌트 배치'><v-btn>버튼</v-btn></section-title>
             <div class="dummy-box">Contents</div>
             <section-title title='extra 컴포넌트 배치'>
-                <v-combobox v-model="select" :items="comboItems" label="Combobox" multiple outlined hide-details
+                <v-combobox v-model="comboItems" :items="comboItems" label="Combobox" multiple outlined hide-details
                     dense></v-combobox>
                 <v-btn>버튼</v-btn>
             </section-title>

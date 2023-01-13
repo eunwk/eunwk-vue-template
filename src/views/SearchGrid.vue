@@ -50,7 +50,7 @@
       v-model="tableData.selected"
       :headers="tableData.headers"
       :items="tableData.desserts"
-      :single-select="singleSelect"
+      :single-select="tableData.singleSelect"
       hide-default-footer
       item-key="name"
       show-select
@@ -74,11 +74,13 @@ export default {
   },
   data() {
     return {
+      valid: false,
       addPopup: false,
       confirm: false,
       isDisabled: false,
       toggle_exclusive: 2,
       items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      firstname: '',
       tableData: {
         selected: [],
         singleSelect: true,

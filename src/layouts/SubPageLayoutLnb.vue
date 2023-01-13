@@ -4,9 +4,9 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="text-h6">
-          {{ selectedCategory }}
+          <v-icon class="mr-2">{{ changeIcon }}</v-icon>{{ selectedCategory }}
         </v-list-item-title>
-        <v-list-item-subtitle> subtext </v-list-item-subtitle>
+        <!-- <v-list-item-subtitle> subtext </v-list-item-subtitle> -->
       </v-list-item-content>
     </v-list-item>
     <v-divider></v-divider>
@@ -30,14 +30,21 @@ import { mapState } from 'vuex';
 export default {
   name: 'SubPageLayoutLnb',
   computed: {
-    ...mapState([
+    ...mapState('app', [
       'selectedCategory',
       'selectedMenuData',
     ]),
-  },
-  watch: {
-    selectedMenuData(value, oldValue) {
-      console.log(value, oldValue);
+    changeIcon() {
+      switch (this.selectedCategory) {
+        case 'Template':
+          return 'mdi-book-multiple-outline';
+        case 'CustomComponent':
+          return 'mdi-bulletin-board';
+        case 'Etc':
+          return 'mdi-focus-field';
+        default:
+          return 'mdi-file-settings-outline';
+      }
     },
   },
   data: () => ({
@@ -53,6 +60,11 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.v-list-item__title {
+  display: flex;
+  .v-icon {
+    color: inherit;
+  }
+}
 </style>

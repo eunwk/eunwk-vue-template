@@ -122,7 +122,7 @@ export default {
   },
   created() {
     // props are exposed on `this`
-    console.log(this.defaultDate, this.date);
+    // console.log(this.defaultDate, this.date);
   },
 };
 </script>

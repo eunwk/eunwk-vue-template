@@ -151,6 +151,7 @@ export default {
   },
   data: () => ({
     zipCode: '12345',
+    valid: false,
   }),
   methods: {
     onClickZipCode() {
