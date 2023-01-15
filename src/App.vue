@@ -6,6 +6,7 @@
 
 <script>
 import './scss/common.scss';
+import './scss/customVariables.scss';
 
 export default {
   name: 'App',

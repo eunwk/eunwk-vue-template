@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <v-btn
+  <v-btn
     fab
     color="primary"
     width="32px"
@@ -16,7 +15,6 @@
     </v-icon>
      <v-icon small v-else>mdi-star-crescent</v-icon>
   </v-btn>
-  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app class="sub-page">
     <v-app-bar app flat color="primary" dense>
       <v-app-bar-title>
         <router-link to="/" class="app-logo">
@@ -16,7 +16,6 @@
           v-model="selectedIndex"
           dark
           slider-color="yellow"
-          show-arrows
           class="pl-3"
         >
           <v-tab
@@ -54,7 +53,7 @@
         <router-view class="sub-content-inner"></router-view>
       </v-container>
     </v-main>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -127,15 +126,12 @@ export default {
   text-decoration: none;
   display: flex;
   align-items: center;
-}
-
-.v-app-bar-title a {
   color: #ffffff;
-}
 
-.v-app-bar-title .app-logo .v-icon {
-  margin-right: 7px;
-  font-size: 30px;
+  > .v-icon {
+    margin-right: 7px;
+    font-size: 30px;
+  }
 }
 
 /* Lnb Show/hide */

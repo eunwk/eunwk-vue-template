@@ -29,6 +29,11 @@
   font-style: normal;
 }
 
+
+$maxContentWidth: 1500px;
+$comBoxVPadding: 40px;
+$comBoxHPadding: 30px;
+
 html { 
   overflow: initial !important;
 }
@@ -41,28 +46,36 @@ body {
   word-break:keep-all;
 }
 
+ul, ol, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 본문영역 페이지 container */
 .v-application {
     font-size: 0.938rem;
-    .single-layout-body-container {
-        padding: 50px 15px;
-  
-    }
-    .sub-layout-body-container {
-      height: 100vh;
-      .v-main__wrap {
-        display: flex;
-      }
-      .sub-layout-content {
-        padding: 20px 15px;
-        overflow: auto;
+    
+    /* single-page */
+    .single-page {
+      .max-width-box {
+        max-width: $maxContentWidth;
+        padding-right: $comBoxHPadding;
+        padding-left: $comBoxHPadding;
+        margin: 0 auto;
+        // border: 1px solid red;
       }
     }
 
-     /* 로그인, 메시지 박스 등 내부  Card 형 박스 */
-     & .card-box {
-        margin: 0 auto;
-        max-width: 460px;
+    /* 로그인, 메시지 박스 등 내부  Card 형 박스 */
+    & .card-box {
+      margin: 0 auto;
+      max-width: 460px;
     }
 
     /* SelectBox 커스텀 */
