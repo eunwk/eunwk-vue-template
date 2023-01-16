@@ -1,29 +1,53 @@
+<!-- eslint-disable brace-style -->
 <template>
   <div class="single-page">
-    <header>
+    <header :class="{scrolled : scrolled}">
+      <!-- <div class="scroll-progress"><span ref="myBar"></span></div> -->
       <div class="max-width-box">
         <h1 class="app-logo">
-          <router-link to="/" >
-            <v-icon color="primary">mdi-cloud-braces</v-icon>
-            Eunwk
+          <router-link to="/" @focus="closeMegamenu">
+            <img src="@/assets/images/logo.png" alt="UI/UX" />
+            Template
           </router-link>
         </h1>
         <div class="header-menu">
-          <v-btn text color="primary" to="/Template/search-grid">Layout Template</v-btn>
-          <v-btn text color="primary" to="/Custom-component/section-title">Custom Component</v-btn>
+          <a :class="{'btn-menu': true, active: selectedMenu === 'template'}" href="#" @click="onClickMenu($event, 'template')">Layout Template<v-icon>mdi-chevron-down</v-icon></a>
+          <div class="mega-menu" ref="template">
+            <div class="menu-inner-box">
+              <a href="/">template</a>
+              <a href="/">template</a>
+              <a href="/">template</a>
+              <a href="/">template</a>
+              <a href="/">template</a>
+            </div>
+          </div>
+          <a :class="{'btn-menu': true, active: selectedMenu === 'custom-component'}" href="#" @click="onClickMenu($event, 'custom-component')">Custom Component<v-icon>mdi-chevron-down</v-icon></a>
+          <div class="mega-menu" ref="customComponent">
+            <div class="menu-inner-box">
+              <a href="/">custom-component</a>
+              <a href="/">custom-component</a>
+              <a href="/">custom-component</a>
+              <a href="/">custom-component</a>
+              <a href="/">custom-component</a>
+            </div>
+          </div>
         </div>
         <div class="header-others">
           <v-btn text color="primary" to="/login">Login</v-btn>
           <btn-theme-change></btn-theme-change>
         </div>
       </div>
+      <!-- <div :class="{'menu-box': true, showing: showMegaMenu}">
+      </div> -->
+      <button class="mega-menu-dim" v-if="showMegaMenu" @click="onClickDim" tabindex="-1">메뉴 닫기</button>
     </header>
     <div class="body-container">
       <router-view></router-view>
     </div>
     <footer>
       <div class="max-width-box text-center">
-        <strong>이메일: eunwk@naver.com</strong>
+        <p>Copyright © 2023 eunwk. All rights reserved. / email: eunwk@naver.com</p>
+        <address>경기도 용인시 기흥구 보라동</address>
       </div>
     </footer>
   </div>
@@ -37,11 +61,105 @@ export default {
   components: {
     BtnThemeChange,
   },
-  methods: {
-    // onClickMenu() {
-    //   console.log('cick');
-    //   this.$store.commit('app/setCategoryFromTabClick', 'template');
+  data() {
+    return {
+      scrolled: false,
+      lastScrollTop: 0,
+      showMegaMenu: false,
+      selectedMenu: null,
+    };
+  },
+  computed: {
+    // isOpen() {
+    //     return `${this.showMegaMenu === true ? 'transition: none' : null}`;
     // },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll);
+  },
+  methods: {
+    onScroll() {
+      // header 플로팅
+      console.log('scroll');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop >= this.lastScrollTop) {
+        this.scrolled = true;
+      } else {
+        this.scrolled = false;
+      }
+      this.lastScrollTop = scrollTop;
+
+      // 메가메뉴 닫음.
+      this.closeMegamenu();
+
+      // scroll Progress
+      // const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      // const scrolled = (scrollTop / height) * 100;
+      // this.$refs.myBar.style.width = `${scrolled}%`;
+    },
+    closeMegamenu() {
+      // 메가메뉴 닫음.
+      if (this.showMegaMenu) {
+        this.showMegaMenu = false;
+        this.selectedMenu = null;
+      }
+    },
+    onClickMenu(e, selectMenu) {
+      console.log('click', e.type);
+     // this.closeMegamenu();
+      // 메뉴가 열려있는 상태에서 다른 메뉴를 클릭했을 떄 animation 금지
+      if (selectMenu === 'template') {
+        if (this.selectedMenu === 'template') {
+          // 현재 클릭한 메뉴가 기존에 열려있던 메뉴일 떄 메뉴닫음.
+          this.$refs.template.style = '';
+          this.$refs.customComponent.style = '';
+          this.showMegaMenu = false;
+          this.selectedMenu = null;
+        } else if (this.selectedMenu !== null) {
+          console.log('이미 열려있는 메뉴가 있어요');
+          // 기존에 다른 메뉴가 열려있다가 이 메뉴가 열리면
+          this.$refs.template.style = 'transition: none';
+          this.$refs.customComponent.style = 'transition: none';
+          this.showMegaMenu = true;
+          this.selectedMenu = selectMenu;
+        } else {
+          this.$refs.template.style = '';
+          this.$refs.customComponent.style = '';
+          this.showMegaMenu = true;
+          this.selectedMenu = selectMenu;
+        }
+      }
+      if (selectMenu === 'custom-component') {
+        if (this.selectedMenu === 'custom-component' && this.selectedMenu !== null) {
+          // 현재 클릭한 메뉴가 기존에 열려있던 메뉴일 떄 메뉴닫음.
+          this.$refs.template.style = '';
+          this.$refs.customComponent.style = '';
+          this.showMegaMenu = false;
+          this.selectedMenu = null;
+        } else if (this.selectedMenu !== null) {
+          console.log('이미 열려있는 메뉴가 있어요');
+          this.$refs.template.style = 'transition: none';
+          this.$refs.customComponent.style = 'transition: none';
+          this.showMegaMenu = true;
+          this.selectedMenu = selectMenu;
+        } else {
+          // 현재 클릭한 메뉴가 기존에 열려있지 않았다면 메뉴 오픈.
+          this.$refs.template.style = '';
+          this.$refs.customComponent.style = '';
+          this.showMegaMenu = true;
+          this.selectedMenu = selectMenu;
+        }
+      }
+    },
+    onClickDim() {
+      this.showMegaMenu = false;
+      this.selectedMenu = null;
+      this.$refs.template.style = '';
+      this.$refs.customComponent.style = '';
+    },
   },
 };
 </script>
@@ -60,15 +178,24 @@ export default {
     top: 0;
     background: #fff;
     z-index:2;
+    transition: 0.4s;
     .max-width-box {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       height: 100%;
       .header-menu {
-
+        margin-right: auto;
+        .btn-menu:not(:last-child) {
+          margin-right: 10px;
+        }
       }
       .header-others {
-        margin-left: auto;
+        margin-left: 20px;
+        justify-self: flex-end;
+        a {
+          margin-right: 5px;
+        }
       }
     }
     .app-logo a {
@@ -77,12 +204,20 @@ export default {
       align-items: center;
       font-size: 20px;
       margin-right: 40px;
-      .v-icon {
-        margin-right: 7px;
-        font-size: 30px;
+      img {
+        margin-right: 10px;
+        width: 50px;
       }
     }
   }
+
+  header.scrolled {
+    top: -64px;
+  }
+
+  // header.menu-open {
+  //   height: 600px;
+  // }
 
   .body-container {
     flex: 1 1 auto;
@@ -94,5 +229,65 @@ export default {
     background: #eee;
   }
 }
+
+.mega-menu-dim {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
+}
+
+.mega-menu {
+  background: #fff;
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  text-align: left;
+  height: 0;
+  transition: 0.3s height;
+  overflow: hidden;
+  // display: none;
+  .menu-inner-box {
+    padding: 30px;
+    display: none;
+  }
+}
+
+.btn-menu {
+  display: inline-block;
+  padding: 2px 5px 2px 10px;
+  border-radius: 3px;
+  transition: 0.2s;
+  &:hover {
+    background: #edf4fb;
+  }
+}
+
+.btn-menu.active {
+  background: #d6e7f7;
+  .v-icon {
+    transform: rotate(-180deg);
+  }
+}
+
+.btn-menu.active + .mega-menu {
+  height: 400px;
+  border-top: 1px solid #ddd;
+  .menu-inner-box {
+   display: block;
+  }
+}
+
+// .btn-menu:focus + .mega-menu,
+// .mega-menu:focus-within {
+//     height: 400px;
+//     border-top: 1px solid $borderColor;
+// }
+
+// .mega-menu:focus-within {
+//     transition: none;
+// }
 
 </style>

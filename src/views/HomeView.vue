@@ -3,34 +3,20 @@
       <section class="main-section main-visual">
         <div class="max-width-box">
           <div class="img-box">
-            <v-img
-              :src="require('../assets/logo.svg')"
-              class="my-3"
-              contain
-              height="200"
-            />
+            <div class="img-view"><img src="@/assets/images/vuetify.png" alt="" /></div>
+            <div class="img-faker" style="--i:1;"><img src="@/assets/images/faker.png" alt="" /></div>
+            <div class="img-vuex" style="--i:2;"><img src="@/assets/images/vuex.png" alt="" /></div>
+            <div class="img-quill" style="--i:3;"><img src="@/assets/images/quill.png" alt="" /></div>
           </div>
           <div class="txt-box">
-            <h1 class="display-2 font-weight-bold mb-3">Vue2 + Vuetify2 <br />Layout Template</h1>
-            <h2 class="headline font-weight-bold mb-3">Used Dependencies</h2>
-            <div class="mb-10">
-              <v-chip class="ma-2" color="secondary">Vuex</v-chip>
-              <v-chip class="ma-2" color="red">SCSS</v-chip>
-              <v-chip class="ma-2">Vuetify</v-chip>
-              <v-chip class="ma-2" color="primary">faker.js, shortid</v-chip>
-              <v-chip class="ma-2" color="green">quill</v-chip>
+            <h1 class="visual-title">Vue2 + Vuetify2 <br />Layout Template</h1>
+            <div class="chips">
+              <v-chip color="yellow">Vuex</v-chip>
+              <v-chip color="red" dark>SCSS</v-chip>
+              <v-chip>Vuetify</v-chip>
+              <v-chip color="primary">faker.js, shortid</v-chip>
+              <v-chip color="green">quill</v-chip>
             </div>
-
-            <h2 class="headline font-weight-bold mb-3">About</h2>
-            <p class="subheading font-weight-regular">
-              1. 메인화면, 로그인 등 단일페이지 레이아웃
-              <br />2. 본문 컨텐츠를 위한 서브페이지 레이아웃
-              <br />3. Sass를 이용한 Vuetify Customizing 설정
-              <br />4. 다른 버전 <a
-                href="https://community.vuetifyjs.com"
-                target="_blank"
-              >[Vue3 + Nuxt를 사용한 퍼블리싱 템플릿]</a>
-            </p>
           </div>
         </div><!-- .max-width-box // -->
       </section><!-- .main-visual // -->
@@ -38,14 +24,14 @@
       <section class="main-section">
         <div class="max-width-box">
           <h2 class="main-section-title">About</h2>
-          <ul class="list-desc">
+          <ol class="list-desc">
             <li>메인화면, 로그인 등 단일페이지 레이아웃</li>
             <li>본문 컨텐츠를 위한 서브페이지 레이아웃</li>
             <li>Sass를 이용한 Vuetify Customizing 설정</li>
             <li>
               Vuex를 사용한 상태관리<br/>
             </li>
-          </ul>
+          </ol>
         </div>
       </section>
 
@@ -86,7 +72,7 @@
           <h2 class="main-section-title">Who is Eunwk...?</h2>
           <p class="main-section-desc">'Eunwk' 는 웹퍼블리셔 입니다~. 이 프로젝트는 뷰 스터디를 위한 템플릿 입니다~</p>
           <div class="band-links">
-            <a href="https://github.com/eunwk/eunwk-vue-template" target="_blank"><v-icon>mdi-github</v-icon>깃허브</a>
+            <a href="https://github.com/eunwk/eunwk-vue-template" target="_blank"><v-icon>mdi-github</v-icon>Code 보기</a>
             <a href="https://eunwk.github.io/eunwk-technote/" target="_blank"><v-icon>mdi-application-brackets-outline</v-icon>기술노트</a>
             <a href="https://eunwk.github.io/react_ui_template/" target="_blank"><v-icon>mdi-react</v-icon>React Template</a>
           </div>
@@ -126,8 +112,11 @@ export default {
 }
 
 .main-visual {
-  background: #fbdec5 ;
+  background: #fbdec5 url(@/assets/images/img_bg.jpg) no-repeat center top ;
+  background-size: cover;
+  color: #fff;
   // border: 1px solid red;
+  padding: 100px 0;
 
   .max-width-box {
     // border: 1px solid red;
@@ -136,23 +125,85 @@ export default {
     justify-content: center;
   }
   .img-box {
-    // width: 300px;
-    // height: 300px;
-    // border-radius: 50%;
-    // background: #ffcda2;
-    margin-right: 150px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
+    width: 50%;
+    height: 400px;
+    // border: 1px solid red;
+    position: relative;
+    [class^="img-"] {
+      background-color: #ffffff;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -60%);
+      animation: main-img-ani 5s linear infinite;
+      animation-delay: calc(-1s * var(--i));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    img {
+      max-width: 70%;
+    }
+    .img-view {
+      animation: none;
+      z-index: 1;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    .img-faker {
+      transform: translate(-120%, -95%) scale(0.4);
+    }
+    .img-vuex {
+      transform: translate(-120%, -15%) scale(0.7);
+    }
+    .img-quill {
+      transform: translate(0%, -10%) scale(0.6);
+    }
   }
+
+  @keyframes main-img-ani {
+    0%,
+    100% {
+        margin-top: -20px;
+    }
+
+    50% {
+      margin-top: 20px;
+    }
+  }
+
   .txt-box {
     text-align: left;
+    .visual-title {
+      font-size: 52px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    .chips .v-chip {
+      margin-right: 10px;
+    }
   }
 }
 .list-desc {
+  display: inline-block;
+  text-align: left;
   font-size: 18px;
+  counter-reset:rankup-counter 0;
+  padding: 0;
   & li {
     margin-bottom: 10px;
+    counter-increment: rankup-counter;
+    &::before {
+      margin-right: 10px;
+      content: counter(rankup-counter) '.';
+      text-align: center;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 24px;
+      color: $primary;
+    }
   }
 }
 
@@ -207,27 +258,26 @@ export default {
 
 .dependencies {background: #f7f7f7}
 .dependencies-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 30px;
+  display: flex;
   width: 100%;
   margin-top: 80px;
   .card {
-    min-width: 250px;
-    background: #fff;
-    padding: 20px 30px 30px;
+    width: 25%;
+    // background: #fff;
+    // box-shadow: 0 0 30px rgba(0,0,0, 0.1);
+    padding: 0px 20px;
     border-radius: 20px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    box-shadow: 0 0 30px rgba(0,0,0, 0.1);
   }
   .card-img {
     margin-bottom: 30px;
     width: 160px;
     height: 160px;
+    mix-blend-mode: multiply;
     & img {
       width: 100%;
       height: 100%;
@@ -246,11 +296,11 @@ export default {
   }
   .card-link {
     margin-top: auto;
-    background: #f1f1f1;
+    background: #e3e3e3;
     height: 40px;
-    border-radius: 10px 30px 10px 30px;
+    border-radius: 20px;
     display:flex;
-    width: 100%;
+    width: 80%;
     align-items: center;
     justify-content: center;
     font-weight: 400;
