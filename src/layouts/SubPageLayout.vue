@@ -1,22 +1,21 @@
 <template>
-  <v-app class="sub-page">
-    <v-app-bar app flat color="primary" dense>
-      <v-app-bar-title>
-        <router-link to="/" class="app-logo">
-          <v-icon color="#ffffff">mdi-cloud-braces</v-icon>
-          Eunwk
-        </router-link>
-      </v-app-bar-title>
-      <template v-slot:extension>
-        <v-app-bar-nav-icon
+  <div class="sub-page">
+    <header>
+        <h1 class="app-logo">
+          <router-link to="/">
+            <img src="@/assets/images/logo.png" alt="UI/UX" />
+            Template
+          </router-link>
+        </h1>
+        <div class="header-menu">
+          <v-btn
           @click.stop="toggleLnb"
           color="#ffffff"
-        ></v-app-bar-nav-icon>
+        ></v-btn>
         <v-tabs
           v-model="selectedIndex"
           dark
           slider-color="yellow"
-          class="pl-3"
         >
           <v-tab
             v-for="item in tabItems"
@@ -27,33 +26,33 @@
             {{ item.category }}
           </v-tab>
         </v-tabs>
-      </template>
-      <v-row justify="end">
-        <v-text-field
-          v-model="searchValue"
-          placeholder="Search"
-          solo
-          clearable
-          hide-details
-          style="max-width: 200px"
-          append-icon="mdi-magnify"
-          clear-icon="mdi-close-circle"
-          dense
-          rounded
-          height="24px"
-          @click:append="onSearch"
-        ></v-text-field>
-        <v-btn text color="#ffffff" to="/login">Login</v-btn>
-        <btn-theme-change />
-      </v-row>
-    </v-app-bar>
+        </div><!-- .header-menu // -->
+        <div class="header-others">
+          <v-text-field
+            v-model="searchValue"
+            placeholder="Search"
+            solo
+            clearable
+            hide-details
+            style="max-width: 200px"
+            append-icon="mdi-magnify"
+            clear-icon="mdi-close-circle"
+            dense
+            rounded
+            height="24px"
+            @click:append="onSearch"
+          ></v-text-field>
+          <v-btn text color="#ffffff" to="/login">Login</v-btn>
+          <btn-theme-change />
+        </div>
+    </header>
     <v-main :class="{'sub-layout-body-container': true, 'lnb-showing': showSubPageLnbDrawer}">
       <sub-page-lnb />
       <v-container class="sub-layout-content" fluid>
         <router-view class="sub-content-inner"></router-view>
       </v-container>
     </v-main>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -123,15 +122,40 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.v-app-bar-title .app-logo {
+@import '@/scss/customVariables.scss';
+.sub-page {
+  header {
+    background: $primary;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0px 30px;
+  }
+  .header-menu {
+    margin-right: auto;
+    .btn-menu:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+  .header-others {
+    margin-left: 20px;
+    justify-self: flex-end;
+    a {
+      margin-right: 5px;
+    }
+  }
+}
+.app-logo a {
   text-decoration: none;
   display: flex;
   align-items: center;
-  color: #ffffff;
-
-  > .v-icon {
-    margin-right: 7px;
-    font-size: 30px;
+  font-size: 20px;
+  margin-right: 40px;
+  color: #fff;
+  text-shadow: 1px 0 0 #333;
+  img {
+    margin-right: 10px;
+    width: 50px;
   }
 }
 
