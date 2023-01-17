@@ -53,14 +53,20 @@ export default {
 
 <style scoped lang="scss">
 @import '@/scss/customVariables.scss';
-.body-container {
+.single-page {
   flex: 1 1 auto;
-}
+  display: flex;
+  flex-direction: column;
 
-footer {
-  padding-top: 30px;
-  padding-bottom: 14px;
-  background: #eee;
+  .body-container {
+    flex: 1 1 auto;
+  }
+
+  footer {
+    padding-top: 30px;
+    padding-bottom: 14px;
+    background: #eee;
+  }
 }
 .btn-menu {
   display: inline-block;
