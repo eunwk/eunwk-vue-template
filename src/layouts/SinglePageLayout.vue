@@ -11,27 +11,13 @@
           </router-link>
         </h1>
         <div class="header-menu">
-          <a :class="{'btn-menu': true, active: selectedMenu === 'template'}" href="#" @click="onClickMenu($event, 'template')">Layout Template<v-icon>mdi-chevron-down</v-icon></a>
-          <div class="mega-menu" ref="template">
-            <div class="menu-inner-box">
-              <a href="/">template</a>
-              <a href="/">template</a>
-              <a href="/">template</a>
-              <a href="/">template</a>
-              <a href="/">template</a>
-            </div>
-          </div>
-          <a :class="{'btn-menu': true, active: selectedMenu === 'custom-component'}" href="#" @click="onClickMenu($event, 'custom-component')">Custom Component<v-icon>mdi-chevron-down</v-icon></a>
-          <div class="mega-menu" ref="customComponent">
-            <div class="menu-inner-box">
-              <a href="/">custom-component</a>
-              <a href="/">custom-component</a>
-              <a href="/">custom-component</a>
-              <a href="/">custom-component</a>
-              <a href="/">custom-component</a>
-            </div>
-          </div>
-        </div>
+          <a :class="{'btn-menu': true, active: currentMenu === 'Template'}" href="#" @click.prevent="onClickMenu($event, 'Template')" ref="Template">Layout Template<v-icon>mdi-chevron-down</v-icon></a>
+          <Single-page-mega-menu :currentMenu="currentMenu" keyValue="Template" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
+
+          <a :class="{'btn-menu': true, active: currentMenu === 'CustomComponent'}" href="#" @click.prevent="onClickMenu($event, 'CustomComponent')" ref="CustomComponent">Custom Component<v-icon>mdi-chevron-down</v-icon></a>
+          <Single-page-mega-menu :currentMenu="currentMenu" keyValue="CustomComponent" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
+
+        </div><!-- .header-menu // -->
         <div class="header-others">
           <v-btn text color="primary" to="/login">Login</v-btn>
           <btn-theme-change></btn-theme-change>
@@ -39,7 +25,6 @@
       </div>
       <!-- <div :class="{'menu-box': true, showing: showMegaMenu}">
       </div> -->
-      <button class="mega-menu-dim" v-if="showMegaMenu" @click="onClickDim" tabindex="-1">메뉴 닫기</button>
     </header>
     <div class="body-container">
       <router-view></router-view>
@@ -47,7 +32,7 @@
     <footer>
       <div class="max-width-box text-center">
         <p>Copyright © 2023 eunwk. All rights reserved. / email: eunwk@naver.com</p>
-        <address>경기도 용인시 기흥구 보라동</address>
+        <!-- <address>경기도 용인시 기흥구 보라동</address> -->
       </div>
     </footer>
   </div>
@@ -55,24 +40,28 @@
 
 <script>
 import BtnThemeChange from '@/components/BtnThemeChange';
+import SinglePageMegaMenu from '@/components/comFrames/SinglePageMegaMenu';
+import { mapState } from 'vuex';
 
 export default {
   name: 'SinglePageLayout',
   components: {
     BtnThemeChange,
+    SinglePageMegaMenu,
   },
   data() {
     return {
       scrolled: false,
       lastScrollTop: 0,
       showMegaMenu: false,
-      selectedMenu: null,
+      currentMenu: null, // 현재 선택되어 있는 메뉴
     };
   },
   computed: {
-    // isOpen() {
-    //     return `${this.showMegaMenu === true ? 'transition: none' : null}`;
-    // },
+    ...mapState('app', [
+      'selectedCategory',
+      'selectedMenuData', // 2뎁스 메뉴 데이터
+    ]),
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll);
@@ -94,71 +83,37 @@ export default {
 
       // 메가메뉴 닫음.
       this.closeMegamenu();
-
-      // scroll Progress
-      // const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      // const scrolled = (scrollTop / height) * 100;
-      // this.$refs.myBar.style.width = `${scrolled}%`;
     },
     closeMegamenu() {
       // 메가메뉴 닫음.
       if (this.showMegaMenu) {
         this.showMegaMenu = false;
-        this.selectedMenu = null;
+        this.currentMenu = null;
+        // this.$refs.Template.focus();
       }
     },
-    onClickMenu(e, selectMenu) {
-      console.log('click', e.type);
-     // this.closeMegamenu();
-      // 메뉴가 열려있는 상태에서 다른 메뉴를 클릭했을 떄 animation 금지
-      if (selectMenu === 'template') {
-        if (this.selectedMenu === 'template') {
-          // 현재 클릭한 메뉴가 기존에 열려있던 메뉴일 떄 메뉴닫음.
-          this.$refs.template.style = '';
-          this.$refs.customComponent.style = '';
-          this.showMegaMenu = false;
-          this.selectedMenu = null;
-        } else if (this.selectedMenu !== null) {
-          console.log('이미 열려있는 메뉴가 있어요');
-          // 기존에 다른 메뉴가 열려있다가 이 메뉴가 열리면
-          this.$refs.template.style = 'transition: none';
-          this.$refs.customComponent.style = 'transition: none';
-          this.showMegaMenu = true;
-          this.selectedMenu = selectMenu;
-        } else {
-          this.$refs.template.style = '';
-          this.$refs.customComponent.style = '';
-          this.showMegaMenu = true;
-          this.selectedMenu = selectMenu;
-        }
-      }
-      if (selectMenu === 'custom-component') {
-        if (this.selectedMenu === 'custom-component' && this.selectedMenu !== null) {
-          // 현재 클릭한 메뉴가 기존에 열려있던 메뉴일 떄 메뉴닫음.
-          this.$refs.template.style = '';
-          this.$refs.customComponent.style = '';
-          this.showMegaMenu = false;
-          this.selectedMenu = null;
-        } else if (this.selectedMenu !== null) {
-          console.log('이미 열려있는 메뉴가 있어요');
-          this.$refs.template.style = 'transition: none';
-          this.$refs.customComponent.style = 'transition: none';
-          this.showMegaMenu = true;
-          this.selectedMenu = selectMenu;
-        } else {
-          // 현재 클릭한 메뉴가 기존에 열려있지 않았다면 메뉴 오픈.
-          this.$refs.template.style = '';
-          this.$refs.customComponent.style = '';
-          this.showMegaMenu = true;
-          this.selectedMenu = selectMenu;
-        }
+    onClickMenu(e, clickMenu) {
+      console.log('처음상태', this.showMegaMenu, clickMenu);
+      if (this.currentMenu === null) {
+        // 메뉴가 닫혀있는 상태에서 메뉴를 누른 경우
+        this.showMegaMenu = true;
+        this.currentMenu = clickMenu;
+        this.setMenu(clickMenu);
+        // this.$refs.megaMenu.focus();
+      } else if (clickMenu === this.currentMenu) {
+        // 현재 열려있는 메뉴를 또 누른 경우 메뉴 닫음.
+        this.showMegaMenu = false;
+        this.currentMenu = null;
+      } else {
+        // 현재 열려있는 메뉴와 다른 메뉴를 누른 경우
+        this.currentMenu = clickMenu;
+        this.setMenu(clickMenu);
+        // this.$refs.megaMenu.focus();
       }
     },
-    onClickDim() {
-      this.showMegaMenu = false;
-      this.selectedMenu = null;
-      this.$refs.template.style = '';
-      this.$refs.customComponent.style = '';
+    setMenu(category) {
+     // console.log('setMenu item', category);
+     this.$store.commit('app/setCategoryFromTabClick', category);
     },
   },
 };
@@ -214,11 +169,6 @@ export default {
   header.scrolled {
     top: -64px;
   }
-
-  // header.menu-open {
-  //   height: 600px;
-  // }
-
   .body-container {
     flex: 1 1 auto;
   }
@@ -229,32 +179,6 @@ export default {
     background: #eee;
   }
 }
-
-.mega-menu-dim {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: -1;
-}
-
-.mega-menu {
-  background: #fff;
-  position: absolute;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  text-align: left;
-  height: 0;
-  transition: 0.3s height;
-  overflow: hidden;
-  // display: none;
-  .menu-inner-box {
-    padding: 30px;
-    display: none;
-  }
-}
-
 .btn-menu {
   display: inline-block;
   padding: 2px 5px 2px 10px;
@@ -266,28 +190,10 @@ export default {
 }
 
 .btn-menu.active {
-  background: #d6e7f7;
-  .v-icon {
-    transform: rotate(-180deg);
+    background: #d6e7f7;
+    .v-icon {
+      transform: rotate(-180deg);
+    }
   }
-}
-
-.btn-menu.active + .mega-menu {
-  height: 400px;
-  border-top: 1px solid #ddd;
-  .menu-inner-box {
-   display: block;
-  }
-}
-
-// .btn-menu:focus + .mega-menu,
-// .mega-menu:focus-within {
-//     height: 400px;
-//     border-top: 1px solid $borderColor;
-// }
-
-// .mega-menu:focus-within {
-//     transition: none;
-// }
 
 </style>

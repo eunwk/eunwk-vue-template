@@ -9,7 +9,7 @@
             <div class="img-quill" style="--i:3;"><img src="@/assets/images/quill.png" alt="" /></div>
           </div>
           <div class="txt-box">
-            <h1 class="visual-title">Vue2 + Vuetify2 <br />Layout Template</h1>
+            <h1 class="visual-title" style="--i:0;">Vue2 + Vuetify2 <br />Layout Template</h1>
             <div class="chips">
               <v-chip color="yellow">Vuex</v-chip>
               <v-chip color="red" dark>SCSS</v-chip>
@@ -23,7 +23,7 @@
 
       <section class="main-section">
         <div class="max-width-box">
-          <h2 class="main-section-title">About</h2>
+          <h2 class="main-section-title" style="--color:#1976d2">About</h2>
           <ol class="list-desc">
             <li>메인화면, 로그인 등 단일페이지 레이아웃</li>
             <li>본문 컨텐츠를 위한 서브페이지 레이아웃</li>
@@ -37,7 +37,7 @@
 
       <section class="main-section dependencies">
         <div class="max-width-box">
-          <h2 class="main-section-title">Used Dependencies</h2>
+          <h2 class="main-section-title" style="--color:#40b37f">Used Dependencies</h2>
           <div class="dependencies-box">
             <div class="card">
               <div class="card-img"><img src="@/assets/images/vuex.png" alt="Vuex" /></div>
@@ -69,7 +69,7 @@
 
       <section class="main-section">
         <div class="max-width-box">
-          <h2 class="main-section-title">Who is Eunwk...?</h2>
+          <h2 class="main-section-title" style="--color:#d96363">Who is Eunwk...?</h2>
           <p class="main-section-desc">'Eunwk' 는 웹퍼블리셔 입니다~. 이 프로젝트는 뷰 스터디를 위한 템플릿 입니다~</p>
           <div class="band-links">
             <a href="https://github.com/eunwk/eunwk-vue-template" target="_blank"><v-icon>mdi-github</v-icon>Code 보기</a>
@@ -105,6 +105,26 @@ export default {
     font-size: 32px;
     margin-bottom: 25px;
     letter-spacing: -0.1rem;
+    position: relative;
+    transition: 0.2s;
+    // text-decoration: underline;
+      &::first-letter {
+        transition: 0.2s;
+        font-size: 40px;
+        font-weight: bold;
+        color: var(--color);
+        :hover {
+          transform: scale(1.2);
+        }
+      }
+    // &::before {
+    //   content: '';
+    //   width: 100%;
+    //   height: 3px;
+    //   background: var(--color);
+    //   position: absolute;
+    //   bottom: 0;
+    // }
   }
   .main-section-desc {
     font-size: 18px;
@@ -209,8 +229,8 @@ export default {
 
 .band-links {
   display: flex;
-  border: 1px solid $secondary;
-  background: $secondary;
+  border: 1px solid #a3a3a3;
+  background: #fff;
   border-radius: 30px;
   overflow: hidden;
   margin: 30px auto 0px;
@@ -221,24 +241,24 @@ export default {
   a {
     width: 33.3333%;
     transition: 0.3s;
-    border-right: 1px solid $borderColor;;
+    border-right: 1px solid #a3a3a3;
     background: transparent;
     flex: 1 1 auto;
     padding: 12px 15px;
     font-size: 20px;
     text-decoration: none;
-    color: #fff;
+    color: $secondary;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     &:hover {
       width: 40%;
-      background: #fff;
-      color: $secondary;
+      background: $secondary;
+      color: #fff;
       border-radius: 30px;
       z-index: 1;
       & + a {
-        border-right: 1px solid $borderColor;
+        border-right: 1px solid #a3a3a3;
       }
     }
     .v-icon {
@@ -308,7 +328,8 @@ export default {
     color: inherit;
     transition: 0.3s;
     &:hover {
-      background: #e5e5e5;
+      background: #d6e7f7;
+      border-radius: 0px 20px 0px 20px;
     }
   }
 }

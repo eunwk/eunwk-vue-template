@@ -48,7 +48,7 @@
       </v-row>
     </v-app-bar>
     <v-main :class="{'sub-layout-body-container': true, 'lnb-showing': showSubPageLnbDrawer}">
-      <sub-page-layout-lnb />
+      <sub-page-lnb />
       <v-container class="sub-layout-content" fluid>
         <router-view class="sub-content-inner"></router-view>
       </v-container>
@@ -59,13 +59,13 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 import BtnThemeChange from '@/components/BtnThemeChange';
-import SubPageLayoutLnb from './SubPageLayoutLnb';
+import SubPageLnb from '@/components/comFrames/SubPageLnb';
 
 export default {
   name: 'SubPageLayout',
   components: {
     BtnThemeChange,
-    SubPageLayoutLnb,
+    SubPageLnb,
   },
   data: () => ({
     searchValue: '',
@@ -99,6 +99,7 @@ export default {
       }
     },
     onClickTab(item) {
+      console.log('setMenu item', item.category);
      this.$store.commit('app/setCategoryFromTabClick', item.category);
     },
   },
