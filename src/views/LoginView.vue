@@ -1,7 +1,7 @@
 <template>
   <div class="login">
-    <div class="login-box">
-      <h1 class="text-h4 text-center mb-10">Login</h1>
+    <section class="login-box">
+      <h1 class="box-title">Login</h1>
       <v-form
         ref="form"
         v-model="valid"
@@ -29,7 +29,8 @@
                 @click="validate"
                 block
                 class="mb-5"
-                large
+                x-large
+                rounded
             >
             Login
             </v-btn>
@@ -37,11 +38,12 @@
                 color="blue-grey lighten-5"
                 block
                 to="/"
-                large
+                x-large
+                rounded
             >Sign Up</v-btn>
           </div>
       </v-form>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -76,9 +78,11 @@
 <style scoped lang="scss">
 
 .login {
-  border: 1px solid red;
   height: 100%;
   background: url(@/assets/images/img_bg.jpg) no-repeat center top ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /* 로그인, 메시지 박스 등 내부  Card 형 박스 */
 .card-box {
@@ -88,7 +92,19 @@
 
 .login-box {
   margin: 0 auto;
-  max-width: 460px;
+  width: 460px;
+  padding: 30px 30px 50px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25 );
+
+  .box-title {
+    font-size: 42px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: -0.1rem;
+    margin-bottom: 20px;
+  }
 }
 
 </style>
