@@ -38,6 +38,11 @@ html {
   overflow: initial !important;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-size: 0.875rem;
   min-width: 360px;
@@ -71,15 +76,6 @@ a {
         // border: 1px solid red;
       }
     }
-
-    /* 로그인, 메시지 박스 등 내부  Card 형 박스 */
-    & .card-box {
-      margin: 0 auto;
-      max-width: 460px;
-    }
-
-    /* SelectBox 커스텀 */
-    
 }
 
 /* 컴포넌트 커스터마이징 */

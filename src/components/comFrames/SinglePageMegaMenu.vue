@@ -1,6 +1,6 @@
 <template>
-  <div :class="`mega-menu ${currentMenu === keyValue ? 'showing' : null}`">
-    <div class="menu-inner-box">
+  <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`">
+    <div class="menu-inner-box max-width-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
         <h2>{{ selectedCategory }}</h2>
@@ -25,24 +25,21 @@ export default {
       'selectedMenuData', // 2뎁스 메뉴 데이터
     ]),
   },
-  props: {
-    currentMenu: {
-      type: String,
-      required: true,
-    },
-    keyValue: {
-      type: String,
-      required: true,
-    },
-    showMegaMenu: {
-      type: Boolean,
-      required: true,
-    },
-    closeMegamenu: {
-      type: Function,
-      required: true,
-    },
-  },
+  props: ['currentMenu', 'showMegaMenu', 'closeMegamenu'],
+  // ,{
+  //   currentMenu: {
+  //     type: String,
+  //     required: true,
+  //   },
+  //   showMegaMenu: {
+  //     type: Boolean,
+  //     required: true,
+  //   },
+  //   closeMegamenu: {
+  //     type: Function,
+  //     required: true,
+  //   },
+  // },
 };
 </script>
 
@@ -57,7 +54,6 @@ export default {
   height: 0;
   // transition: 0.3s height;
   overflow: hidden;
-  border-top: 1px solid #ddd;
   // display: none;
   .menu-inner-box {
     padding: 30px;
@@ -66,6 +62,7 @@ export default {
 
   &.showing {
     height: 400px;
+    border-top: 1px solid #ddd;
     .menu-inner-box {
       display: block;
 
@@ -87,6 +84,7 @@ h2 {
   top: 64px;
   right: 0;
   bottom: 0;
+  height: calc(100vh - 64px);
   background: rgba(0,0,0,0.5);
   z-index: -1;
   text-indent: -9999px;

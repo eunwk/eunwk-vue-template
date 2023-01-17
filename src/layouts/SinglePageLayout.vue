@@ -12,10 +12,10 @@
         </h1>
         <div class="header-menu">
           <a :class="{'btn-menu': true, active: currentMenu === 'Template'}" href="#" @click.prevent="onClickMenu($event, 'Template')" ref="Template">Layout Template<v-icon>mdi-chevron-down</v-icon></a>
-          <Single-page-mega-menu :currentMenu="currentMenu" keyValue="Template" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
+          <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
 
           <a :class="{'btn-menu': true, active: currentMenu === 'CustomComponent'}" href="#" @click.prevent="onClickMenu($event, 'CustomComponent')" ref="CustomComponent">Custom Component<v-icon>mdi-chevron-down</v-icon></a>
-          <Single-page-mega-menu :currentMenu="currentMenu" keyValue="CustomComponent" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
+          <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
 
         </div><!-- .header-menu // -->
         <div class="header-others">
@@ -131,7 +131,8 @@ export default {
     height: 64px;
     position: sticky;
     top: 0;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: saturate(200%) blur(10px);
     z-index:2;
     transition: 0.4s;
     .max-width-box {
@@ -174,8 +175,8 @@ export default {
   }
 
   footer {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 14px;
     background: #eee;
   }
 }
