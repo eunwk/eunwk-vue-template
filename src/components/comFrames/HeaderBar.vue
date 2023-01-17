@@ -10,10 +10,10 @@
       </h1>
       <div class="header-menu">
         <a :class="{'btn-menu': true, active: currentMenu === 'Template'}" href="#" @click.prevent="onClickMenu($event, 'Template')" ref="Template">Layout Template<v-icon>mdi-chevron-down</v-icon></a>
-        <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
+        <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu" :headerType="headerType"/>
 
         <a :class="{'btn-menu': true, active: currentMenu === 'CustomComponent'}" href="#" @click.prevent="onClickMenu($event, 'CustomComponent')" ref="CustomComponent">Custom Component<v-icon>mdi-chevron-down</v-icon></a>
-        <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu"/>
+        <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu" :headerType="headerType"/>
 
       </div><!-- .header-menu // -->
       <div class="header-others">
@@ -151,9 +151,9 @@ export default {
       this.$store.commit('app/setLnbForCreated', true);
     }
   },
-  beforeCreate() {
-    this.$store.commit('app/setCategoryFromPath', this.$route.path);
-  },
+  // beforeCreate() {
+  //   this.$store.commit('app/setCategoryFromPath', this.$route.path);
+  // },
 };
 </script>
 

@@ -132,7 +132,7 @@ export default {
 }
 
 .main-visual {
-  background: #fbdec5 url(@/assets/images/img_bg.jpg) no-repeat center top ;
+  background: #184c9f url(@/assets/images/img_bg.jpg) no-repeat center top ;
   background-size: cover;
   color: #fff;
   // border: 1px solid red;

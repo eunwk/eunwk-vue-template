@@ -23,6 +23,8 @@ export default {
     HeaderBar,
   },
   data() {
+    return {
+    };
   },
   methods: {
   },

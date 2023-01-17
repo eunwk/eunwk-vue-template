@@ -1,5 +1,5 @@
 <template>
-  <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`">
+  <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`" :data-menu-type="headerType">
     <div class="menu-inner-box max-width-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
@@ -25,22 +25,26 @@ export default {
       'selectedMenuData', // 2뎁스 메뉴 데이터
     ]),
   },
-  props: ['currentMenu', 'showMegaMenu', 'closeMegamenu'],
-  // ,{
-  //   currentMenu: {
-  //     type: String,
-  //     required: true,
-  //   },
-  //   showMegaMenu: {
-  //     type: Boolean,
-  //     required: true,
-  //   },
-  //   closeMegamenu: {
-  //     type: Function,
-  //     required: true,
-  //   },
-  // },
+  props: {
+    headerType: {
+      type: String,
+      default: 'single-page',
+    },
+    currentMenu: {
+      // type: String,
+      // default: 'single-page',
+    },
+    showMegaMenu: {
+      type: Boolean,
+      required: true,
+    },
+    closeMegamenu: {
+      type: Function,
+      required: true,
+    },
+  },
 };
+
 </script>
 
 <style scoped lang="scss">
@@ -99,4 +103,13 @@ h2 {
     padding: 2px;
   }
 }
+
+.mega-menu[data-menu-type="single-page"] {
+
+}
+
+.mega-menu[data-menu-type="sub-page"] {
+  background: powderblue;
+}
+
 </style>
