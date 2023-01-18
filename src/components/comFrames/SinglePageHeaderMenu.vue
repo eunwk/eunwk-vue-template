@@ -64,7 +64,6 @@ export default {
         this.setCurrentMenu(clickMenu);
         this.setCategoryFromTabClick(clickMenu);
       }
-      return false;
     },
     onKeyup(e, focusCategory) {
         // 키보드로 탭 키로 메뉴진입시 메가메뉴 오픈
@@ -84,6 +83,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log('beforeMount');
     // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
     // this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
@@ -96,104 +96,17 @@ export default {
     //   this.$store.commit('app/setLnbForCreated', true);
     // }
   },
+  watch: {
+    $route() {
+      if (this.showMegaMenu) {
+        this.closeMegaMenu();
+      }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 @import '@/scss/customVariables.scss';
 
-/******************************
-  헤더 공통 스타일
-*******************************/
-header {
-  // border-bottom: 1px solid $borderColor;
-  height: 64px;
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: saturate(200%) blur(10px);
-  z-index:2;
-  transition: 0.4s;
-  .max-width-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    .header-menu {
-      margin-right: auto;
-      .btn-menu-item:not(:last-child) {
-        margin-right: 10px;
-      }
-    }
-    .header-others {
-      margin-left: 20px;
-      justify-self: flex-end;
-      display: inline-flex;
-      align-items: center;
-      a {
-        margin-right: 5px;
-      }
-      .v-input {
-        margin-right: 10px;
-        margin-top: 0;
-      }
-    }
-  }
-  .app-logo a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    margin-right: 40px;
-    img {
-      margin-right: 10px;
-      width: 50px;
-    }
-  }
-}
-
-.btn-menu-item {
-  display: inline-block;
-}
-.btn-menu {
-  &:hover {
-    background: #edf4fb;
-  }
-}
-
-header.scrolled {
-  top: -64px;
-}
-
-/******************************
-  .single-page 전용 스타일
-*******************************/
-header[data-header-type="single-page"] {
-  .btn-menu {
-    &:hover {
-      background: #edf4fb;
-    }
-    padding-right: 7px !important;
-    &.v-btn--active .v-icon {
-      transform: rotate(180deg);
-    }
-  }
-}
-
-/******************************
-  .sub-page 전용 스타일
-*******************************/
-header[data-header-type="sub-page"] {
-  // background: #19509f;
-  // color: $textColorWhite;
-  // background: #ccc;
-  padding: 0 30px;
-  border-bottom: 1px solid #ddd;
-  .mega-menu {
-    border-top: 0px none;
-  }
-  h1, a, button {
-    // color: $textColorWhite;
-  }
-}
 </style>

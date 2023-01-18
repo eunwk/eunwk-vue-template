@@ -9,20 +9,7 @@
       </h1>
 
       <single-page-header-menu  v-if="headerType === 'single-page'" />
-
-      <!-- // sub-page 메뉴 -->
-      <div class="header-menu" v-if="headerType === 'sub-page'">
-        <div v-for="item in gnbMenuItems" :key="item.value" class="btn-menu-item">
-          <v-btn
-            text
-            class="btn-menu"
-            :key="item.value"
-            href="#lnb"
-          >
-            {{ item.title }}
-          </v-btn>
-        </div>
-      </div><!-- sub-page 메뉴 // -->
+      <sub-page-header-menu  v-if="headerType === 'sub-page'" />
 
       <div class="header-others">
         <v-text-field
@@ -47,11 +34,13 @@
 import { mapState, mapMutations } from 'vuex';
 import BtnThemeChange from '@/components/BtnThemeChange';
 import SinglePageHeaderMenu from './SinglePageHeaderMenu.vue';
+import SubPageHeaderMenu from './SubPageHeaderMenu.vue';
 
 export default {
   components: {
     BtnThemeChange,
     SinglePageHeaderMenu,
+    SubPageHeaderMenu,
   },
   props: {
     headerType: {
@@ -130,7 +119,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import '@/scss/customVariables.scss';
 
 /******************************
@@ -152,6 +141,9 @@ header {
     height: 100%;
     .header-menu {
       margin-right: auto;
+      .btn-menu-item {
+        display: inline-block;
+      }
       .btn-menu-item:not(:last-child) {
         margin-right: 10px;
       }
@@ -183,9 +175,6 @@ header {
   }
 }
 
-.btn-menu-item {
-  display: inline-block;
-}
 .btn-menu {
   &:hover {
     background: #edf4fb;
