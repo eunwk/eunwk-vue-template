@@ -73,6 +73,19 @@ const mutations = {
     const mode = localStorage.getItem('darkMode') === 'dark' ? true : false;
     this.$vuetify.theme.dark = mode;
   },
+  setShowMegaMenu(state, payload) {
+     state.showMegaMenu = payload;
+  },
+  setCurrentMenu(state, payload) {
+     state.currentMenu = payload;
+  },
+  closeMegaMenu(state) {
+    // 메가메뉴 닫음.
+    if (state.showMegaMenu) {
+      state.showMegaMenu = false;
+      state.currentMenu = null;
+    }
+  },
 };
 
 const actions = {
@@ -127,6 +140,10 @@ const state = {
     },
   ],
   selectedMenuData: [],
+  // singlePageScrolled: false,
+  // singlePageLastScrollTop: 0,
+  showMegaMenu: false,
+  currentMenu: null, // singlePage 현재 선택되어 있는 메뉴 category명
 };
 
 export default {

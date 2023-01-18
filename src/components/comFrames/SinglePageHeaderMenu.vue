@@ -1,116 +1,85 @@
 <template>
-  <header :class="{scrolled : scrolled}" :data-header-type="headerType">
-    <div class="max-width-box">
-      <h1 class="app-logo">
-        <router-link to="/">
-          <img src="@/assets/images/logo.png" alt="UI/UX" />
-          Template
-        </router-link>
-      </h1>
-
-      <single-page-header-menu  v-if="headerType === 'single-page'" />
-
-      <!-- // sub-page 메뉴 -->
-      <div class="header-menu" v-if="headerType === 'sub-page'">
-        <div v-for="item in gnbMenuItems" :key="item.value" class="btn-menu-item">
-          <v-btn
-            text
-            class="btn-menu"
-            :key="item.value"
-            href="#lnb"
-          >
-            {{ item.title }}
-          </v-btn>
-        </div>
-      </div><!-- sub-page 메뉴 // -->
-
-      <div class="header-others">
-        <v-text-field
-          v-model="searchValue"
-          placeholder="Search"
-          clearable
-          hide-details
-          style="max-width: 200px"
-          append-icon="mdi-magnify"
-          clear-icon="mdi-close-circle"
-          dense
-          @click:append="onSearch"
-        ></v-text-field>
-        <v-btn text color="primary" to="/login">Login</v-btn>
-        <btn-theme-change />
-      </div>
+  <div class="header-menu">
+    <div v-for="item in gnbMenuItems" :key="item.value" class="btn-menu-item">
+      <v-btn
+        text color="primary"
+        :class="{'btn-menu': true, 'v-btn--active': currentMenu === item.category}"
+        @click.prevent="onClickMenu(item.category)"
+        @keyup="onKeyup($event, item.category)"
+        @keydown="onKeydown($event, item.category)"
+        ref="item.category"
+      >
+        {{ item.title }}
+        <v-icon>mdi-chevron-down</v-icon>
+      </v-btn>
+      <single-page-mega-menu
+        :currentMenu="currentMenu"
+        v-if="showMegaMenu && item.category === currentMenu"
+      />
     </div>
-  </header>
+  </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import BtnThemeChange from '@/components/BtnThemeChange';
-import SinglePageHeaderMenu from './SinglePageHeaderMenu.vue';
+import SinglePageMegaMenu from '@/components/comFrames/SinglePageMegaMenu';
 
 export default {
   components: {
-    BtnThemeChange,
-    SinglePageHeaderMenu,
-  },
-  props: {
-    headerType: {
-      type: String,
-      default: 'single-page',
-    },
+    SinglePageMegaMenu,
   },
   data() {
     return {
       scrolled: false,
       lastScrollTop: 0,
-      // showMegaMenu: false,
-      // currentMenu: null, // 현재 선택되어 있는 메뉴
-      searchValue: '',
-      windowSize: {
-        x: 0,
-        y: 0,
-      },
     };
   },
   computed: {
     ...mapState('app', [
-      'selectedMenuData', // 2뎁스 메뉴 데이터
-      'showSubPageLnbDrawer',
       'gnbMenuItems',
-      // 'singlePageScrolled',
-      // 'singlePageLastScrollTop',
+      'showMegaMenu',
+      'currentMenu', // 현재 선택되어 있는 메뉴
     ]),
-  },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
     ...mapMutations('app', [
-      'setCategoryFromPath',
+      'setCategoryFromTabClick',
       'closeMegaMenu',
+      'setShowMegaMenu',
+      'setCurrentMenu',
     ]),
-    onSearch() {
-      if (this.searchValue) {
-        alert(`${this.searchValue}를 검색합니다.`);
+    onClickMenu(clickMenu) {
+      if (this.currentMenu === null) {
+        // 메뉴가 닫혀있는 상태에서 메뉴를 누른 경우
+        this.setShowMegaMenu(true);
+        this.setCurrentMenu(clickMenu);
+        this.setCategoryFromTabClick(clickMenu);
+        // this.$refs.megaMenu.focus();
+      } else if (clickMenu === this.currentMenu) {
+        // 현재 열려있는 메뉴를 또 누른 경우 메뉴 닫음.
+        this.setShowMegaMenu(false);
+        this.setCurrentMenu(null);
       } else {
-        alert('검색어를 입력해 주세요.');
+        // 현재 열려있는 메뉴와 다른 메뉴를 누른 경우
+        this.setCurrentMenu(clickMenu);
+        this.setCategoryFromTabClick(clickMenu);
       }
+      return false;
     },
-    onScroll() {
-      // single-page 일 경우 header 플로팅
-      if (this.headerType === 'single-page') {
-        console.log('scroll');
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop >= this.lastScrollTop) {
-          this.scrolled = true;
-        } else {
-          this.scrolled = false;
+    onKeyup(e, focusCategory) {
+        // 키보드로 탭 키로 메뉴진입시 메가메뉴 오픈
+        if (e.keyCode === 9 && !e.shiftKey) {
+          this.onClickMenu(focusCategory);
         }
-        this.lastScrollTop = scrollTop;
-        this.closeMegaMenu();
+    },
+    onKeydown(e, focusCategory) {
+      if (e.keyCode === 9 && e.shiftKey) {
+        // 시프트 + 탭키로 나갈때 현재 열려진 카테고리 메뉴가 첫번째 메뉴이면 메가메뉴 닫기
+        // 현재 열려진 카테고리의 index 찾기
+        const index = this.gnbMenuItems.findIndex((v) => v.category === focusCategory);
+        if (index === 0) {
+          this.closeMegaMenu();
+        }
       }
     },
   },

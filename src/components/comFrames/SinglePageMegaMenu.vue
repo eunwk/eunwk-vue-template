@@ -1,6 +1,6 @@
 <template>
-  <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`" :data-menu-type="headerType">
-    <div class="menu-inner-box max-width-box">
+  <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`">
+    <div class="menu-inner-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
         <h2>{{ selectedCategory }}</h2>
@@ -9,19 +9,19 @@
             <router-link :to="item.src">{{ item.title }}</router-link>
           </li>
         </ul>
-        <button class="btn-menu-close" @click="closeMegamenu" @keydown="onCloseBtnKeydown($event)" title="메뉴닫기">
+        <button class="btn-menu-close" @click="closeMegaMenu" @keydown="onCloseBtnKeydown($event)" title="메뉴닫기">
           <v-icon>mdi-close</v-icon>
           <!-- Close -->
         </button>
       </div>
     </div>
     <!-- <button class="mega-menu-dim" v-if="showMegaMenu" @click="closeMegamenu" >메뉴 닫기</button> -->
-    <div class="mega-menu-dim" @click="closeMegamenu"></div>
+    <div class="mega-menu-dim" @click="closeMegaMenu" @keydown="closeMegaMenu"></div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   computed: {
@@ -29,28 +29,20 @@ export default {
       'selectedCategory',
       'selectedMenuData', // 2뎁스 메뉴 데이터
       'gnbMenuItems',
+      'currentMenu',
     ]),
   },
-  props: {
-    headerType: {
-      type: String,
-      default: 'single-page',
-    },
-    currentMenu: {
-    },
-    closeMegamenu: {
-      type: Function,
-      required: true,
-    },
-  },
   methods: {
+    ...mapMutations('app', [
+      'closeMegaMenu',
+    ]),
     onCloseBtnKeydown(e) {
       // 메뉴닫기 버튼에서 탭키로 나갈때 현재 열려진 카테고리 메뉴가 마지막 메뉴이면 메가메뉴 닫기
       if (e.keyCode === 9 && !e.shiftKey) {
         // 현재 열려진 카테고리의 index 찾기
         const index = this.gnbMenuItems.findIndex((v) => v.category === this.currentMenu);
         if (this.gnbMenuItems.length - 1 === index) {
-          this.closeMegamenu();
+          this.closeMegaMenu();
         }
       }
     },
@@ -61,6 +53,11 @@ export default {
 
 <style scoped lang="scss">
 .mega-menu {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: 0;
   background: #fff;
   text-align: left;
   .menu-inner-box {
@@ -69,6 +66,7 @@ export default {
   }
   &.showing {
     border-top: 1px solid #ddd;
+    height: 400px;
     .menu-inner-box {
       display: block;
     }
@@ -117,34 +115,6 @@ h2 {
     &:focus {
       background: #d6e7f7;
     }
-  }
-}
-
-.mega-menu[data-menu-type="single-page"] {
-  position: absolute;
-  top: 64px;
-  left: 0;
-  width: 100%;
-  height: 0;
-
-  &.showing {
-    height: 400px;
-  }
-}
-
-.mega-menu[data-menu-type="sub-page"] {
-  // background: powderblue;
-  position: fixed;
-  top: 64px;
-  left: 0;
-  width: 50px;
-  height: calc(100vh - 64px);
-  bottom: 0;
-  &.showing {
-    width: 250px;
-  }
-  .mega-menu-dim {
-    left: 250px;
   }
 }
 

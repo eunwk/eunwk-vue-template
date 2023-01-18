@@ -1,89 +1,83 @@
 <template>
   <div class="sub-page">
     <header-bar headerType="sub-page" />
-    <!-- <v-tabs
+    <v-tabs
       v-model="selectedIndex"
       dark
       slider-color="yellow"
     >
       <v-tab
-        v-for="item in tabItems"
+        v-for="item in gnbMenuItems"
         :key="item.id"
         :to="item.src"
         @click="onClickTab(item)"
       >
         {{ item.category }}
       </v-tab>
-    </v-tabs> -->
+    </v-tabs>
     <div class="body-container">
-      <!-- <sub-page-lnb /> -->
+      <sub-page-lnb />
       <div class="contents-box">
         <router-view></router-view>
       </div>
     </div>
-    <!-- <v-main :class="{'sub-layout-body-container': true, 'lnb-showing': showSubPageLnbDrawer}">
-      <v-container class="sub-layout-content" fluid>
-        <router-view class="sub-content-inner"></router-view>
-      </v-container>
-    </v-main> -->
   </div>
 </template>
 
 <script>
-// import { mapMutations, mapState } from 'vuex';
-// import SubPageLnb from '@/components/comFrames/SubPageLnb';
+import { mapMutations, mapState } from 'vuex';
+import SubPageLnb from '@/components/comFrames/SubPageLnb';
 import HeaderBar from '@/components/comFrames/HeaderBar';
 
 export default {
   name: 'SubPageLayout',
   components: {
-    // SubPageLnb,
+    SubPageLnb,
     HeaderBar,
   },
-  // data: () => ({
-  //   windowSize: {
-  //     x: 0,
-  //     y: 0,
-  //   },
-  //   selectedIndex: '',
-  // }),
-  // computed: {
-  //   ...mapState('app', [
-  //     'tabItems',
-  //     'showSubPageLnbDrawer',
-  //     'selectedCategory',
-  //   ]),
-  //   mobileBreakPoint() {
-  //     return this.$vuetify.breakpoint.mobileBreakpoint;
-  //   },
-  // },
-  // methods: {
-  //   ...mapMutations('app', [
-  //     'toggleLnb',
-  //     'setCategoryFromPath',
-  //     'setCategoryFromTabClick',
-  //   ]),
-  //   onClickTab(item) {
-  //     console.log('setMenu item', item.category);
-  //    this.$store.commit('app/setCategoryFromTabClick', item.category);
-  //   },
-  // },
-  // beforeMount() {
-  //   // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
-  //   this.windowSize = { x: window.innerWidth, y: window.innerHeight };
-  //   // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
-  //   if (this.windowSize.x < this.mobileBreakPoint) {
-  //     // breakpoint md 이하
-  //     this.$store.commit('app/setLnbForCreated', false);
-  //   }
-  //   if (this.windowSize.x >= this.mobileBreakPoint) {
-  //     // breakpoint lg 이상
-  //     this.$store.commit('app/setLnbForCreated', true);
-  //   }
-  // },
-  // beforeCreate() {
-  //   this.$store.commit('app/setCategoryFromPath', this.$route.path);
-  // },
+  data: () => ({
+    windowSize: {
+      x: 0,
+      y: 0,
+    },
+    selectedIndex: '',
+  }),
+  computed: {
+    ...mapState('app', [
+      'gnbMenuItems',
+      'showSubPageLnbDrawer',
+    ]),
+    mobileBreakPoint() {
+      return this.$vuetify.breakpoint.mobileBreakpoint;
+    },
+  },
+  methods: {
+    ...mapMutations('app', [
+      'toggleLnb',
+      'setCategoryFromPath',
+      'setCategoryFromTabClick',
+    ]),
+    onClickTab(item) {
+      console.log('setMenu item', item.category);
+      this.$store.commit('app/setCategoryFromTabClick', item.category);
+    },
+  },
+  beforeMount() {
+    // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
+    this.windowSize = { x: window.innerWidth, y: window.innerHeight };
+    // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
+    if (this.windowSize.x < this.mobileBreakPoint) {
+      // breakpoint md 이하
+      this.$store.commit('app/setLnbForCreated', false);
+    }
+    if (this.windowSize.x >= this.mobileBreakPoint) {
+      // breakpoint lg 이상
+      this.$store.commit('app/setLnbForCreated', true);
+    }
+  },
+  beforeCreate() {
+    this.$store.commit('app/setCategoryFromPath', this.$route.path);
+  },
 };
 </script>
 

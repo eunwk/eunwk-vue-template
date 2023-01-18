@@ -1,6 +1,6 @@
 <template>
   <!-- <v-navigation-drawer v-model="drawer" app clipped > -->
-  <nav class="lnb">
+  <nav class="lnb" id="lnb">
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="text-h6">
@@ -54,8 +54,8 @@ export default {
   },
   mounted() {
     // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
-   // this.setSubMenuTitle();
-  // this.setSubMenu();
+    // this.setSubMenuTitle();
+    this.setSubMenu();
   },
 };
 </script>
