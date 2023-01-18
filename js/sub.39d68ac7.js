@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkvue2_vuetify2"]=self["webpackChunkvue2_vuetify2"]||[]).push([[435],{1363:function(e,t,a){a.r(t),a.d(t,{default:function(){return l}});var s=function(){var e=this,t=e._self._c;return t("div",{staticClass:"sub-page"},[t("header-bar",{attrs:{headerType:"sub-page"}}),t("div",{staticClass:"body-container"},[t("div",{staticClass:"contents-box"},[t("router-view")],1)])],1)},u=[],n=a(500),r={name:"SubPageLayout",components:{HeaderBar:n.Z}},i=r,c=a(1001),o=(0,c.Z)(i,s,u,!1,null,"29725708",null),l=o.exports}}]);
-//# sourceMappingURL=sub.39d68ac7.js.map
