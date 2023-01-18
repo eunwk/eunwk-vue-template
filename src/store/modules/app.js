@@ -81,10 +81,8 @@ const mutations = {
   },
   closeMegaMenu(state) {
     // 메가메뉴 닫음.
-    if (state.showMegaMenu) {
-      state.showMegaMenu = false;
-      state.currentMenu = null;
-    }
+    state.showMegaMenu = false;
+    state.currentMenu = null;
   },
 };
 

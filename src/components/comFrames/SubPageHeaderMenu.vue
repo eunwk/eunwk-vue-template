@@ -29,13 +29,7 @@ export default {
   methods: {
     onClickMenu(clickMenu) {
       console.log(clickMenu);
-      // if (this.currentMenu === null) {
-      //   // 메뉴가 닫혀있는 상태에서 메뉴를 누른 경우
-      //   this.setShowMegaMenu(true);
-      //   this.setCurrentMenu(clickMenu);
-      //   this.setCategoryFromTabClick(clickMenu);
-      //   // this.$refs.megaMenu.focus();
-      // } else if (clickMenu === this.currentMenu) {
+      // if (clickMenu === this.currentMenu) {
       //   // 현재 열려있는 메뉴를 또 누른 경우 메뉴 닫음.
       //   this.setShowMegaMenu(false);
       //   this.setCurrentMenu(null);
@@ -47,7 +41,7 @@ export default {
     },
   },
   mounted() {
-    // window.addEventListener('scroll', this.onScroll);
+    console.log('this.currentMenu', this.currentMenu);
   },
 };
 </script>

@@ -95,12 +95,16 @@ export default {
     //   // breakpoint lg 이상
     //   this.$store.commit('app/setLnbForCreated', true);
     // }
+    this.closeMegaMenu();
+  },
+  beforeDestroy() {
+    console.log('beforeDestroy');
+    this.setShowMegaMenu(false);
   },
   watch: {
-    $route() {
-      if (this.showMegaMenu) {
-        this.closeMegaMenu();
-      }
+    $route(to, from) {
+      console.log('여기실행', to, from);
+      this.closeMegaMenu();
     },
   },
 };
