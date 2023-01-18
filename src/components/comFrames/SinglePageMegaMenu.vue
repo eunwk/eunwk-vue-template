@@ -9,9 +9,14 @@
             <router-link :to="item.src">{{ item.title }}</router-link>
           </li>
         </ul>
+        <button class="btn-menu-close" @click="closeMegamenu" @keydown="onCloseBtnKeydown($event)" title="메뉴닫기">
+          <v-icon>mdi-close</v-icon>
+          <!-- Close -->
+        </button>
       </div>
     </div>
-    <button class="mega-menu-dim" v-if="showMegaMenu" @click="closeMegamenu" >메뉴 닫기</button>
+    <!-- <button class="mega-menu-dim" v-if="showMegaMenu" @click="closeMegamenu" >메뉴 닫기</button> -->
+    <div class="mega-menu-dim" @click="closeMegamenu"></div>
   </div>
 </template>
 
@@ -23,6 +28,7 @@ export default {
     ...mapState('app', [
       'selectedCategory',
       'selectedMenuData', // 2뎁스 메뉴 데이터
+      'gnbMenuItems',
     ]),
   },
   props: {
@@ -31,16 +37,22 @@ export default {
       default: 'single-page',
     },
     currentMenu: {
-      // type: String,
-      // default: 'single-page',
-    },
-    showMegaMenu: {
-      type: Boolean,
-      required: true,
     },
     closeMegamenu: {
       type: Function,
       required: true,
+    },
+  },
+  methods: {
+    onCloseBtnKeydown(e) {
+      // 메뉴닫기 버튼에서 탭키로 나갈때 현재 열려진 카테고리 메뉴가 마지막 메뉴이면 메가메뉴 닫기
+      if (e.keyCode === 9 && !e.shiftKey) {
+        // 현재 열려진 카테고리의 index 찾기
+        const index = this.gnbMenuItems.findIndex((v) => v.category === this.currentMenu);
+        if (this.gnbMenuItems.length - 1 === index) {
+          this.closeMegamenu();
+        }
+      }
     },
   },
 };
@@ -51,8 +63,6 @@ export default {
 .mega-menu {
   background: #fff;
   text-align: left;
-  overflow: hidden;
-  // display: none;
   .menu-inner-box {
     padding: 30px;
     display: none;
@@ -67,6 +77,23 @@ export default {
 
 h2 {
   margin-bottom: 10px;
+}
+
+.btn-menu-close {
+  border: 1px solid #fff;
+  position: absolute;
+  background: #fff;
+  right: 10px;
+  bottom: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  // top: 0;
+  // right: 10px;
+  // width: 50px;
+  // height: 24px;
+  // font-size: 12px;
+  // border-radius: 0px 0px 3px 3px;
 }
 .mega-menu-dim {
   position: fixed;
@@ -87,6 +114,9 @@ h2 {
   li a {
     display: block;
     padding: 2px;
+    &:focus {
+      background: #d6e7f7;
+    }
   }
 }
 
@@ -103,7 +133,7 @@ h2 {
 }
 
 .mega-menu[data-menu-type="sub-page"] {
-  background: powderblue;
+  // background: powderblue;
   position: fixed;
   top: 64px;
   left: 0;

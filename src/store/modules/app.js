@@ -83,14 +83,25 @@ const state = {
   isThemeDark: false,
   showSubPageLnbDrawer: true,
   selectedCategory: null,
-  tabItems: [
-    { id: 1, category: 'Template', src: '/Template/search-grid' },
+  gnbMenuItems: [
+    {
+      id: 1,
+      category: 'Template',
+      src: '/Template/search-grid',
+      title: 'Layout Template',
+    },
     {
       id: 2,
       category: 'CustomComponent',
       src: '/CustomComponent/section-title',
+      title: 'Custom Component',
     },
-    { id: 3, category: 'Etc', src: '/Etc/sub1' },
+    {
+      id: 3,
+      category: 'Etc',
+      src: '/Etc/sub1',
+      title: 'Etc',
+    },
   ],
   menuItems: [
     {

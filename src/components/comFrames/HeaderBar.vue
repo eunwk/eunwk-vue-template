@@ -9,12 +9,26 @@
         </router-link>
       </h1>
       <div class="header-menu">
-        <v-btn text color="primary" :class="{'btn-menu': true, 'v-btn--active': currentMenu === 'Template'}" @click.prevent="onClickMenu($event, 'Template')" ref="Template">Layout Template<v-icon>mdi-chevron-down</v-icon></v-btn>
-        <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu" :headerType="headerType"/>
-
-        <v-btn text color="primary" :class="{'btn-menu': true, 'v-btn--active': currentMenu === 'CustomComponent'}" @click.prevent="onClickMenu($event, 'CustomComponent')" ref="CustomComponent">Custom Component<v-icon>mdi-chevron-down</v-icon></v-btn>
-        <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu" :headerType="headerType"/>
-
+        <div v-for="(item, i) in gnbMenuItems" :key="i" class="btn-menu-item">
+          <v-btn
+            text color="primary"
+            :class="{'btn-menu': true, 'v-btn--active': currentMenu === item.category}"
+            @click.prevent="onClickMenu(item.category)"
+            @keyup="onKeyup($event, item.category)"
+            @keydown="onKeydown($event, item.category)"
+            ref="item.category"
+            href="#mega"
+          >
+            {{ item.title }}
+            <v-icon>mdi-chevron-down</v-icon>
+          </v-btn>
+          <Single-page-mega-menu
+            :currentMenu="currentMenu"
+            :closeMegamenu="closeMegamenu"
+            :headerType="headerType"
+            v-if="showMegaMenu && item.category === currentMenu"
+          />
+        </div>
       </div><!-- .header-menu // -->
       <div class="header-others">
         <v-text-field
@@ -63,14 +77,15 @@ export default {
         y: 0,
       },
       selectedIndex: '',
+      focusBtnIndex: null,
     };
   },
   computed: {
     ...mapState('app', [
       'selectedCategory',
       'selectedMenuData', // 2뎁스 메뉴 데이터
-      'tabItems',
       'showSubPageLnbDrawer',
+      'gnbMenuItems',
     ]),
   },
   mounted() {
@@ -103,7 +118,6 @@ export default {
       }
       this.lastScrollTop = scrollTop;
 
-      // 메가메뉴 닫음.
       this.closeMegamenu();
     },
     closeMegamenu() {
@@ -111,11 +125,9 @@ export default {
       if (this.showMegaMenu) {
         this.showMegaMenu = false;
         this.currentMenu = null;
-        // this.$refs.Template.focus();
       }
     },
-    onClickMenu(e, clickMenu) {
-      console.log('처음상태', this.showMegaMenu, clickMenu);
+    onClickMenu(clickMenu) {
       if (this.currentMenu === null) {
         // 메뉴가 닫혀있는 상태에서 메뉴를 누른 경우
         this.showMegaMenu = true;
@@ -130,30 +142,43 @@ export default {
         // 현재 열려있는 메뉴와 다른 메뉴를 누른 경우
         this.currentMenu = clickMenu;
         this.setMenu(clickMenu);
-        // this.$refs.megaMenu.focus();
+      }
+      return false;
+    },
+    onKeyup(e, focusCategory) {
+        // 키보드로 메뉴진입시 메가메뉴 오픈
+        if (e.keyCode === 9 && !e.shiftKey) {
+          // console.log('탭키로 들어왔어. ');
+          this.onClickMenu(focusCategory);
+        }
+    },
+    onKeydown(e, focusCategory) {
+      if (e.keyCode === 9 && e.shiftKey) {
+        // 시프트 + 탭키로 나갈때 현재 열려진 카테고리 메뉴가 첫번째 메뉴이면 메가메뉴 닫기
+        // 현재 열려진 카테고리의 index 찾기
+        const index = this.gnbMenuItems.findIndex((v) => v.category === focusCategory);
+        if (index === 0) {
+          this.closeMegamenu();
+        }
       }
     },
     setMenu(category) {
-     // console.log('setMenu item', category);
      this.$store.commit('app/setCategoryFromTabClick', category);
     },
   },
   beforeMount() {
     // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
-    this.windowSize = { x: window.innerWidth, y: window.innerHeight };
+    // this.windowSize = { x: window.innerWidth, y: window.innerHeight };
     // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
-    if (this.windowSize.x < this.mobileBreakPoint) {
-      // breakpoint md 이하
-      this.$store.commit('app/setLnbForCreated', false);
-    }
-    if (this.windowSize.x >= this.mobileBreakPoint) {
-      // breakpoint lg 이상
-      this.$store.commit('app/setLnbForCreated', true);
-    }
+    // if (this.windowSize.x < this.mobileBreakPoint) {
+    //   // breakpoint md 이하
+    //   this.$store.commit('app/setLnbForCreated', false);
+    // }
+    // if (this.windowSize.x >= this.mobileBreakPoint) {
+    //   // breakpoint lg 이상
+    //   this.$store.commit('app/setLnbForCreated', true);
+    // }
   },
-  // beforeCreate() {
-  //   this.$store.commit('app/setCategoryFromPath', this.$route.path);
-  // },
 };
 </script>
 
@@ -176,7 +201,7 @@ header {
     height: 100%;
     .header-menu {
       margin-right: auto;
-      .btn-menu:not(:last-child) {
+      .btn-menu-item:not(:last-child) {
         margin-right: 10px;
       }
     }
@@ -207,6 +232,9 @@ header {
   }
 }
 
+.btn-menu-item {
+  display: inline-block;
+}
 .btn-menu {
   &:hover {
     background: #edf4fb;
