@@ -9,10 +9,10 @@
         </router-link>
       </h1>
       <div class="header-menu">
-        <a :class="{'btn-menu': true, active: currentMenu === 'Template'}" href="#" @click.prevent="onClickMenu($event, 'Template')" ref="Template">Layout Template<v-icon>mdi-chevron-down</v-icon></a>
+        <v-btn text color="primary" :class="{'btn-menu': true, 'v-btn--active': currentMenu === 'Template'}" @click.prevent="onClickMenu($event, 'Template')" ref="Template">Layout Template<v-icon>mdi-chevron-down</v-icon></v-btn>
         <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu" :headerType="headerType"/>
 
-        <a :class="{'btn-menu': true, active: currentMenu === 'CustomComponent'}" href="#" @click.prevent="onClickMenu($event, 'CustomComponent')" ref="CustomComponent">Custom Component<v-icon>mdi-chevron-down</v-icon></a>
+        <v-btn text color="primary" :class="{'btn-menu': true, 'v-btn--active': currentMenu === 'CustomComponent'}" @click.prevent="onClickMenu($event, 'CustomComponent')" ref="CustomComponent">Custom Component<v-icon>mdi-chevron-down</v-icon></v-btn>
         <Single-page-mega-menu :currentMenu="currentMenu" :showMegaMenu="showMegaMenu" :closeMegamenu="closeMegamenu" :headerType="headerType"/>
 
       </div><!-- .header-menu // -->
@@ -207,20 +207,30 @@ header {
   }
 }
 
-  header.scrolled {
-    top: -64px;
+.btn-menu {
+  &:hover {
+    background: #edf4fb;
   }
+  padding-right: 7px !important;
+  &.v-btn--active .v-icon {
+    transform: rotate(180deg);
+  }
+}
 
-  header[data-header-type="single-page"] {
+header.scrolled {
+  top: -64px;
+}
 
+header[data-header-type="single-page"] {
+
+}
+header[data-header-type="sub-page"] {
+  // background: $primary;
+  // background: #ccc;
+  padding: 0 30px;
+  border-bottom: 1px solid #ddd;
+  .mega-menu {
+    border-top: 0px none;
   }
-  header[data-header-type="sub-page"] {
-    // background: $primary;
-    // background: #ccc;
-    padding: 0 30px;
-    border-bottom: 1px solid #ddd;
-    .mega-menu {
-      border-top: 0px none;
-    }
-  }
+}
 </style>

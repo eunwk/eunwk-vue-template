@@ -50,31 +50,17 @@ export default {
 <style scoped lang="scss">
 .mega-menu {
   background: #fff;
-  position: absolute;
-  top: 64px;
-  left: 0;
-  width: 100%;
   text-align: left;
-  height: 0;
-  // transition: 0.3s height;
   overflow: hidden;
   // display: none;
   .menu-inner-box {
     padding: 30px;
     display: none;
   }
-
   &.showing {
-    height: 400px;
     border-top: 1px solid #ddd;
     .menu-inner-box {
       display: block;
-
-      // .img-box {
-      //   width: 200px;
-      //   // background: red;
-      //   margin-right: 20px;
-      // }
     }
   }
 }
@@ -105,11 +91,31 @@ h2 {
 }
 
 .mega-menu[data-menu-type="single-page"] {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  height: 0;
 
+  &.showing {
+    height: 400px;
+  }
 }
 
 .mega-menu[data-menu-type="sub-page"] {
   background: powderblue;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 50px;
+  height: calc(100vh - 64px);
+  bottom: 0;
+  &.showing {
+    width: 250px;
+  }
+  .mega-menu-dim {
+    left: 250px;
+  }
 }
 
 </style>
