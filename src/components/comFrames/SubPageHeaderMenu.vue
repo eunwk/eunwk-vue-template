@@ -5,18 +5,16 @@
           text
           class="btn-menu"
           :key="item.value"
-          href="#lnb"
           @click.prevent="onClickMenu(item.category)"
         >
           {{ item.title }}
         </v-btn>
       </div>
-      currentMenu {{ currentMenu }}
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 // import SinglePageMegaMenu from '@/components/comFrames/SinglePageMegaMenu';
 
 export default {
@@ -27,8 +25,14 @@ export default {
     ]),
   },
   methods: {
+    ...mapMutations('app', [
+      'setCategoryFromTabClick',
+      'setCurrentMenu',
+    ]),
     onClickMenu(clickMenu) {
       console.log(clickMenu);
+      this.setCurrentMenu(clickMenu);
+      this.setCategoryFromTabClick(clickMenu);
       // if (clickMenu === this.currentMenu) {
       //   // 현재 열려있는 메뉴를 또 누른 경우 메뉴 닫음.
       //   this.setShowMegaMenu(false);
