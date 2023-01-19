@@ -41,7 +41,8 @@ const mutations = {
   setCategoryFromPath(state, path) {
     // 처음 서브화면 진입 시, 새로고침 시 카테고리 및 LNB select 셋팅
     const splitPath = path.split('/');
-    const data = state.tabItems.filter(({ category }) => category === splitPath[1]);
+    const data = state.gnbMenuItems.filter(({ category }) => category === splitPath[1]);
+    console.log('화면 새로고침', data);
     if (data) {
      // console.log('화면 새로고침 path', splitPath[1], data);
      // console.log(data[0].category);
@@ -49,7 +50,7 @@ const mutations = {
       this.commit('app/setSubMenu');
     }
   },
-  setCategoryFromTabClick(state, category) {
+  setCategoryFromMenuClick(state, category) {
     state.selectedCategory = category;
     this.commit('app/setSubMenu');
   },
@@ -76,13 +77,13 @@ const mutations = {
   setShowMegaMenu(state, payload) {
      state.showMegaMenu = payload;
   },
-  setCurrentMenu(state, payload) {
-     state.currentMenu = payload;
+  setSelectedCategory(state, payload) {
+     state.selectedCategory = payload;
   },
   closeMegaMenu(state) {
     // 메가메뉴 닫음.
     state.showMegaMenu = false;
-    state.currentMenu = null;
+    state.selectedCategory = null;
   },
 };
 
@@ -138,10 +139,7 @@ const state = {
     },
   ],
   selectedMenuData: [],
-  // singlePageScrolled: false,
-  // singlePageLastScrollTop: 0,
   showMegaMenu: false,
-  currentMenu: null, // singlePage 현재 선택되어 있는 메뉴 category명
 };
 
 export default {

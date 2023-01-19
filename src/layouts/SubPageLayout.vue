@@ -1,20 +1,6 @@
 <template>
   <div class="sub-page">
     <header-bar headerType="sub-page" />
-    <v-tabs
-      v-model="selectedIndex"
-      dark
-      slider-color="yellow"
-    >
-      <v-tab
-        v-for="item in gnbMenuItems"
-        :key="item.id"
-        :to="item.src"
-        @click="onClickTab(item)"
-      >
-        {{ item.category }}
-      </v-tab>
-    </v-tabs>
     <div class="body-container">
       <sub-page-lnb />
       <div class="contents-box">
@@ -36,47 +22,45 @@ export default {
     HeaderBar,
   },
   data: () => ({
-    windowSize: {
-      x: 0,
-      y: 0,
-    },
-    selectedIndex: '',
+    // windowSize: {
+    //   x: 0,
+    //   y: 0,
+    // },
   }),
   computed: {
     ...mapState('app', [
-      'gnbMenuItems',
       'showSubPageLnbDrawer',
+      // 'selectedCategory',
     ]),
-    mobileBreakPoint() {
-      return this.$vuetify.breakpoint.mobileBreakpoint;
-    },
+    // mobileBreakPoint() {
+    //   return this.$vuetify.breakpoint.mobileBreakpoint;
+    // },
   },
   methods: {
     ...mapMutations('app', [
-      'toggleLnb',
-      'setCategoryFromPath',
-      'setCategoryFromTabClick',
+      // 'toggleLnb',
+      // 'setCategoryFromPath',
+      'setCategoryFromMenuClick',
+      // 'setLnbForCreated',
     ]),
-    onClickTab(item) {
-      console.log('setMenu item', item.category);
-      this.$store.commit('app/setCategoryFromTabClick', item.category);
-    },
   },
   beforeMount() {
-    // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
-    this.windowSize = { x: window.innerWidth, y: window.innerHeight };
-    // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
-    if (this.windowSize.x < this.mobileBreakPoint) {
-      // breakpoint md 이하
-      this.$store.commit('app/setLnbForCreated', false);
-    }
-    if (this.windowSize.x >= this.mobileBreakPoint) {
-      // breakpoint lg 이상
-      this.$store.commit('app/setLnbForCreated', true);
-    }
+    // // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
+    // this.windowSize = { x: window.innerWidth, y: window.innerHeight };
+    // // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
+    // if (this.windowSize.x < this.mobileBreakPoint) {
+    //   // breakpoint md 이하
+    //   this.setLnbForCreated(false);
+    // }
+    // if (this.windowSize.x >= this.mobileBreakPoint) {
+    //   // breakpoint lg 이상
+    //   this.setLnbForCreated(true);
+    // }
+
+    // 서브화면 진입 시 현재 카테고리 세팅
   },
   beforeCreate() {
-    this.$store.commit('app/setCategoryFromPath', this.$route.path);
+    // this.setCategoryFromPath(this.$route.path);
   },
 };
 </script>

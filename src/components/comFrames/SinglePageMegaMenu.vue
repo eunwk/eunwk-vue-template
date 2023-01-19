@@ -1,15 +1,15 @@
 <template>
-  <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`">
+  <div :class="`mega-menu ${selectedCategory !== null ? 'showing' : ''}`">
     <div class="menu-inner-box max-width-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
         <h2>{{ selectedCategory }}</h2>
         <ul class="menu-list">
           <li v-for="item in selectedMenuData" :key="item.value">
-            <router-link :to="item.src">{{ item.title }}</router-link>
+            <router-link :to="item.src" class="menu-link">{{ item.title }}</router-link>
           </li>
         </ul>
-        <button class="btn-menu-close" @click="closeMegaMenu" @keydown="onCloseBtnKeydown($event)" title="메뉴닫기">
+        <button class="btn-menu-close" @click="closeMegaMenu" title="메뉴닫기">
           <v-icon>mdi-close</v-icon>
           <!-- Close -->
         </button>
@@ -28,24 +28,24 @@ export default {
     ...mapState('app', [
       'selectedCategory',
       'selectedMenuData', // 2뎁스 메뉴 데이터
-      'gnbMenuItems',
-      'currentMenu',
+      // 'gnbMenuItems',
+      'selectedCategory',
     ]),
   },
   methods: {
     ...mapMutations('app', [
       'closeMegaMenu',
     ]),
-    onCloseBtnKeydown(e) {
-      // 메뉴닫기 버튼에서 탭키로 나갈때 현재 열려진 카테고리 메뉴가 마지막 메뉴이면 메가메뉴 닫기
-      if (e.keyCode === 9 && !e.shiftKey) {
-        // 현재 열려진 카테고리의 index 찾기
-        const index = this.gnbMenuItems.findIndex((v) => v.category === this.currentMenu);
-        if (this.gnbMenuItems.length - 1 === index) {
-          this.closeMegaMenu();
-        }
-      }
-    },
+    // onCloseBtnKeydown(e) {
+    //   // 메뉴닫기 버튼에서 탭키로 나갈때 현재 열려진 카테고리 메뉴가 마지막 메뉴이면 메가메뉴 닫기
+    //   if (e.keyCode === 9 && !e.shiftKey) {
+    //     // 현재 열려진 카테고리의 index 찾기
+    //     const index = this.gnbMenuItems.findIndex((v) => v.category === this.selectedCategory);
+    //     if (this.gnbMenuItems.length - 1 === index) {
+    //       this.closeMegaMenu();
+    //     }
+    //   }
+    // },
   },
 };
 

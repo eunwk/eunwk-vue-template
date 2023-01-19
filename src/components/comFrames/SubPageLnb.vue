@@ -6,7 +6,6 @@
         <v-list-item-title class="text-h6">
           <v-icon class="mr-2">{{ changeIcon }}</v-icon>{{ selectedCategory }}
         </v-list-item-title>
-        <!-- <v-list-item-subtitle> subtext </v-list-item-subtitle> -->
       </v-list-item-content>
     </v-list-item>
     <v-divider></v-divider>
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'SubPageLayoutLnb',
@@ -49,14 +48,28 @@ export default {
   },
   data: () => ({
     selectedItem: 1,
+    currentPath: this.$route.path,
   }),
   methods: {
+    ...mapMutations('app', [
+      'setCategoryFromMenuClick',
+      'setCategoryFromPath',
+    ]),
+  },
+  beforeMount() {
+    // 서브화면 진입 시 Lnb 에 현재 카테고리 메뉴 세팅
+    if (this.selectedCategory === null) {
+      this.setCategoryFromPath(this.$route.path);
+    }
   },
   mounted() {
-    // 초기 선택된 탭 타이틀을 Drawer 상단에 넣기위에 값 저장
-    // this.setSubMenuTitle();
-    this.setSubMenu();
+
   },
+  // watch: {
+  //   $route(to, from) {
+  //     console.log('여기실행', to, from);
+  //   },
+  // },
 };
 </script>
 

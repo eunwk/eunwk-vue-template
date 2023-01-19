@@ -53,7 +53,7 @@ export default {
       scrolled: false,
       lastScrollTop: 0,
       // showMegaMenu: false,
-      // currentMenu: null, // 현재 선택되어 있는 메뉴
+      // selectedCategory: null, // 현재 선택되어 있는 메뉴
       searchValue: '',
       windowSize: {
         x: 0,
