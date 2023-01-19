@@ -1,6 +1,6 @@
 <template>
   <div :class="`mega-menu ${currentMenu !== null ? 'showing' : ''}`">
-    <div class="menu-inner-box">
+    <div class="menu-inner-box max-width-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
         <h2>{{ selectedCategory }}</h2>
