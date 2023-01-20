@@ -17,7 +17,6 @@
           placeholder="Search"
           clearable
           hide-details
-          style="max-width: 200px"
           append-icon="mdi-magnify"
           clear-icon="mdi-close-circle"
           dense
@@ -122,12 +121,15 @@ export default {
 <style lang="scss">
 @import '@/scss/customVariables.scss';
 
+$headerNormalHeight: 64px;
+$headerMobileHeight: $headerNormalHeight * 2;
+
 /******************************
   헤더 공통 스타일
 *******************************/
 header {
   // border-bottom: 1px solid $borderColor;
-  height: 64px;
+  height: $headerNormalHeight;
   position: sticky;
   top: 0;
   background: rgba(255, 255, 255, 0.5);
@@ -141,8 +143,16 @@ header {
     height: 100%;
     .header-menu {
       margin-right: auto;
+      height: $headerNormalHeight;
       .btn-menu-item {
-        display: inline-block;
+        display: inline-flex;
+        height: $headerNormalHeight;
+        align-items: center;
+        .btn-menu {
+          &:hover {
+            background: #edf4fb;
+          }
+      }
       }
       .btn-menu-item:not(:last-child) {
         margin-right: 10px;
@@ -153,6 +163,7 @@ header {
       justify-self: flex-end;
       display: inline-flex;
       align-items: center;
+      height: $headerNormalHeight;
       a {
         margin-right: 5px;
       }
@@ -175,14 +186,62 @@ header {
   }
 }
 
-.btn-menu {
-  &:hover {
-    background: #edf4fb;
+header.scrolled {
+  top: -$headerNormalHeight;
+}
+
+/********************************************
+  breakpoint 반응형 처리
+*********************************************/
+
+/*** xs, sm, md 공통  ***/
+.app-xs,
+.app-sm,
+.app-md {
+  header {
+    height: 128px;
+      .max-width-box {
+      background: yellow;
+      flex-wrap: wrap;
+      .header-menu {
+        order: 10;
+        height: $headerNormalHeight;
+        width: 100%;
+        border-top: 1px solid #ddd;
+        align-self: flex-end;
+      }
+    }
   }
 }
 
-header.scrolled {
-  top: -64px;
+// breakpoint xs : ~ 599px
+.app-xs {
+  header {
+    .max-width-box {
+      background: yellow;
+    }
+    .header-others .v-input {
+      max-width: 150px;
+    }
+  }
+}
+
+// breakpoint sm : 600px ~ 950px
+.app-sm {
+  header {
+    .max-width-box {
+      background: yellow;
+    }
+  }
+}
+
+// breakpoint md : 960px ~ 1263px
+.app-md {
+  header {
+    .max-width-box {
+      background: yellow;
+    }
+  }
 }
 
 /******************************
@@ -207,7 +266,7 @@ header[data-header-type="sub-page"] {
   // background: #19509f;
   // color: $textColorWhite;
   // background: #ccc;
-  padding: 0 30px;
+  padding: 0 $boxHPadding_lg;
   border-bottom: 1px solid #ddd;
   .mega-menu {
     border-top: 0px none;

@@ -1,4 +1,6 @@
 
+@import '@/scss/customVariables.scss';
+
 @font-face {
   font-family: 'NotoSansKr';
   src : local("NotoKR-Regular");
@@ -32,7 +34,7 @@
 
 $maxContentWidth: 1500px;
 $comBoxVPadding: 40px;
-$comBoxHPadding: 30px;
+
 
 html { 
   overflow: initial !important;
@@ -67,7 +69,12 @@ a {
   color: inherit;
 }
 
+/********************************************
+  breakpoint 공통 스타일 + lg(1264px) 이상
+*********************************************/
+
 /* 본문영역 페이지 container */
+
 .v-application {
     font-size: 0.938rem;
     
@@ -75,8 +82,8 @@ a {
     .single-page {
       .max-width-box {
         max-width: $maxContentWidth;
-        padding-right: $comBoxHPadding;
-        padding-left: $comBoxHPadding;
+        padding-right: $boxHPadding_lg;
+        padding-left: $boxHPadding_lg;
         margin: 0 auto;
         // border: 1px solid red;
       }
@@ -385,3 +392,42 @@ a {
   text-align: center;
   color: #999;
 }
+
+/********************************************
+  breakpoint 반응형 처리
+*********************************************/
+
+// breakpoint xs : ~ 599px
+.app-xs.v-application {
+  /* single-page */
+  .single-page {
+    .max-width-box {
+      padding-right: $boxHPadding_xs;
+      padding-left: $boxHPadding_xs;
+    }
+  }
+}
+
+// breakpoint sm : 600px ~ 950px
+.app-sm.v-application {
+  /* single-page */
+  .single-page {
+    .max-width-box {
+      padding-right: $boxHPadding_sm;
+      padding-left: $boxHPadding_sm;
+    }
+  }
+}
+
+
+// breakpoint md : 960px ~ 1263px
+.app-md.v-application {
+  /* single-page */
+  .single-page {
+    .max-width-box {
+      padding-right: $boxHPadding_md;
+      padding-left: $boxHPadding_md;
+    }
+  }
+}
+
