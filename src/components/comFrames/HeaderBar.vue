@@ -124,9 +124,9 @@ export default {
 $headerNormalHeight: 64px;
 $headerMobileHeight: $headerNormalHeight * 2;
 
-/******************************
-  헤더 공통 스타일
-*******************************/
+/*******************************************
+  공통 스타일 - PC first style
+********************************************/
 header {
   // border-bottom: 1px solid $borderColor;
   height: $headerNormalHeight;
@@ -135,13 +135,15 @@ header {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: saturate(200%) blur(10px);
   z-index:2;
-  transition: 0.4s;
+  // transition: 0.4s;
   .max-width-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    transition: padding 0.4s;
     .header-menu {
+      display: flex;
       margin-right: auto;
       height: $headerNormalHeight;
       .btn-menu-item {
@@ -178,7 +180,7 @@ header {
     display: flex;
     align-items: center;
     font-size: 20px;
-    margin-right: 40px;
+    margin-right: 10px;
     img {
       margin-right: 10px;
       width: 50px;
@@ -199,29 +201,52 @@ header.scrolled {
 .app-sm,
 .app-md {
   header {
-    height: 128px;
-      .max-width-box {
-      background: yellow;
-      flex-wrap: wrap;
+  height: 128px;
+    .max-width-box {
+      align-items: flex-start;
+      h1 {
+        height: 64px;
+        display: inline-flex;
+        align-items: center;
+      }
+      .header-others {
+        margin-left: auto;
+      }
       .header-menu {
-        order: 10;
+        position: absolute;
         height: $headerNormalHeight;
         width: 100%;
+        top: 64px;
+        left: 0;
         border-top: 1px solid #ddd;
-        align-self: flex-end;
+        transition: padding 0.4s;
       }
     }
+  }
+  .mega-menu-dim {
+    top: 64px;
   }
 }
 
 // breakpoint xs : ~ 599px
 .app-xs {
   header {
-    .max-width-box {
-      background: yellow;
-    }
     .header-others .v-input {
-      max-width: 150px;
+      margin-right: 0;
+    }
+    .header-others a {
+      margin-right: 0;
+      padding: 0 7px;
+    }
+    .header-menu {
+      padding-right: $boxHPadding_xs - 5;
+      padding-left: $boxHPadding_xs - 5;
+    }
+    .btn-menu-item .v-icon {
+      display: none;
+    }
+    .btn-menu-item:not(:last-child) {
+      margin-right: 0;
     }
   }
 }
@@ -229,8 +254,9 @@ header.scrolled {
 // breakpoint sm : 600px ~ 950px
 .app-sm {
   header {
-    .max-width-box {
-      background: yellow;
+    .header-menu {
+      padding-right: $boxHPadding_sm - 10;
+      padding-left: $boxHPadding_sm - 10;
     }
   }
 }
@@ -238,10 +264,15 @@ header.scrolled {
 // breakpoint md : 960px ~ 1263px
 .app-md {
   header {
-    .max-width-box {
-      background: yellow;
+    .header-menu {
+      padding-right: $boxHPadding_md - 10;
+      padding-left: $boxHPadding_md - 10;
     }
   }
+}
+
+// breakpoint lg : 1264px ~
+.app-lg {
 }
 
 /******************************
@@ -257,6 +288,10 @@ header[data-header-type="single-page"] {
       transform: rotate(180deg);
     }
   }
+}
+
+.app-xs header .btn-menu {
+  padding: 5px !important;
 }
 
 /******************************
