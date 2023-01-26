@@ -72,16 +72,20 @@ export default {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  height: 100vh;
+  // border: 2px solid green;
 
   .body-container {
     display: flex;
     flex: 1 1 auto;
+    position: relative;
+    height: 100px;
   }
   .contents-box {
     padding: 20px;
     flex: 1 1 auto;
     overflow: auto;
-    height: calc(100vh - 64px);
   }
 }
 
@@ -98,14 +102,14 @@ export default {
   margin-left: 0;
 }
 
-.app-md .lnb,
-.app-sm .lnb,
-.app-xs .lnb   {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-};
+// .app-md .lnb,
+// .app-sm .lnb,
+// .app-xs .lnb   {
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   z-index: 1;
+// };
 
 .v-tabs {
   position: fixed;

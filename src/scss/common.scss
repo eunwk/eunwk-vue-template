@@ -46,9 +46,8 @@ p {
 }
 
 body {
-  font-size: 0.875rem;
+  font-size: 16px;
   min-width: 360px;
-  overflow: auto;
   word-wrap:break-word;
   word-break:keep-all;
 }
@@ -102,16 +101,18 @@ a {
 .v-application {
     font-size: 0.938rem;
     
-    /* single-page */
-    .single-page {
-      .max-width-box {
-        max-width: $maxContentWidth;
-        padding-right: $boxHPadding_lg;
-        padding-left: $boxHPadding_lg;
-        margin: 0 auto;
-        // border: 1px solid red;
-      }
+    /* max-width-box */
+    .max-width-box {
+      padding-right: $boxHPadding_lg;
+      padding-left: $boxHPadding_lg;
+      margin: 0 auto;
+      // border: 1px solid red;
     }
+
+    .single-page .max-width-box {
+      max-width: $maxContentWidth;
+    }
+ 
 }
 
 /* 컴포넌트 커스터마이징 */
@@ -423,35 +424,27 @@ a {
 
 // breakpoint xs : ~ 599px
 .app-xs.v-application {
-  /* single-page */
-  .single-page {
-    .max-width-box {
-      padding-right: $boxHPadding_xs;
-      padding-left: $boxHPadding_xs;
-    }
+  .max-width-box {
+    padding-right: $boxHPadding_xs;
+    padding-left: $boxHPadding_xs;
   }
+
 }
 
 // breakpoint sm : 600px ~ 950px
 .app-sm.v-application {
-  /* single-page */
-  .single-page {
-    .max-width-box {
-      padding-right: $boxHPadding_sm;
-      padding-left: $boxHPadding_sm;
-    }
+  .max-width-box {
+    padding-right: $boxHPadding_sm;
+    padding-left: $boxHPadding_sm;
   }
 }
 
 
 // breakpoint md : 960px ~ 1263px
 .app-md.v-application {
-  /* single-page */
-  .single-page {
-    .max-width-box {
-      padding-right: $boxHPadding_md;
-      padding-left: $boxHPadding_md;
-    }
+  .max-width-box {
+    padding-right: $boxHPadding_md;
+    padding-left: $boxHPadding_md;
   }
 }
 

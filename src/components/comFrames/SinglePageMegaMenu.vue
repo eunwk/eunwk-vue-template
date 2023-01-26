@@ -3,7 +3,7 @@
     <div class="menu-inner-box max-width-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
-        <h2>{{ selectedCategory }}</h2>
+        <h2 class="category-title">{{ selectedCategory }}</h2>
         <ul class="menu-list">
           <li v-for="item in selectedMenuData" :key="item.value">
             <router-link :to="item.src" class="menu-link">{{ item.title }}</router-link>
@@ -52,9 +52,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/customVariables.scss';
 .mega-menu {
   position: absolute;
-  top: 64px;
+  top: $headerNormalHeight - 1;
   left: 0;
   width: 100%;
   height: 0;
@@ -73,8 +74,9 @@ export default {
   }
 }
 
-h2 {
+.category-title {
   margin-bottom: 10px;
+  font-size: 1.8rem;
 }
 
 .btn-menu-close {
@@ -86,12 +88,6 @@ h2 {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  // top: 0;
-  // right: 10px;
-  // width: 50px;
-  // height: 24px;
-  // font-size: 12px;
-  // border-radius: 0px 0px 3px 3px;
 }
 .mega-menu-dim {
   position: fixed;
@@ -115,6 +111,26 @@ h2 {
     &:focus {
       background: #d6e7f7;
     }
+  }
+}
+
+/********************************************
+  breakpoint 반응형 처리
+*********************************************/
+
+/*** xs, sm, md 공통  ***/
+.app-xs,
+.app-sm,
+.app-md {
+  .mega-menu-dim {
+    top: $headerMobileHeight;
+  }
+}
+
+// breakpoint xs : ~ 599px
+.app-xs {
+  .category-title {
+    font-size: 1.25rem;
   }
 }
 

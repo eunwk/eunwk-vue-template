@@ -121,9 +121,6 @@ export default {
 <style lang="scss">
 @import '@/scss/customVariables.scss';
 
-$headerNormalHeight: 64px;
-$headerMobileHeight: $headerNormalHeight * 2;
-
 /*******************************************
   공통 스타일 - PC first style
 ********************************************/
@@ -135,6 +132,7 @@ header {
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: saturate(200%) blur(10px);
   z-index:2;
+  flex-shrink: 0;
   // transition: 0.4s;
   .max-width-box {
     display: flex;
@@ -221,7 +219,7 @@ header.scrolled {
     }
   }
   .mega-menu-dim {
-    top: 64px;
+    top: $headerMobileHeight;
   }
 }
 
@@ -291,7 +289,7 @@ header[data-header-type="sub-page"] {
   // background: #19509f;
   // color: $textColorWhite;
   // background: #ccc;
-  padding: 0 $boxHPadding_lg;
+  // padding: 0 $boxHPadding_lg;
   border-bottom: 1px solid #ddd;
   .mega-menu {
     border-top: 0px none;

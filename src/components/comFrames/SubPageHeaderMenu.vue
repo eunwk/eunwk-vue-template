@@ -1,22 +1,20 @@
 <template>
   <div class="header-menu">
-      <div v-for="item in gnbMenuItems" :key="item.value" class="btn-menu-item">
-        <v-btn
-          text
-          color="primary"
-          :class="`btn-menu ${item.category === selectedCategory ? 'v-btn--active' : ''}`"
-          :key="item.value"
-          @click.prevent="onClickMenu(item.category)"
-        >
-          {{ item.title }}
-        </v-btn>
-      </div>
+    <div v-for="item in gnbMenuItems" :key="item.value" class="btn-menu-item">
+      <v-btn
+        text
+        color="primary"
+        :class="{'btn-menu': true, 'v-btn--active': selectedCategory === item.category}"
+        @click.prevent="onClickMenu(item.category)"
+      >
+        {{ item.title }}
+      </v-btn>
     </div>
+  </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-// import SinglePageMegaMenu from '@/components/comFrames/SinglePageMegaMenu';
 
 export default {
   computed: {
@@ -34,20 +32,32 @@ export default {
       console.log(clickMenu);
       this.setSelectedCategory(clickMenu);
       this.setCategoryFromMenuClick(clickMenu);
-      // if (clickMenu === this.selectedCategory) {
-      //   // 현재 열려있는 메뉴를 또 누른 경우 메뉴 닫음.
-      //   this.setShowMegaMenu(false);
-      //   this.setSelectedCategory(null);
-      // } else {
-      //   // 현재 열려있는 메뉴와 다른 메뉴를 누른 경우
-      //   this.setSelectedCategory(clickMenu);
-      //   this.setCategoryFromMenuClick(clickMenu);
-      // }
     },
   },
   mounted() {
    // console.log('this.selectedCategory', this.selectedCategory);
   },
+  beforeMount() {
+    console.log('beforeMount');
+    // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
+    // this.windowSize = { x: window.innerWidth, y: window.innerHeight };
+    // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
+    // if (this.windowSize.x < this.mobileBreakPoint) {
+    //   // breakpoint md 이하
+    //   this.$store.commit('app/setLnbForCreated', false);
+    // }
+    // if (this.windowSize.x >= this.mobileBreakPoint) {
+    //   // breakpoint lg 이상
+    //   this.$store.commit('app/setLnbForCreated', true);
+    // }
+    this.closeMegaMenu();
+  },
+  // watch: {
+  //   $route(to, from) {
+  //    // console.log('여기실행', to, from);
+  //     this.closeMegaMenu();
+  //   },
+  // },
 };
 </script>
 
