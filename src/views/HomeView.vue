@@ -373,6 +373,7 @@ export default {
   /* About */
   .about {
     .list-desc {
+      // text-align: center;
       font-size: 1rem;
     }
   }

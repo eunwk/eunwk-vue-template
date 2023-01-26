@@ -22,7 +22,7 @@
           dense
           @click:append="onSearch"
         ></v-text-field>
-        <v-btn text color="primary" to="/login">Login</v-btn>
+        <router-link to="/login">Login</router-link>
         <btn-theme-change />
       </div>
     </div>
@@ -167,7 +167,7 @@ header {
       align-items: center;
       height: $headerNormalHeight;
       a {
-        margin-right: 5px;
+        margin-right: 10px;
       }
       .v-input {
         margin-right: 10px;
@@ -209,9 +209,6 @@ header.scrolled {
         display: inline-flex;
         align-items: center;
       }
-      .header-others {
-        margin-left: auto;
-      }
       .header-menu {
         position: absolute;
         height: $headerNormalHeight;
@@ -231,13 +228,6 @@ header.scrolled {
 // breakpoint xs : ~ 599px
 .app-xs {
   header {
-    .header-others .v-input {
-      margin-right: 0;
-    }
-    .header-others a {
-      margin-right: 0;
-      padding: 0 7px;
-    }
     .header-menu {
       padding-right: $boxHPadding_xs - 5;
       padding-left: $boxHPadding_xs - 5;
