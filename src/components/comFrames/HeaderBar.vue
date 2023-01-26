@@ -8,8 +8,8 @@
         </router-link>
       </h1>
 
+      <!-- single page mode menu -->
       <single-page-header-menu  v-if="headerType === 'single-page'" />
-      <sub-page-header-menu  v-if="headerType === 'sub-page'" />
 
       <div class="header-others">
         <v-text-field
@@ -25,6 +25,10 @@
         <router-link to="/login">Login</router-link>
         <btn-theme-change />
       </div>
+
+      <!-- sub page mode menu -->
+      <button v-if="headerType === 'sub-page' && $vuetify.breakpoint.mdAndDown" title="메뉴열기" class="btn-lnb-toggle"><v-icon>mdi-menu</v-icon></button>
+      <!-- <sub-page-header-menu  v-if="headerType === 'sub-page'" /> -->
     </div>
   </header>
 </template>
@@ -33,13 +37,13 @@
 import { mapState, mapMutations } from 'vuex';
 import BtnThemeChange from '@/components/BtnThemeChange';
 import SinglePageHeaderMenu from './SinglePageHeaderMenu.vue';
-import SubPageHeaderMenu from './SubPageHeaderMenu.vue';
+// import SubPageHeaderMenu from './SubPageHeaderMenu.vue';
 
 export default {
   components: {
     BtnThemeChange,
     SinglePageHeaderMenu,
-    SubPageHeaderMenu,
+    // SubPageHeaderMenu,
   },
   props: {
     headerType: {
@@ -125,7 +129,6 @@ export default {
   공통 스타일 - PC first style
 ********************************************/
 header {
-  // border-bottom: 1px solid $borderColor;
   height: $headerNormalHeight;
   position: sticky;
   top: 0;
@@ -137,33 +140,14 @@ header {
   .max-width-box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     height: 100%;
     transition: padding 0.4s;
-    .header-menu {
-      display: flex;
-      margin-right: auto;
-      height: $headerNormalHeight;
-      .btn-menu-item {
-        display: inline-flex;
-        height: $headerNormalHeight;
-        align-items: center;
-        .btn-menu {
-          &:hover {
-            background: #edf4fb;
-          }
-      }
-      }
-      .btn-menu-item:not(:last-child) {
-        margin-right: 10px;
-      }
-    }
     .header-others {
-      margin-left: 20px;
+      margin-left: auto;
       justify-self: flex-end;
       display: inline-flex;
       align-items: center;
-      height: $headerNormalHeight;
+      height: $headerNormalHeight - 1;
       a {
         margin-right: 10px;
       }
@@ -190,20 +174,43 @@ header.scrolled {
   top: -$headerNormalHeight;
 }
 
-/********************************************
-  breakpoint 반응형 처리
-*********************************************/
-
-/*** xs, sm, md 공통  ***/
+/******************************
+  .single-page 전용 스타일
+*******************************/
+header[data-header-type="single-page"] {
+  .header-menu {
+    display: flex;
+    margin-right: auto;
+    height: $headerNormalHeight - 1;
+    .btn-menu-item {
+      display: inline-flex;
+      height: $headerNormalHeight;
+      align-items: center;
+      .btn-menu {
+        padding-right: 7px !important;
+        &:hover {
+          background: #edf4fb;
+        }
+      }
+      &.v-btn--active .v-icon {
+        transform: rotate(180deg);
+      }
+    }
+    .btn-menu-item:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+/*** 반응형 xs, sm, md 공통  ***/
 .app-xs,
 .app-sm,
 .app-md {
-  header {
+  header[data-header-type="single-page"] {
   height: 128px;
     .max-width-box {
       align-items: flex-start;
       h1 {
-        height: 64px;
+        height: $headerNormalHeight - 1;
         display: inline-flex;
         align-items: center;
       }
@@ -211,7 +218,7 @@ header.scrolled {
         position: absolute;
         height: $headerNormalHeight;
         width: 100%;
-        top: 64px;
+        top: $headerNormalHeight - 1;
         left: 0;
         border-top: 1px solid #ddd;
         transition: padding 0.4s;
@@ -225,7 +232,7 @@ header.scrolled {
 
 // breakpoint xs : ~ 599px
 .app-xs {
-  header {
+  header[data-header-type="single-page"] {
     .header-menu {
       padding-right: $boxHPadding_xs - 5;
       padding-left: $boxHPadding_xs - 5;
@@ -236,12 +243,15 @@ header.scrolled {
     .btn-menu-item:not(:last-child) {
       margin-right: 0;
     }
+    .btn-menu {
+      padding: 5px !important;
+    }
   }
 }
 
 // breakpoint sm : 600px ~ 950px
 .app-sm {
-  header {
+  header[data-header-type="single-page"] {
     .header-menu {
       padding-right: $boxHPadding_sm - 10;
       padding-left: $boxHPadding_sm - 10;
@@ -251,7 +261,7 @@ header.scrolled {
 
 // breakpoint md : 960px ~ 1263px
 .app-md {
-  header {
+  header[data-header-type="single-page"] {
     .header-menu {
       padding-right: $boxHPadding_md - 10;
       padding-left: $boxHPadding_md - 10;
@@ -261,25 +271,6 @@ header.scrolled {
 
 // breakpoint lg : 1264px ~
 .app-lg {
-}
-
-/******************************
-  .single-page 전용 스타일
-*******************************/
-header[data-header-type="single-page"] {
-  .btn-menu {
-    &:hover {
-      background: #edf4fb;
-    }
-    padding-right: 7px !important;
-    &.v-btn--active .v-icon {
-      transform: rotate(180deg);
-    }
-  }
-}
-
-.app-xs header .btn-menu {
-  padding: 5px !important;
 }
 
 /******************************
@@ -297,5 +288,17 @@ header[data-header-type="sub-page"] {
   h1, a, button {
     // color: $textColorWhite;
   }
+  .btn-lnb-toggle {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    margin-left: -10px;
+    margin-right: 10px;
+    order: -1;
+    .v-icon {
+      font-size: 32px;
+    }
+  }
 }
+
 </style>

@@ -64,4 +64,10 @@ export default {
 <style scoped lang="scss">
 @import '@/scss/customVariables.scss';
 
+.header-menu {
+  position: fixed;
+  left: 0;
+  width: 250px;
+  top: 500px;
+}
 </style>

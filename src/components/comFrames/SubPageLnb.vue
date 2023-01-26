@@ -1,24 +1,32 @@
 <template>
   <!-- <v-navigation-drawer v-model="drawer" app clipped > -->
   <nav class="lnb" id="lnb">
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="text-h6">
-          <v-icon class="mr-2">{{ changeIcon }}</v-icon>{{ selectedCategory }}
-        </v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-list>
-      <v-list-item-group v-model="selectedItem">
+    <v-list expand >
+      <v-list-group
+        v-for="item in gnbMenuItems"
+        v-model="item.active"
+        :key="item.id"
+        :prepend-icon="item.icon"
+        no-action
+      >
+      <!-- <div>{{item.title}}</div> -->
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+
         <v-list-item
-          v-for="item in selectedMenuData"
-          :key="item.value"
-          :to="item.src"
+          v-for="child in item.menus"
+          :key="child.value"
+          :to="child.src"
+          :value="true"
         >
-          {{ item.title }}
+          <v-list-item-content>
+            <v-list-item-title v-text="child.title"></v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
-    </v-list-item-group>
+      </v-list-group>
     </v-list>
   </nav>
 </template>
@@ -32,19 +40,9 @@ export default {
     ...mapState('app', [
       'selectedCategory',
       'selectedMenuData',
+      'gnbMenuItems',
+      'selectedLnbItem',
     ]),
-    changeIcon() {
-      switch (this.selectedCategory) {
-        case 'Template':
-          return 'mdi-book-multiple-outline';
-        case 'CustomComponent':
-          return 'mdi-bulletin-board';
-        case 'Etc':
-          return 'mdi-focus-field';
-        default:
-          return 'mdi-file-settings-outline';
-      }
-    },
   },
   data: () => ({
     selectedItem: 1,
