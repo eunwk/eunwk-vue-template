@@ -33,7 +33,7 @@
         class="btn-lnb-toggle"
         @click="toggleLnb"
       >
-        <v-icon>{{showLnb ? 'mdi-menu' : 'mdi-arrow-left'}}</v-icon>
+        <v-icon>{{showLnb ? 'mdi-arrow-left' : 'mdi-menu'}}</v-icon>
       </button>
     </div>
   </header>

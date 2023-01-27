@@ -293,11 +293,6 @@ export default {
         checkbox: [],
       };
   },
-  computed: {
-    breakpoint() {
-      return this.$vuetify.breakpoint.name;
-    },
-  },
   methods: {
     onClickCheckAll() {
       // this.checkboxAll = !this.checkboxAll;

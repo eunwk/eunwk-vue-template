@@ -43,7 +43,6 @@ export default {
       this.toggleTheme();
     },
     getDarkMode() {
-      console.log('getmode');
       const mode = localStorage.getItem('darkMode') === 'dark' ? true : false;
       this.$vuetify.theme.dark = mode;
     },

@@ -28,7 +28,11 @@ const mutations = {
     this.$vuetify.theme.dark = mode;
   },
   toggleLnb(state) {
+    console.log('toggleLnb');
     state.showLnb = !state.showLnb;
+  },
+  setShowLnbInitForMobile(state) {
+    state.showLnb = false;
   },
   setLnbOverlay(state) {
     state.isLnbOverlay = !state.isLnbOverlay;
@@ -61,9 +65,6 @@ const mutations = {
     const splitPath = path.split('/');
     state.selectedMenuIndex = state.gnbMenuItems.findIndex((v) => v.category === splitPath[1]);
   },
-  setLnbActiveMenu(state) {
-    console.log('selectedMenuIndexFromPath', state);
-  },
 };
 
 const actions = {
@@ -72,9 +73,8 @@ const actions = {
 const state = {
   cardList: generateCardList(7),
   isThemeDark: false,
-  showLnb: true,
-  isLnbOverlay: false,
-  selectedLnbItem: 0,
+  showLnb: false, // md 이하에만 초기값 false 적용. lg 이상은 항상 보임.
+  isLnbOverlay: false, // md 이하에만 초기값 false 적용. lg 이상은 항상 보임.
   gnbMenuItems: [
     {
       id: 1,

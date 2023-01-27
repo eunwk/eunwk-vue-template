@@ -24,6 +24,7 @@
           v-for="child in item.menus"
           :key="child.value"
           :to="child.src"
+          @click="onClickLink"
         >
           <v-list-item-content>
             <v-list-item-title v-text="child.title"></v-list-item-title>
@@ -43,7 +44,6 @@ export default {
     ...mapState('app', [
       'selectedMenuIndex',
       'gnbMenuItems',
-      'selectedLnbItem',
       'isLnbOverlay',
     ]),
   },
@@ -55,8 +55,14 @@ export default {
     ...mapMutations('app', [
       'selectedMenuIndexFromPath',
       'setLnbOverlay',
-      'setLnbActiveMenu',
+      'toggleLnb',
     ]),
+    onClickLink() {
+      if (this.$vuetify.breakpoint.smAndDown || (this.$vuetify.breakpoint.mdOnly && this.isLnbOverlay)) {
+        // sm 이하이거나. md +  lnb overlay 모드일 때. 메뉴를 누르면 화면 바뀌면서 lnb 닫음.
+        this.toggleLnb();
+      }
+    },
   },
   // beforeCreate() {
   //   console.log('before create!!!!');
@@ -65,7 +71,6 @@ export default {
   mounted() {
     console.log('mounted');
     this.selectedMenuIndexFromPath(this.$route.path);
-    // this.setLnbActiveMenu();
   },
   updated() {
     console.log('lnb updated');

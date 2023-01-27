@@ -1,7 +1,7 @@
 <template>
   <div class="sub-page">
     <header-bar headerType="sub-page" />
-    <div :class="{'body-container': true, 'lnb-hidden': $vuetify.breakpoint.mdAndDown && showLnb, 'lnb-overlay': $vuetify.breakpoint.mdOnly && isLnbOverlay}">
+    <div :class="{'body-container': true, 'lnb-hidden': $vuetify.breakpoint.mdAndDown && !showLnb, 'lnb-overlay': $vuetify.breakpoint.mdOnly && isLnbOverlay}">
       <sub-page-lnb />
       <div class="contents-box">
         <router-view></router-view>
