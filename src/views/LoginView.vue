@@ -60,9 +60,17 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        alert('로그인성공!');
+        // 데이터 통신
+        setTimeout(() => {
+          this.$store.dispatch('app/logIn', {
+            id: this.id,
+          });
+          this.$router.push({
+            path: '/',
+          });
+        }, 1000);
       } else {
-        alert('로그인실패!');
+        alert('폼 양식이 올바르지 않습니다.!');
       }
     },
   },

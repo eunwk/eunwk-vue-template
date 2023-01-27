@@ -41,7 +41,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .section-title-area {
   margin-bottom: 8px;
   display: flex;

@@ -104,6 +104,7 @@ export default {
 /* Lnb Show/hide */
 .lnb-hidden .lnb {
   width: 0;
+  border-right: 0;  
 }
 
 .v-tabs {

@@ -31,7 +31,7 @@
     <section-title title='검색결과'>
       <v-dialog v-model="addPopup" width="500">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="secondary" depressed v-bind="attrs" v-on="on">추가</v-btn>
+          <v-btn v-bind="attrs" v-on="on">추가</v-btn>
       </template>
       <add-grid-popup :bind-close="onCloseAddPopup" />
     </v-dialog>
@@ -41,10 +41,12 @@
       max-width="290"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="secondary" depressed v-bind="attrs" v-on="on">삭제</v-btn>
+        <v-btn v-bind="attrs" v-on="on">삭제</v-btn>
       </template>
       <common-message :bind-close="cancleConfirm" :bind-ok="okConfirm" msg="삭제하시겠습니까?" type="delete" confirm />
     </v-dialog>
+    <v-btn >버튼</v-btn>
+    <v-btn >버튼</v-btn>
     </section-title>
     <v-data-table
       v-model="tableData.selected"

@@ -16,6 +16,14 @@ export const getters = {
 };
 
 const mutations = {
+  setLogin(state, payload) {
+    state.isLoggedIn = true;
+    state.loginUserInfo = payload;
+  },
+  setLogOut(state) {
+    state.isLoggedIn = false;
+    state.loginUserInfo = {};
+  },
   toggleTheme(state) {
     state.isThemeDark = !state.isThemeDark;
   },
@@ -68,9 +76,17 @@ const mutations = {
 };
 
 const actions = {
+  logIn({ commit }, payload) {
+    commit('setLogin', payload);
+  },
+  logOut({ commit }) {
+    commit('setLogOut', null);
+  },
 };
 
 const state = {
+  isLoggedIn: false,
+  loginUserInfo: {},
   cardList: generateCardList(7),
   isThemeDark: false,
   showLnb: false, // md 이하에만 초기값 false 적용. lg 이상은 항상 보임.

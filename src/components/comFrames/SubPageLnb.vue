@@ -1,10 +1,6 @@
 <template>
   <!-- <v-navigation-drawer v-model="drawer" app clipped > -->
   <nav class="lnb" id="lnb">
-    <div class="login-info">
-      로그인 정보 영역
-      <v-btn rounded icon class="btn-pin" v-if="$vuetify.breakpoint.mdOnly" @click="setLnbOverlay"><v-icon>{{ isLnbOverlay ? 'mdi-pin-off' : 'mdi-pin'}}</v-icon></v-btn>
-    </div>
     <v-list expand>
       <v-list-group
         v-for="(item, index) in gnbMenuItems"
@@ -44,6 +40,8 @@ export default {
     ...mapState('app', [
       'selectedMenuIndex',
       'gnbMenuItems',
+      'isLoggedIn',
+      'loginUserInfo',
       'isLnbOverlay',
     ]),
   },
@@ -54,7 +52,6 @@ export default {
   methods: {
     ...mapMutations('app', [
       'selectedMenuIndexFromPath',
-      'setLnbOverlay',
       'toggleLnb',
     ]),
     onClickLink() {
@@ -64,10 +61,6 @@ export default {
       }
     },
   },
-  // beforeCreate() {
-  //   console.log('before create!!!!');
-  //   // this.selectedMenuIndexFromPath(this.$route.path);
-  // },
   mounted() {
     console.log('mounted');
     this.selectedMenuIndexFromPath(this.$route.path);
@@ -84,14 +77,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.login-info {
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  .btn-pin {
-    margin-left: auto;
-  }
-}
+
 .v-list-item__title {
   display: flex;
   .v-icon {
@@ -99,4 +85,7 @@ export default {
   }
 }
 
+.v-avatar {
+  margin-right: 10px;
+}
 </style>

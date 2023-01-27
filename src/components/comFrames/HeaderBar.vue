@@ -22,7 +22,32 @@
           dense
           @click:append="onSearch"
         ></v-text-field>
-        <router-link to="/login">Login</router-link>
+        <router-link v-if="!isLoggedIn" to="/login">로그인</router-link>
+        <div v-else class="myInfo">
+          <v-menu left offset-y v-model="menu" :close-on-content-click="false" attach=".myInfo">
+            <template v-slot:activator="{ on, attrs }">
+              <button v-bind="attrs" v-on="on" class="btn-avatar" >
+                <v-avatar size="40">
+                  <v-img src="https://cdn.vuetifyjs.com/images/lists/3.jpg"></v-img>
+                </v-avatar>
+              </button>
+            </template>
+            <v-list dense>
+                <v-list-item class="list-title">
+                  <v-list-item-content>
+                  <v-list-item-title>Park Eunhee</v-list-item-title>
+                  <v-list-item-subtitle>Web Publisher</v-list-item-subtitle>
+                </v-list-item-content>
+                </v-list-item>
+                <v-list-item to="/account" disabled>
+                  나의 정보(준비중)
+                </v-list-item>
+                <v-list-item @click="onClickLogOut">
+                  로그아웃
+                </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
         <btn-theme-change />
       </div>
 
@@ -35,6 +60,7 @@
       >
         <v-icon>{{showLnb ? 'mdi-arrow-left' : 'mdi-menu'}}</v-icon>
       </button>
+      <button class="btn-pin" v-if="$vuetify.breakpoint.mdOnly" @click="setLnbOverlay"><v-icon>{{ isLnbOverlay ? 'mdi-pin-off' : 'mdi-pin'}}</v-icon></button>
     </div>
   </header>
 </template>
@@ -61,10 +87,18 @@ export default {
       lastScrollTop: 0,
       // showMegaMenu: false,
       searchValue: '',
-      windowSize: {
-        x: 0,
-        y: 0,
-      },
+      selectedItem: null,
+      menu: false,
+      // windowSize: {
+      //   x: 0,
+      //   y: 0,
+      // },
+      myMenuList: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ],
     };
   },
   computed: {
@@ -72,15 +106,16 @@ export default {
       'megaMenuData', // single page 메가메뉴 데이터
       'showLnb',
       'gnbMenuItems',
-      // 'singlePageScrolled',
-      // 'singlePageLastScrollTop',
+      'isLoggedIn',
+      'isLnbOverlay',
+      'loginUserInfo',
     ]),
   },
-
   methods: {
     ...mapMutations('app', [
       'closeMegaMenu',
       'toggleLnb',
+      'setLnbOverlay',
     ]),
     onSearch() {
       if (this.searchValue) {
@@ -102,6 +137,15 @@ export default {
         this.lastScrollTop = scrollTop;
         this.closeMegaMenu();
       }
+    },
+    onClickLogOut() {
+      setTimeout(() => {
+        this.$store.dispatch('app/logOut');
+        this.$router.push({
+          path: '/',
+        });
+      }, 1000);
+      this.menu = false;
     },
   },
   mounted() {
@@ -152,11 +196,20 @@ header {
       display: inline-flex;
       align-items: center;
       height: $headerNormalHeight - 1;
-      a {
+      & > *:not(:last-child) {
         margin-right: 10px;
       }
-      .v-input {
-        margin-right: 10px;
+      & > a {
+        padding: 0;
+        color: $primary;
+      }
+      .myInfo {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+      }
+      & > .v-input {
         margin-top: 0;
       }
     }
@@ -171,6 +224,10 @@ header {
       margin-right: 10px;
       width: 50px;
     }
+  }
+  .list-title {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
   }
 }
 
@@ -292,7 +349,8 @@ header[data-header-type="sub-page"] {
   h1, a, button {
     // color: $textColorWhite;
   }
-  .btn-lnb-toggle {
+  .btn-lnb-toggle,
+  .btn-pin {
     width: 40px;
     height: 40px;
     flex: 0 0 auto;
@@ -302,6 +360,13 @@ header[data-header-type="sub-page"] {
     .v-icon {
       font-size: 32px;
     }
+  }
+
+  .btn-lnb-toggle .v-icon {
+    font-size: 32px;
+  }
+  .btn-pin .v-icon {
+    font-size: 26px;
   }
 }
 
