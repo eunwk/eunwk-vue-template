@@ -19,41 +19,6 @@ const mutations = {
   toggleTheme(state) {
     state.isThemeDark = !state.isThemeDark;
   },
-  toggleLnb(state) {
-    state.showSubPageLnbDrawer = !state.showSubPageLnbDrawer;
-  },
-  setLnbForCreated(state, payload) {
-   // console.log('setLnbForCreated', state, payload);
-    state.showSubPageLnbDrawer = payload;
-  },
-  setCategoryFromPath(state, path) {
-    // 처음 서브화면 진입 시, 새로고침 시 카테고리 및 LNB select 셋팅
-    const splitPath = path.split('/');
-    const data = state.gnbMenuItems.filter(({ category }) => category === splitPath[1]);
-    console.log('화면 새로고침', data);
-    if (data) {
-     // console.log('화면 새로고침 path', splitPath[1], data);
-     // console.log(data[0].category);
-      state.selectedCategory = data[0].category;
-      this.commit('app/setSubMenu');
-    }
-  },
-  setCategoryFromMenuClick(state, category) {
-    state.selectedCategory = category;
-    this.commit('app/setSubMenu');
-  },
-  setSubMenu(state) {
-    const data = state.menuItems.filter(
-      ({ category }) => category === state.selectedCategory,
-    );
-    // 하위메뉴 없을 경우 예외처리
-    if (!data.length) {
-      state.selectedMenuData = [];
-    } else {
-      state.selectedMenuData = data[0].menus;
-    }
-    // console.log('setSubMenu 실행', state.selectedMenuData);
-  },
   setDarkMode(mode) {
     this.$vuetify.theme.dark = mode;
       localStorage.setItem('darkMode', mode ? 'dark' : 'light');
@@ -62,16 +27,42 @@ const mutations = {
     const mode = localStorage.getItem('darkMode') === 'dark' ? true : false;
     this.$vuetify.theme.dark = mode;
   },
-  setShowMegaMenu(state, payload) {
-     state.showMegaMenu = payload;
+  toggleLnb(state) {
+    state.showLnb = !state.showLnb;
   },
-  setSelectedCategory(state, payload) {
-     state.selectedCategory = payload;
+  setLnbOverlay(state) {
+    state.isLnbOverlay = !state.isLnbOverlay;
+  },
+  setMegaMenuData(state) {
+    // single page 메뉴 클릭시 메가메뉴에 보여질 메뉴 셋팅
+    const data = state.gnbMenuItems[state.selectedMenuIndex].menus;
+    // 하위메뉴 없을 경우 예외처리
+    if (!data.length) {
+      state.megaMenuData = [];
+    } else {
+      state.megaMenuData = data;
+    }
+  },
+  setShowMegaMenu(state, payload) {
+    state.showMegaMenu = payload;
+  },
+  setSelectedMenuIndex(state, payload) {
+      state.selectedMenuIndex = payload;
   },
   closeMegaMenu(state) {
     // 메가메뉴 닫음.
     state.showMegaMenu = false;
-    state.selectedCategory = null;
+    state.selectedMenuIndex = null;
+    state.megaMenuData = [];
+  },
+  selectedMenuIndexFromPath(state, path) {
+    // 처음 서브화면 진입 시, 새로고침 시 Lnb 1뎁스 메뉴 펼침.
+    // console.log('selectedMenuIndexFromPath', path);
+    const splitPath = path.split('/');
+    state.selectedMenuIndex = state.gnbMenuItems.findIndex((v) => v.category === splitPath[1]);
+  },
+  setLnbActiveMenu(state) {
+    console.log('selectedMenuIndexFromPath', state);
   },
 };
 
@@ -81,8 +72,8 @@ const actions = {
 const state = {
   cardList: generateCardList(7),
   isThemeDark: false,
-  showSubPageLnbDrawer: true,
-  selectedCategory: null,
+  showLnb: true,
+  isLnbOverlay: false,
   selectedLnbItem: 0,
   gnbMenuItems: [
     {
@@ -91,7 +82,7 @@ const state = {
       icon: 'mdi-book-multiple-outline',
       src: '/Template/search-grid',
       title: 'Layout Template',
-      active: false,
+      // active: false,
       menus: [
         { title: 'Search + Grid', src: '/Template/search-grid' },
         { title: 'Card Layout', src: '/Template/card-layout' },
@@ -105,7 +96,7 @@ const state = {
       icon: 'mdi-bulletin-board',
       src: '/CustomComponent/section-title',
       title: 'Custom Component',
-      active: false,
+      // active: true,
       menus: [
         { title: 'Section Title', src: '/CustomComponent/section-title' },
         { title: 'Search Area', src: '/CustomComponent/search-area' },
@@ -118,35 +109,13 @@ const state = {
       icon: 'mdi-focus-field',
       src: '/Etc/sub1',
       title: 'Etc',
-      active: false,
+      // active: true,
       menus: [{ title: '404 에러페이지', src: '/Etc/sub1' }],
     },
   ],
-  menuItems: [
-    {
-      category: 'Template',
-      menus: [
-        { title: 'Search + Grid', src: '/Template/search-grid' },
-        { title: 'Card Layout', src: '/Template/card-layout' },
-        { title: 'Post Form', src: '/Template/post' },
-        { title: 'Responsive Table', src: '/Template/responsive-table' },
-      ],
-    },
-    {
-      category: 'CustomComponent',
-      menus: [
-        { title: 'Section Title', src: '/CustomComponent/section-title' },
-        { title: 'Search Area', src: '/CustomComponent/search-area' },
-        { title: 'Message Box', src: '/CustomComponent/message-box' },
-      ],
-    },
-    {
-      category: 'Etc',
-      menus: [{ title: '404 에러페이지', src: '/Etc/sub1' }],
-    },
-  ],
-  selectedMenuData: [],
+  selectedMenuIndex: null, // 선택된 메뉴 index. single page, sub page 공통 사용
   showMegaMenu: false,
+  megaMenuData: [], // single Page 메가메뉴에 뿌려질 데이터
 };
 
 export default {

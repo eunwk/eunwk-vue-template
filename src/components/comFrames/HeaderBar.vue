@@ -27,8 +27,14 @@
       </div>
 
       <!-- sub page mode menu -->
-      <button v-if="headerType === 'sub-page' && $vuetify.breakpoint.mdAndDown" title="메뉴열기" class="btn-lnb-toggle"><v-icon>mdi-menu</v-icon></button>
-      <!-- <sub-page-header-menu  v-if="headerType === 'sub-page'" /> -->
+      <button
+        v-if="headerType === 'sub-page' && $vuetify.breakpoint.mdAndDown"
+        :title="showLnb ? '메뉴열기' : '메뉴닫기'"
+        class="btn-lnb-toggle"
+        @click="toggleLnb"
+      >
+        <v-icon>{{showLnb ? 'mdi-menu' : 'mdi-arrow-left'}}</v-icon>
+      </button>
     </div>
   </header>
 </template>
@@ -37,13 +43,11 @@
 import { mapState, mapMutations } from 'vuex';
 import BtnThemeChange from '@/components/BtnThemeChange';
 import SinglePageHeaderMenu from './SinglePageHeaderMenu.vue';
-// import SubPageHeaderMenu from './SubPageHeaderMenu.vue';
 
 export default {
   components: {
     BtnThemeChange,
     SinglePageHeaderMenu,
-    // SubPageHeaderMenu,
   },
   props: {
     headerType: {
@@ -56,7 +60,6 @@ export default {
       scrolled: false,
       lastScrollTop: 0,
       // showMegaMenu: false,
-      // selectedCategory: null, // 현재 선택되어 있는 메뉴
       searchValue: '',
       windowSize: {
         x: 0,
@@ -66,23 +69,18 @@ export default {
   },
   computed: {
     ...mapState('app', [
-      'selectedMenuData', // 2뎁스 메뉴 데이터
-      'showSubPageLnbDrawer',
+      'megaMenuData', // single page 메가메뉴 데이터
+      'showLnb',
       'gnbMenuItems',
       // 'singlePageScrolled',
       // 'singlePageLastScrollTop',
     ]),
   },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
-  },
+
   methods: {
     ...mapMutations('app', [
-      'setCategoryFromPath',
       'closeMegaMenu',
+      'toggleLnb',
     ]),
     onSearch() {
       if (this.searchValue) {
@@ -105,6 +103,12 @@ export default {
         this.closeMegaMenu();
       }
     },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll);
   },
   beforeMount() {
     // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true

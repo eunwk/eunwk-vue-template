@@ -1,7 +1,7 @@
 <template>
   <div class="sub-page">
     <header-bar headerType="sub-page" />
-    <div class="body-container">
+    <div :class="{'body-container': true, 'lnb-hidden': $vuetify.breakpoint.mdAndDown && showLnb, 'lnb-overlay': $vuetify.breakpoint.mdOnly && isLnbOverlay}">
       <sub-page-lnb />
       <div class="contents-box">
         <router-view></router-view>
@@ -29,19 +29,13 @@ export default {
   }),
   computed: {
     ...mapState('app', [
-      'showSubPageLnbDrawer',
-      // 'selectedCategory',
+      'showLnb',
+      'isLnbOverlay',
     ]),
-    // mobileBreakPoint() {
-    //   return this.$vuetify.breakpoint.mobileBreakpoint;
-    // },
   },
   methods: {
     ...mapMutations('app', [
       // 'toggleLnb',
-      // 'setCategoryFromPath',
-      'setCategoryFromMenuClick',
-      // 'setLnbForCreated',
     ]),
   },
   beforeMount() {
@@ -50,17 +44,12 @@ export default {
     // // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
     // if (this.windowSize.x < this.mobileBreakPoint) {
     //   // breakpoint md 이하
-    //   this.setLnbForCreated(false);
     // }
     // if (this.windowSize.x >= this.mobileBreakPoint) {
     //   // breakpoint lg 이상
-    //   this.setLnbForCreated(true);
     // }
 
     // 서브화면 진입 시 현재 카테고리 세팅
-  },
-  beforeCreate() {
-    // this.setCategoryFromPath(this.$route.path);
   },
 };
 </script>
@@ -81,6 +70,17 @@ export default {
     flex: 1 1 auto;
     position: relative;
     height: 100px;
+    overflow: hidden;
+  }
+
+  .lnb {
+    background: #fff;
+    border-right: 1px solid #ddd;
+    width: 260px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    overflow: hidden;
   }
   .contents-box {
     padding: 20px;
@@ -89,27 +89,22 @@ export default {
   }
 }
 
-/* Lnb Show/hide */
-.lnb {
-  background: #fff;
-  border-right: 1px solid #ddd;
-  width: 260px;
-  flex-shrink: 0;
-  flex-grow: 0;
-  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.lnb-showing .lnb {
-  margin-left: 0;
+/* Lnb Overlay */
+.app-xs,
+.app-sm,
+.app-md .body-container.lnb-overlay {
+  .lnb {
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 15%);
+  }
 }
 
-// .app-md .lnb,
-// .app-sm .lnb,
-// .app-xs .lnb   {
-//   position: absolute;
-//   top: 0;
-//   bottom: 0;
-//   z-index: 1;
-// };
+/* Lnb Show/hide */
+.lnb-hidden .lnb {
+  width: 0;
+}
 
 .v-tabs {
   position: fixed;

@@ -1,11 +1,11 @@
 <template>
-  <div :class="`mega-menu ${selectedCategory !== null ? 'showing' : ''}`">
+  <div :class="`mega-menu ${selectedMenuIndex !== null ? 'showing' : ''}`">
     <div class="menu-inner-box max-width-box">
       <!-- <div class="img-box"><img src="@/assets/images/img_error.png" alt="" /></div> -->
       <div class="menu-box">
-        <h2 class="category-title">{{ selectedCategory }}</h2>
+        <h2 class="category-title">{{ gnbMenuItems[selectedMenuIndex].title }}</h2>
         <ul class="menu-list">
-          <li v-for="item in selectedMenuData" :key="item.value">
+          <li v-for="item in megaMenuData" :key="item.value">
             <router-link :to="item.src" class="menu-link">{{ item.title }}</router-link>
           </li>
         </ul>
@@ -26,26 +26,16 @@ import { mapState, mapMutations } from 'vuex';
 export default {
   computed: {
     ...mapState('app', [
-      'selectedCategory',
-      'selectedMenuData', // 2뎁스 메뉴 데이터
+      'gnbMenuItems',
+      'megaMenuData', // single page 메가메뉴 데이터
       // 'gnbMenuItems',
-      'selectedCategory',
+      'selectedMenuIndex',
     ]),
   },
   methods: {
     ...mapMutations('app', [
       'closeMegaMenu',
     ]),
-    // onCloseBtnKeydown(e) {
-    //   // 메뉴닫기 버튼에서 탭키로 나갈때 현재 열려진 카테고리 메뉴가 마지막 메뉴이면 메가메뉴 닫기
-    //   if (e.keyCode === 9 && !e.shiftKey) {
-    //     // 현재 열려진 카테고리의 index 찾기
-    //     const index = this.gnbMenuItems.findIndex((v) => v.category === this.selectedCategory);
-    //     if (this.gnbMenuItems.length - 1 === index) {
-    //       this.closeMegaMenu();
-    //     }
-    //   }
-    // },
   },
 };
 
