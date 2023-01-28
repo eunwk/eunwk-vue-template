@@ -11,19 +11,34 @@
         {{ item.title }}
         <v-icon>mdi-chevron-down</v-icon>
       </v-btn>
-      <single-page-mega-menu v-if="showMegaMenu && index === selectedMenuIndex" />
+
+      <div v-if="showMegaMenu && index === selectedMenuIndex" :class="`mega-menu ${selectedMenuIndex !== null ? 'showing' : ''}`">
+        <div class="menu-inner-box max-width-box">
+          <div class="menu-box">
+            <h2 class="category-title">{{ gnbMenuItems[selectedMenuIndex].title }}</h2>
+            <ul class="menu-list">
+              <li v-for="megaItem in megaMenuData" :key="megaItem.value">
+                <router-link :to="megaItem.src" class="menu-link">{{ megaItem.title }}</router-link>
+              </li>
+            </ul>
+            <button class="btn-menu-close" @click="closeMegaMenu" title="메뉴닫기">
+              <v-icon>mdi-close</v-icon>
+              <!-- Close -->
+            </button>
+          </div>
+        </div>
+        <!-- <button class="mega-menu-dim" v-if="showMegaMenu" @click="closeMegamenu" >메뉴 닫기</button> -->
+        <div class="mega-menu-dim" @click="closeMegaMenu" @keydown="closeMegaMenu"></div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import SinglePageMegaMenu from '@/components/comFrames/SinglePageMegaMenu';
 
 export default {
-  components: {
-    SinglePageMegaMenu,
-  },
   data() {
     return {
       scrolled: false,
@@ -36,6 +51,7 @@ export default {
       'gnbMenuItems',
       'showMegaMenu',
       'selectedMenuIndex',
+      'megaMenuData', // single page 메가메뉴 데이터
     ]),
   },
   methods: {
@@ -94,5 +110,108 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/customVariables.scss';
+.mega-menu {
+  position: absolute;
+  top: $headerNormalHeight - 1;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #fff;
+  text-align: left;
+  .menu-inner-box {
+    padding: 20px $boxHPadding_lg;
+    display: none;
+  }
+  &.showing {
+    border-top: 1px solid #ddd;
+    height: 400px;
+    .menu-inner-box {
+      display: block;
+    }
+  }
+}
 
+.category-title {
+  margin-bottom: 15px;
+  font-size: 1.5rem; /* 24px */
+}
+
+.btn-menu-close {
+  border: 1px solid #fff;
+  position: absolute;
+  background: #fff;
+  right: 10px;
+  bottom: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.mega-menu-dim {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 64px);
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
+  text-indent: -9999px;
+  font-size: 0;
+  overflow: hidden;
+}
+
+.menu-list {
+  padding: 0;
+  margin-left: -3px;
+  width: auto;
+  display: inline-block;
+  li {
+    margin-bottom: 3px;
+  }
+  li a {
+    display: block;
+    padding: 4px 5px;
+    &:focus {
+      background: #d6e7f7;
+    }
+  }
+}
+
+/********************************************
+  breakpoint 반응형 처리
+*********************************************/
+
+/*** xs, sm, md 공통  ***/
+.app-xs,
+.app-sm,
+.app-md {
+  .mega-menu {
+    top:  $headerMobileHeight - $headerNormalHeight;
+  }
+  .mega-menu-dim {
+    top: $headerMobileHeight;
+  }
+}
+
+.app-md {
+  .menu-inner-box  {
+    padding: 20px $boxHPadding_md;
+  }
+}
+
+// breakpoint xs : ~ 599px
+.app-xs,
+.app-sm {
+  .category-title {
+    font-size: 1.25rem;
+  }
+  .menu-inner-box  {
+    padding: 10px $boxHPadding_sm;
+  }
+}
+
+.app-xs .menu-list {
+  display: block;
+}
 </style>

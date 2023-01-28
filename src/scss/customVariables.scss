@@ -11,10 +11,10 @@ $textColorWhite: #f1f1f1;
 
 
 $boxHPadding_xs: 15px;
-$boxHPadding_sm: 20px;
-$boxHPadding_md: 25px;
+$boxHPadding_sm: 15px;
+$boxHPadding_md: 20px;
 $boxHPadding_lg: 30px;
 
 
 $headerNormalHeight: 64px;
-$headerMobileHeight: $headerNormalHeight * 2;
+$headerMobileHeight: 120px; // 64 + 56px

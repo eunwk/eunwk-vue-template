@@ -8,8 +8,9 @@
         </router-link>
       </h1>
 
-      <!-- single page mode menu -->
+      <!-- // single page only -->
       <single-page-header-menu  v-if="headerType === 'single-page'" />
+      <!-- single page only // -->
 
       <div class="header-others">
         <v-text-field
@@ -21,6 +22,8 @@
           clear-icon="mdi-close-circle"
           dense
           @click:append="onSearch"
+          class="input-src"
+          v-if="$vuetify.breakpoint.smAndUp"
         ></v-text-field>
         <router-link v-if="!isLoggedIn" to="/login">로그인</router-link>
         <div v-else class="myInfo">
@@ -51,7 +54,7 @@
         <btn-theme-change />
       </div>
 
-      <!-- sub page mode menu -->
+      <!-- // sub page only -->
       <button
         v-if="headerType === 'sub-page' && $vuetify.breakpoint.mdAndDown"
         :title="showLnb ? '메뉴열기' : '메뉴닫기'"
@@ -60,8 +63,10 @@
       >
         <v-icon>{{showLnb ? 'mdi-arrow-left' : 'mdi-menu'}}</v-icon>
       </button>
-      <button class="btn-pin" v-if="$vuetify.breakpoint.mdOnly" @click="setLnbOverlay"><v-icon>{{ isLnbOverlay ? 'mdi-pin-off' : 'mdi-pin'}}</v-icon></button>
-    </div>
+      <button class="btn-pin" v-if="headerType === 'sub-page' && $vuetify.breakpoint.mdOnly" @click="setLnbOverlay"><v-icon>{{ isLnbOverlay ? 'mdi-pin-off' : 'mdi-pin'}}</v-icon></button>
+      <!-- sub page only //-->
+
+    </div><!-- .max-width-box //-->
   </header>
 </template>
 
@@ -154,19 +159,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener('scroll', this.onScroll);
   },
-  beforeMount() {
-    // 화면 로딩 시 Lnb의 Show/Hide 기본값 지정. 모바일(md 1264) 이하 false, PC(lg 이상) 은 true
-    // this.windowSize = { x: window.innerWidth, y: window.innerHeight };
-    // console.log('windowSize', this.windowSize.x, this.mobileBreakPoint);
-    // if (this.windowSize.x < this.mobileBreakPoint) {
-    //   // breakpoint md 이하
-    //   this.$store.commit('app/setLnbForCreated', false);
-    // }
-    // if (this.windowSize.x >= this.mobileBreakPoint) {
-    //   // breakpoint lg 이상
-    //   this.$store.commit('app/setLnbForCreated', true);
-    // }
-  },
+
 };
 </script>
 
@@ -203,23 +196,25 @@ header {
         padding: 0;
         color: $primary;
       }
-      .myInfo {
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        overflow: hidden;
-      }
-      & > .v-input {
-        margin-top: 0;
-      }
+    }
+    .myInfo {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+    }
+    .input-src {
+      margin-top: 0;
     }
   }
+
   .app-logo a {
     text-decoration: none;
     display: flex;
     align-items: center;
     font-size: 20px;
     margin-right: 10px;
+    letter-spacing: -0.03rem;
     img {
       margin-right: 10px;
       width: 50px;
@@ -236,119 +231,105 @@ header.scrolled {
 }
 
 /******************************
-  .single-page 전용 스타일
+  반응형 공통 스타일
 *******************************/
-header[data-header-type="single-page"] {
-  .header-menu {
-    display: flex;
-    margin-right: auto;
-    height: $headerNormalHeight - 1;
-    .btn-menu-item {
-      display: inline-flex;
-      height: $headerNormalHeight;
-      align-items: center;
-      .btn-menu {
-        padding-right: 7px !important;
-        &:hover {
-          background: #edf4fb;
-        }
+
+.app-xs,
+.app-sm {
+  header {
+    .app-logo a {
+      font-size: 18px;
+      img {
+        width: 42px;
       }
-      &.v-btn--active .v-icon {
-        transform: rotate(180deg);
-      }
-    }
-    .btn-menu-item:not(:last-child) {
-      margin-right: 10px;
     }
   }
 }
-/*** 반응형 xs, sm, md 공통  ***/
+
+/******************************
+  .single-page 전용 스타일
+*******************************/
+/* 헤더메뉴로 인한 헤더 높이 조정 */
+.app-xs header[data-header-type="single-page"],
+.app-sm header[data-header-type="single-page"],
+.app-md header[data-header-type="single-page"] {
+  height: $headerMobileHeight;
+  .max-width-box {
+    align-items: flex-start;
+    h1 {
+      height: $headerNormalHeight - 1;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}
+
+.header-menu {
+  display: flex;
+  margin-right: auto;
+  height: $headerNormalHeight - 1;
+  padding: 0px $boxHPadding_lg - 10;
+  .btn-menu-item {
+    display: inline-flex;
+    align-items: center;
+    .btn-menu {
+      padding-right: 7px !important;
+      &:hover {
+        background: #edf4fb;
+      }
+    }
+    &.v-btn--active .v-icon {
+      transform: rotate(180deg);
+    }
+  }
+  .btn-menu-item:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
 .app-xs,
 .app-sm,
 .app-md {
-  header[data-header-type="single-page"] {
-  height: 128px;
-    .max-width-box {
-      align-items: flex-start;
-      h1 {
-        height: $headerNormalHeight - 1;
-        display: inline-flex;
-        align-items: center;
-      }
-      .header-menu {
-        position: absolute;
-        height: $headerNormalHeight;
-        width: 100%;
-        top: $headerNormalHeight - 1;
-        left: 0;
-        border-top: 1px solid #ddd;
-        transition: padding 0.4s;
-      }
-    }
+  .header-menu {
+    position: absolute;
+    height: $headerMobileHeight - $headerNormalHeight;
+    width: 100%;
+    top: $headerNormalHeight - 1;
+    left: 0;
+    border-top: 1px solid #ddd;
+    transition: padding 0.4s;
   }
   .mega-menu-dim {
     top: $headerMobileHeight;
   }
 }
 
-// breakpoint xs : ~ 599px
+.app-md header .header-menu {
+  padding: 0px $boxHPadding_md - 10;
+}
+
+.app-sm header .header-menu,
+.app-xs header .header-menu {
+  padding: 0px $boxHPadding_sm - 5;
+}
+
 .app-xs {
-  header[data-header-type="single-page"] {
-    .header-menu {
-      padding-right: $boxHPadding_xs - 5;
-      padding-left: $boxHPadding_xs - 5;
-    }
-    .btn-menu-item .v-icon {
+  .btn-menu-item:not(:last-child) {
+    margin-right: 5px;
+  }
+  .btn-menu {
+    padding: 0 5px !important;
+    .v-icon {
       display: none;
     }
-    .btn-menu-item:not(:last-child) {
-      margin-right: 0;
-    }
-    .btn-menu {
-      padding: 5px !important;
-    }
   }
-}
-
-// breakpoint sm : 600px ~ 950px
-.app-sm {
-  header[data-header-type="single-page"] {
-    .header-menu {
-      padding-right: $boxHPadding_sm - 10;
-      padding-left: $boxHPadding_sm - 10;
-    }
-  }
-}
-
-// breakpoint md : 960px ~ 1263px
-.app-md {
-  header[data-header-type="single-page"] {
-    .header-menu {
-      padding-right: $boxHPadding_md - 10;
-      padding-left: $boxHPadding_md - 10;
-    }
-  }
-}
-
-// breakpoint lg : 1264px ~
-.app-lg {
 }
 
 /******************************
   .sub-page 전용 스타일
 *******************************/
 header[data-header-type="sub-page"] {
-  // background: #19509f;
-  // color: $textColorWhite;
-  // background: #ccc;
-  // padding: 0 $boxHPadding_lg;
   border-bottom: 1px solid #ddd;
-  .mega-menu {
-    border-top: 0px none;
-  }
-  h1, a, button {
-    // color: $textColorWhite;
-  }
   .btn-lnb-toggle,
   .btn-pin {
     width: 40px;
