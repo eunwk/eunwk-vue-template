@@ -71,11 +71,12 @@ export default {
     position: relative;
     height: 100px;
     overflow: hidden;
+    border-top: 1px solid $borderColor;
   }
 
   .lnb {
-    background: #fff;
-    border-right: 1px solid #ddd;
+    background: #f6f8fa;
+    border-right: 1px solid $borderColor;
     width: 260px;
     flex-shrink: 0;
     flex-grow: 0;
@@ -83,7 +84,7 @@ export default {
     overflow: hidden;
   }
   .contents-box {
-    padding: 20px;
+    padding: 20px $boxHPadding_lg;
     flex: 1 1 auto;
     overflow: auto;
   }
@@ -114,4 +115,18 @@ export default {
   width: 400px;
 }
 
+/******************************
+  반응형 스타일
+*******************************/
+.app-md .sub-page .contents-box {
+  padding: 20px $boxHPadding_md;
+}
+
+.app-sm .sub-page .contents-box {
+  padding: 20px $boxHPadding_sm;
+}
+
+.app-xs .sub-page .contents-box {
+  padding: 20px $boxHPadding_xs;
+}
 </style>

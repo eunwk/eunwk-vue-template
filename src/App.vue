@@ -8,6 +8,7 @@
 import './scss/common.scss';
 import './scss/customVariables.scss';
 import { mapState } from 'vuex';
+import './scss/darkThemeCustom.scss';
 
 export default {
   name: 'App',

@@ -1,0 +1,59 @@
+/******************************
+  .theme--light customize
+*******************************/
+
+.theme--light.v-application {
+  .sub-page  {
+    .lnb .v-list {
+      background: transparent;
+    }
+  }
+}
+
+
+/******************************
+  theme--dark customize
+*******************************/
+$darkThemePrimary: #00BFA5;
+
+.theme--dark.v-application {
+  .sub-page  {
+    .lnb {
+      background: #262626;
+    }
+    .lnb .v-list {
+      background: transparent;
+    }
+  }
+
+  .mega-menu {
+    background: #262626;
+    .menu-list li a {
+      color: #f1f1f1;
+    }
+  }
+  
+  header {
+    background: #000;
+  }
+  
+  .contents-box {
+    background: #3c3c3c;
+  }
+  
+  .search-area {
+    background: transparent;
+    border: 1px solid #727272;
+  }
+
+  .category-banner .title {
+    color: $darkThemePrimary;
+  }
+
+  .section-title-area.box {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: #222;
+  }
+
+}
+

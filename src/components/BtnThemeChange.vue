@@ -2,14 +2,16 @@
   <v-btn
     fab
     color="primary"
-    width="32px"
-    height="32px"
+    width="40px"
+    height="40px"
     depressed
     @click="setDarkMode(!darkMode)"
+    class="btn-theme"
   >
     <v-icon
       small
       v-if="!isThemeDark"
+      size="40"
     >
       mdi-white-balance-sunny
     </v-icon>
@@ -50,4 +52,8 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.btn-theme {
+
+}
+</style>

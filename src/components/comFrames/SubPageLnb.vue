@@ -88,4 +88,5 @@ export default {
 .v-avatar {
   margin-right: 10px;
 }
+
 </style>

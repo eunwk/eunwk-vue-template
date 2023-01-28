@@ -30,7 +30,7 @@
           <v-menu left offset-y v-model="menu" :close-on-content-click="false" attach=".myInfo">
             <template v-slot:activator="{ on, attrs }">
               <button v-bind="attrs" v-on="on" class="btn-avatar" >
-                <v-avatar size="40">
+                <v-avatar size="50" tile>
                   <v-img src="https://cdn.vuetifyjs.com/images/lists/3.jpg"></v-img>
                 </v-avatar>
               </button>
@@ -185,10 +185,9 @@ header {
     transition: padding 0.4s;
     .header-others {
       margin-left: auto;
-      justify-self: flex-end;
       display: inline-flex;
       align-items: center;
-      height: $headerNormalHeight - 1;
+      height: 100%;
       & > *:not(:last-child) {
         margin-right: 10px;
       }
@@ -198,28 +197,34 @@ header {
       }
     }
     .myInfo {
-      border-radius: 50%;
       width: 40px;
       height: 40px;
+      border-radius: 50%;
       overflow: hidden;
     }
     .input-src {
       margin-top: 0;
+      width: 200px;
     }
   }
 
-  .app-logo a {
-    text-decoration: none;
-    display: flex;
+  h1.app-logo  {
+    display: inline-flex;
     align-items: center;
-    font-size: 20px;
-    margin-right: 10px;
-    letter-spacing: -0.03rem;
-    img {
+    a {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
       margin-right: 10px;
-      width: 50px;
+      letter-spacing: -0.03rem;
+      img {
+        margin-right: 10px;
+        width: 50px;
+      }
     }
   }
+
   .list-title {
     border-bottom: 1px solid #ddd;
     margin-bottom: 5px;
@@ -258,9 +263,10 @@ header.scrolled {
     align-items: flex-start;
     h1 {
       height: $headerNormalHeight - 1;
-      display: inline-flex;
-      align-items: center;
     }
+  }
+  .header-others {
+    height: $headerNormalHeight - 1;
   }
 }
 
@@ -328,8 +334,11 @@ header.scrolled {
 /******************************
   .sub-page 전용 스타일
 *******************************/
+$subPageHeaderFontColor: #e5e5e5;
+$subPageHeaderPrimaryColor: #ffd334;
+
 header[data-header-type="sub-page"] {
-  border-bottom: 1px solid #ddd;
+  background: #1f324c;
   .btn-lnb-toggle,
   .btn-pin {
     width: 40px;
@@ -345,9 +354,42 @@ header[data-header-type="sub-page"] {
 
   .btn-lnb-toggle .v-icon {
     font-size: 32px;
+    color: $subPageHeaderPrimaryColor;
   }
   .btn-pin .v-icon {
     font-size: 26px;
+    color: $subPageHeaderPrimaryColor;
+  }
+
+  .header-others > a {
+    color: $subPageHeaderPrimaryColor;
+  }
+
+  h1.app-logo {
+    font-weight: 500;
+    img {
+      mix-blend-mode: hard-light;
+    }
+  }
+
+  h1.app-logo a,
+  .input-src {
+    // color: $subPageHeaderFontColor;
+    .v-icon,
+    input,
+    input::placeholder {
+      // color: $subPageHeaderFontColor;
+    }
+    .v-input__slot:before {
+      border-color: rgba(255, 255, 255, 0.42) !important;
+    }
+    .v-input__slot:after {
+      // border-color: $subPageHeaderPrimaryColor;
+      border-width: thin 0 0 0;
+    }
+  }
+  .v-icon.primary--text {
+    color:  $subPageHeaderFontColor !important;
   }
 }
 
