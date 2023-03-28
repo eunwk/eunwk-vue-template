@@ -89,6 +89,8 @@ export default {
 .chidren-area .v-btn {
   margin: 0 5px;
   max-width: 300px;
+  height: 32px;
+  border-radius: 16px;
 }
 
 .chidren-area .v-btn--block {

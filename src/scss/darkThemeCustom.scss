@@ -38,13 +38,10 @@ $darkThemePrimary: #00BFA5;
   }
   
   .contents-box {
-    background: #3c3c3c;
+    background: transparent;
   }
   
-  .search-area {
-    background: transparent;
-    border: 1px solid #727272;
-  }
+
 
   .category-banner .title {
     color: $darkThemePrimary;
@@ -55,5 +52,54 @@ $darkThemePrimary: #00BFA5;
     border-color: #222;
   }
 
+
+  /* table Default */
+  .v-data-table-header th {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .v-data-table__wrapper {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  
+  /* table - 상세유형 */
+  .tbl-detail {
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+    th {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    th, td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  /* MessageBox */
+  .msg-box {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* .dummy-box */
+  .dummy-box {
+    background: transparent;
+    color: #f1f1f1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* .search-area */
+  .search-area {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .search-area .v-text-field__slot .v-label + input,
+  .search-area .v-select .v-select__selections {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
 }
+
 
